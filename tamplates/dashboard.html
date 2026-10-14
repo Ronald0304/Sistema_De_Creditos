@@ -1,12 +1,383 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-    
-    </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueBank - Panel de Control</title>
+    <!-- Enlace preparado para la hoja de estilos CSS -->
+    <link rel="stylesheet" href="../css/dasboard.css">
+</head>
+<body>
+
+    <!-- CONTENEDOR PRINCIPAL DEL DASHBOARD -->
+    <div class="contenedor-panel">
+
+        <!-- ==========================================
+             BARRA LATERAL IZQUIERDA (Navegación / Menú)
+             ========================================== -->
+        <aside class="barra-lateral">
+            
+            <!-- Logotipo de la aplicación -->
+            <div class="logotipo-banco">
+                <div class="icono-logo"></div>
+                <span class="nombre-banco">BlueBank</span>
+            </div>
+
+            <!-- Menú de navegación principal -->
+            <nav class="menu-navegacion">
+                <ul class="lista-menu">
+                    <li class="item-menu activo">
+                        <a href="#panel" class="enlace-menu">
+                            <span class="icono-menu">📊</span>
+                            <span class="texto-menu">Panel de Control</span>
+                        </a>
+                    </li>
+                    <li class="item-menu">
+                        <a href="#finanzas" class="enlace-menu">
+                            <span class="icono-menu">💳</span>
+                            <span class="texto-menu">Mis Finanzas</span>
+                        </a>
+                    </li>
+                    <li class="item-menu">
+                        <a href="#herramientas" class="enlace-menu">
+                            <span class="icono-menu">🛠</span>
+                            <span class="texto-menu">Herramientas y Servicios</span>
+                        </a>
+                    </li>
+                    <li class="item-menu">
+                        <a href="#ofertas" class="enlace-menu">
+                            <span class="icono-menu">🏷</span>
+                            <span class="texto-menu">Nuestra Oferta</span>
+                        </a>
+                    </li>
+                    <li class="item-menu">
+                        <a href="#historial" class="enlace-menu">
+                            <span class="icono-menu">🏛</span>
+                            <span class="texto-menu">Historial</span>
+                        </a>
+                    </li>
+                    <li class="item-menu">
+                        <a href="#transaccion" class="enlace-menu">
+                            <span class="icono-menu">💸</span>
+                            <span class="texto-menu">Realizar Transacción</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Tarjeta promocional inferior (Seguro de viaje) -->
+            <div class="tarjeta-promocion">
+                <div class="imagen-promocion">
+                    <img src="seguro-viajes.png" alt="Seguro de viaje" class="ilustracion-promocional">
+                </div>
+                <span class="etiqueta-promocion">SEGURO DE VIAJE</span>
+                <p class="texto-promocion">Acceso 24/7 a asistencia rápida en viajes ➔</p>
+                <!-- Indicadores de carrusel promocional -->
+                <div class="puntos-promocion">
+                    <span class="punto-promocion activo"></span>
+                    <span class="punto-promocion"></span>
+                    <span class="punto-promocion"></span>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <!-- ==========================================
+             SECCIÓN DE CONTENIDO PRINCIPAL (Dashboard)
+             ========================================== -->
+        <main class="contenido-principal">
+
+            <!-- ENCABEZADO SUPERIOR (Perfil de Usuario y Notificaciones) -->
+            <header class="cabecera-principal">
+                <h1 class="titulo-pagina">Panel de Control</h1>
+
+                <div class="area-usuario">
+                    <!-- Foto y nombre del usuario -->
+                    <div class="perfil-usuario">
+                        <img src="usuario.jpg" alt="Ernest Hemingway" class="foto-perfil">
+                        <span class="nombre-usuario">Ernest Hemingway</span>
+                    </div>
+
+                    <!-- Botones de acción rápida -->
+                    <button type="button" class="boton-icono" id="boton-notificaciones" aria-label="Notificaciones">
+                        🔔
+                        <span class="indicador-notificacion"></span>
+                    </button>
+                    <button type="button" class="boton-icono" id="boton-cerrar-sesion" aria-label="Cerrar sesión">
+                        🚪
+                    </button>
+                </div>
+            </header>
+
+            <!-- FILA SUPERIOR: TARJETAS RESUMEN (4 Bloques) -->
+            <section class="seccion-tarjetas-superiores">
+
+                <!-- Bloque 1: Estadísticas / Ingresos -->
+                <article class="tarjeta-resumen">
+                    <div class="encabezado-tarjeta">
+                        <h3 class="titulo-tarjeta">Estadística</h3>
+                        <span class="opciones-tarjeta">•••</span>
+                    </div>
+                    <div class="selector-tipo">
+                        <span class="subtitulo-tipo">Ingresos ▾</span>
+                    </div>
+                    <div class="monto-destacado">$9,950</div>
+                    <!-- Gráfica lineal pequeña -->
+                    <div class="contenedor-grafico-pequeno">
+                        <canvas id="grafico-ingresos" class="canvas-grafico"></canvas>
+                    </div>
+                    <!-- Filtros de tiempo -->
+                    <div class="filtros-tiempo">
+                        <button type="button" class="boton-filtro">1d</button>
+                        <button type="button" class="boton-filtro">1s</button>
+                        <button type="button" class="boton-filtro activo">1m</button>
+                        <button type="button" class="boton-filtro">6m</button>
+                        <button type="button" class="boton-filtro">1a</button>
+                        <button type="button" class="boton-filtro">Todo</button>
+                    </div>
+                </article>
+
+                <!-- Bloque 2: Gastos -->
+                <article class="tarjeta-resumen">
+                    <div class="encabezado-tarjeta">
+                        <h3 class="titulo-tarjeta">Gastos</h3>
+                        <span class="opciones-tarjeta">•••</span>
+                    </div>
+                    <div class="monto-destacado">$325</div>
+                    <span class="etiqueta-promedio">Promedio diario ▾</span>
+                    <!-- Gráfica semicircular / Dona -->
+                    <div class="contenedor-grafico-dona">
+                        <canvas id="grafico-gastos" class="canvas-grafico"></canvas>
+                    </div>
+                    <!-- Desglose por categoría -->
+                    <div class="desglose-categorias">
+                        <div class="item-categoria">
+                            <span class="punto-color comida"></span>
+                            <span class="monto-categoria">$25</span>
+                        </div>
+                        <div class="item-categoria">
+                            <span class="punto-color facturas"></span>
+                            <span class="monto-categoria">$62</span>
+                        </div>
+                        <div class="item-categoria">
+                            <span class="punto-color viajes"></span>
+                            <span class="monto-categoria">$84</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Bloque 3: Tus Tarjetas -->
+                <article class="tarjeta-resumen">
+                    <div class="encabezado-tarjeta">
+                        <h3 class="titulo-tarjeta">Tus tarjetas</h3>
+                        <span class="opciones-tarjeta">•••</span>
+                    </div>
+
+                    <!-- Tarjeta Azul (Visa) -->
+                    <div class="tarjeta-credito visa">
+                        <div class="encabezado-credito">
+                            <span class="limite-tarjeta">Límite: $10 000</span>
+                            <span class="logo-tarjeta">VISA</span>
+                        </div>
+                        <div class="datos-credito">
+                            <div class="titular-tarjeta">
+                                <span class="etiqueta-titular">Nombre en la tarjeta</span>
+                                <span class="valor-titular">Ernest Hemingway</span>
+                            </div>
+                            <div class="expiracion-tarjeta">
+                                <span class="etiqueta-expiracion">Vence</span>
+                                <span class="valor-expiracion">06/22</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Gris/Blanca (Mastercard) -->
+                    <div class="tarjeta-credito mastercard">
+                        <div class="encabezado-credito">
+                            <span class="limite-tarjeta">Límite: $15 500</span>
+                            <span class="logo-tarjeta">🔴🟡</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Bloque 4: Operaciones Recientes -->
+                <article class="tarjeta-resumen operaciones-recientes">
+                    <div class="encabezado-tarjeta">
+                        <h3 class="titulo-tarjeta">Operaciones recientes</h3>
+                        <span class="opciones-tarjeta">•••</span>
+                    </div>
+
+                    <ul class="lista-operaciones">
+                        <li class="item-operacion">
+                            <div class="info-operacion">
+                                <span class="icono-operacion tienda"></span>
+                                <div class="detalles-operacion">
+                                    <span class="nombre-operacion">Tienda Adidas</span>
+                                    <span class="categoria-operacion">Ropa</span>
+                                </div>
+                            </div>
+                            <div class="montos-operacion">
+                                <span class="monto-negativo">-$250</span>
+                                <span class="saldo-restante">$2 400</span>
+                            </div>
+                        </li>
+
+                        <li class="item-operacion">
+                            <div class="info-operacion">
+                                <span class="icono-operacion ingreso"></span>
+                                <div class="detalles-operacion">
+                                    <span class="nombre-operacion">Depósito</span>
+                                    <span class="categoria-operacion">Ingreso</span>
+                                </div>
+                            </div>
+                            <div class="montos-operacion">
+                                <span class="monto-positivo">+$450</span>
+                                <span class="saldo-restante">$2 650</span>
+                            </div>
+                        </li>
+
+                        <li class="item-operacion">
+                            <div class="info-operacion">
+                                <span class="icono-operacion ingreso"></span>
+                                <div class="detalles-operacion">
+                                    <span class="nombre-operacion">Depósito</span>
+                                    <span class="categoria-operacion">Ingreso</span>
+                                </div>
+                            </div>
+                            <div class="montos-operacion">
+                                <span class="monto-positivo">+$110</span>
+                                <span class="saldo-restante">$2 310</span>
+                            </div>
+                        </li>
+
+                        <li class="item-operacion">
+                            <div class="info-operacion">
+                                <span class="icono-operacion servicio"></span>
+                                <div class="detalles-operacion">
+                                    <span class="nombre-operacion">Mobil</span>
+                                    <span class="categoria-operacion">Otros</span>
+                                </div>
+                            </div>
+                            <div class="montos-operacion">
+                                <span class="monto-negativo">-$160</span>
+                                <span class="saldo-restante">$2 200</span>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+
+            </section>
+
+
+            <!-- SECCIÓN INFERIOR: BALANCES Y GRÁFICO PRINCIPAL -->
+            <section class="seccion-balance-cuentas">
+                <article class="tarjeta-balance-general">
+                    
+                    <div class="encabezado-balance">
+                        <h2 class="titulo-seccion">Balance de Cuenta</h2>
+                        <span class="opciones-tarjeta">•••</span>
+                    </div>
+
+                    <!-- Controles de filtros (Cuenta y Período) -->
+                    <div class="controles-balance">
+                        <div class="grupo-control">
+                            <label for="select-cuenta" class="etiqueta-control">Elegir cuenta</label>
+                            <select id="select-cuenta" class="desplegable-control">
+                                <option value="todas">Todas las cuentas</option>
+                                <option value="principal">Cuenta Principal</option>
+                                <option value="ahorros">Cuenta de Ahorros</option>
+                            </select>
+                        </div>
+
+                        <div class="grupo-control">
+                            <span class="etiqueta-control">Elegir período</span>
+                            <div class="periodos-tiempo">
+                                <button type="button" class="boton-periodo">1m</button>
+                                <button type="button" class="boton-periodo">3m</button>
+                                <button type="button" class="boton-periodo">6m</button>
+                                <button type="button" class="boton-periodo">9m</button>
+                                <button type="button" class="boton-periodo activo">1a</button>
+                                <button type="button" class="boton-periodo">Todo</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráfica de Barras Principal + Leyenda -->
+                    <div class="grid-grafico-balance">
+                        
+                        <!-- Área de gráfico (Barras comparativas) -->
+                        <div class="contenedor-grafico-barras">
+                            <canvas id="grafico-balance-anual" class="canvas-grafico"></canvas>
+                        </div>
+
+                        <!-- Panel Lateral con Métricas y Cifras Totales -->
+                        <div class="panel-metricas">
+                            
+                            <!-- Ingresos totales -->
+                            <div class="bloque-metrica">
+                                <div class="cabecera-metrica">
+                                    <span class="indicador-color ingresos"></span>
+                                    <span class="etiqueta-metrica">Ingresos</span>
+                                    <span class="valor-metrica">$140 526</span>
+                                </div>
+                                <div class="subdesglose">
+                                    <div class="fila-subdesglose">
+                                        <span>Transferencias internas</span>
+                                        <span>$19 630</span>
+                                    </div>
+                                    <div class="fila-subdesglose">
+                                        <span>Otros</span>
+                                        <span>$120 896</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gastos totales -->
+                            <div class="bloque-metrica">
+                                <div class="cabecera-metrica">
+                                    <span class="indicador-color gastos"></span>
+                                    <span class="etiqueta-metrica">Gastos</span>
+                                    <span class="valor-metrica">$75 265</span>
+                                </div>
+                                <div class="subdesglose">
+                                    <div class="fila-subdesglose">
+                                        <span>Transferencias internas</span>
+                                        <span>$10 255</span>
+                                    </div>
+                                    <div class="fila-subdesglose">
+                                        <span>Ropa</span>
+                                        <span>$9 201</span>
+                                    </div>
+                                    <div class="fila-subdesglose">
+                                        <span>Facturas</span>
+                                        <span>$18 315</span>
+                                    </div>
+                                    <div class="fila-subdesglose">
+                                        <span>Viajes</span>
+                                        <span>$10 336</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Balance Neto -->
+                            <div class="bloque-balance-total">
+                                <span class="etiqueta-balance-total">Balance</span>
+                                <span class="valor-balance-total">$65 261</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Archivo de JavaScript en español -->
+    <script src="../javascrip/dashboard.js"></script>
+</body>
 </html>

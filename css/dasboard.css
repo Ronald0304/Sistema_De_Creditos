@@ -1,0 +1,649 @@
+/* ==========================================
+   1. ESTILOS GLOBALES Y VARIABLES
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #e8eff7;
+    color: #2d3748;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ==========================================
+   2. CONTENEDOR PRINCIPAL (Estructura de Dos Columnas)
+   ========================================== */
+.contenedor-panel {
+    width: 100%;
+    max-width: 1360px;
+    background-color: #f4f7fc;
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    min-height: 800px;
+}
+
+/* ==========================================
+   3. BARRA LATERAL (Menú de Navegación)
+   ========================================== */
+.barra-lateral {
+    width: 240px;
+    background-color: #ffffff;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #edf2f7;
+}
+
+.logotipo-banco {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    padding-left: 10px;
+}
+
+.icono-logo {
+    width: 28px;
+    height: 28px;
+    background-color: #2b5cff;
+    border-radius: 50%;
+}
+
+.nombre-banco {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.lista-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.item-menu {
+    border-radius: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.item-menu.activo, .item-menu:hover {
+    background-color: #f0f4ff;
+}
+
+.enlace-menu {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    text-decoration: none;
+    color: #718096;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.item-menu.activo .enlace-menu {
+    color: #2b5cff;
+    font-weight: 600;
+}
+
+.icono-menu {
+    font-size: 1rem;
+}
+
+/* Tarjeta promocional en el menú lateral */
+.tarjeta-promocion {
+    background-color: #f7fafc;
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #edf2f7;
+    margin-top: 20px;
+}
+
+.ilustracion-promocional {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.etiqueta-promocion {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #a0aec0;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.texto-promocion {
+    font-size: 0.8rem;
+    color: #4a5568;
+    line-height: 1.3;
+    margin-bottom: 12px;
+}
+
+.puntos-promocion {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.punto-promocion {
+    width: 6px;
+    height: 6px;
+    background-color: #cbd5e0;
+    border-radius: 50%;
+}
+
+.punto-promocion.activo {
+    width: 16px;
+    border-radius: 3px;
+    background-color: #2b5cff;
+}
+
+
+/* ==========================================
+   4. CONTENIDO PRINCIPAL (Dashboard)
+   ========================================== */
+.contenido-principal {
+    flex: 1;
+    padding: 30px 40px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Cabecera Superior */
+.cabecera-principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titulo-pagina {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.area-usuario {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.perfil-usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #ffffff;
+    padding: 6px 14px 6px 6px;
+    border-radius: 30px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.foto-perfil {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nombre-usuario {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.boton-icono {
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    position: relative;
+    font-size: 1rem;
+}
+
+.indicador-notificacion {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 8px;
+    height: 8px;
+    background-color: #e53e3e;
+    border-radius: 50%;
+}
+
+
+/* ==========================================
+   5. SECCIÓN DE TARJETAS SUPERIORES (Grid de 4)
+   ========================================== */
+.seccion-tarjetas-superiores {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.tarjeta-resumen {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.encabezado-tarjeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.titulo-tarjeta {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.opciones-tarjeta {
+    color: #a0aec0;
+    cursor: pointer;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* Tarjeta 1: Estadística */
+.selector-tipo {
+    font-size: 0.8rem;
+    color: #718096;
+    margin-bottom: 4px;
+}
+
+.monto-destacado {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 10px;
+}
+
+.contenedor-grafico-pequeno {
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.filtros-tiempo {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f7fafc;
+    padding: 3px;
+    border-radius: 6px;
+}
+
+.boton-filtro {
+    background: none;
+    border: none;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #718096;
+    font-weight: 600;
+}
+
+.boton-filtro.activo {
+    background-color: #ffffff;
+    color: #2b5cff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Tarjeta 2: Gastos */
+.etiqueta-promedio {
+    font-size: 0.8rem;
+    color: #a0aec0;
+    margin-bottom: 10px;
+}
+
+.contenedor-grafico-dona {
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.desglose-categorias {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.8rem;
+}
+
+.item-categoria {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.punto-color {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.punto-color.comida { background-color: #ecc94b; }
+.punto-color.facturas { background-color: #3182ce; }
+.punto-color.viajes { background-color: #319795; }
+
+/* Tarjeta 3: Tus Tarjetas */
+.tarjeta-credito {
+    border-radius: 12px;
+    padding: 14px;
+    color: #ffffff;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90px;
+}
+
+.tarjeta-credito.visa {
+    background: linear-gradient(135deg, #3182ce 0%, #2b5cff 100%);
+}
+
+.tarjeta-credito.mastercard {
+    background: #edf2f7;
+    color: #2d3748;
+    height: 50px;
+}
+
+.encabezado-credito {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.datos-credito {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+}
+
+.etiqueta-titular, .etiqueta-expiracion {
+    opacity: 0.7;
+    display: block;
+}
+
+/* Tarjeta 4: Operaciones Recientes */
+.lista-operaciones {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.item-operacion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.info-operacion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nombre-operacion {
+    font-weight: 600;
+    color: #2d3748;
+    display: block;
+}
+
+.categoria-operacion {
+    font-size: 0.7rem;
+    color: #a0aec0;
+}
+
+.montos-operacion {
+    text-align: right;
+}
+
+.monto-negativo {
+    color: #e53e3e;
+    font-weight: 600;
+    display: block;
+}
+
+.monto-positivo {
+    color: #38a169;
+    font-weight: 600;
+    display: block;
+}
+
+.saldo-restante {
+    font-size: 0.7rem;
+    color: #a0aec0;
+}
+
+
+/* ==========================================
+   6. SECCIÓN INFERIOR (Balance y Gráficos)
+   ========================================== */
+.seccion-balance-cuentas {
+    width: 100%;
+}
+
+.tarjeta-balance-general {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.encabezado-balance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.titulo-seccion {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.controles-balance {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.grupo-control {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.etiqueta-control {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #a0aec0;
+}
+
+.desplegable-control {
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    background-color: #f7fafc;
+    color: #4a5568;
+    outline: none;
+}
+
+.periodos-tiempo {
+    display: flex;
+    background-color: #f7fafc;
+    padding: 3px;
+    border-radius: 8px;
+    gap: 4px;
+}
+
+.boton-periodo {
+    background: none;
+    border: none;
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #718096;
+    font-weight: 600;
+}
+
+.boton-periodo.activo {
+    background-color: #ffffff;
+    color: #2b5cff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Grid Interno del Gráfico y Métricas */
+.grid-grafico-balance {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.contenedor-grafico-barras {
+    height: 220px;
+}
+
+.canvas-grafico {
+    width: 100%;
+    height: 100%;
+}
+
+/* Panel lateral de métricas */
+.panel-metricas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-left: 1px solid #edf2f7;
+    padding-left: 20px;
+}
+
+.bloque-metrica {
+    font-size: 0.8rem;
+}
+
+.cabecera-metrica {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.indicador-color {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.indicador-color.ingresos { background-color: #3182ce; }
+.indicador-color.gastos { background-color: #e2e8f0; }
+
+.etiqueta-metrica {
+    color: #718096;
+    flex: 1;
+}
+
+.valor-metrica {
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.subdesglose {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 16px;
+    font-size: 0.75rem;
+    color: #a0aec0;
+}
+
+.fila-subdesglose {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bloque-balance-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #edf2f7;
+    padding-top: 12px;
+    font-weight: 700;
+}
+
+.etiqueta-balance-total {
+    color: #718096;
+    font-size: 0.85rem;
+}
+
+.valor-balance-total {
+    color: #1a202c;
+    font-size: 1rem;
+}
+
+
+/* ==========================================
+   7. DISEÑO RESPONSIVO (Adaptabilidad)
+   ========================================== */
+@media (max-width: 1100px) {
+    .seccion-tarjetas-superiores {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .grid-grafico-balance {
+        grid-template-columns: 1fr;
+    }
+    .panel-metricas {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid #edf2f7;
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contenedor-panel {
+        flex-direction: column;
+    }
+    .barra-lateral {
+        width: 100%;
+    }
+    .seccion-tarjetas-superiores {
+        grid-template-columns: 1fr;
+    }
+}

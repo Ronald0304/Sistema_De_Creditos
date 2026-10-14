@@ -1,0 +1,317 @@
+/* ==========================================
+   1. ESTILOS GLOBALES Y VARIABLES
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f6f8; /* Color gris claro de fondo general */
+    color: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ==========================================
+   2. CONTENEDOR PRINCIPAL Y FONDO AZUL
+   ========================================== */
+.contenedor-principal {
+    width: 100%;
+    max-width: 1000px;
+    background-color: #0d225a; /* Fondo azul oscuro general de la pantalla */
+    border-radius: 20px;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 15px 35px rgba(13, 34, 90, 0.2);
+}
+
+/* ==========================================
+   3. TARJETA DE AUTENTICACIÓN (Contenedor Central)
+   ========================================== */
+.tarjeta-autenticacion {
+    width: 100%;
+    max-width: 860px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    min-height: 480px;
+}
+
+/* ==========================================
+   4. COLUMNA IZQUIERDA (Formulario)
+   ========================================== */
+.columna-formulario {
+    flex: 1;
+    padding: 45px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Cabecera del Logo */
+.cabecera-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 35px;
+}
+
+.icono-logo {
+    width: 32px;
+    height: 32px;
+    background-color: #0d225a;
+    border-radius: 50%;
+    position: relative;
+}
+
+/* Simulación visual de la U estilizada del logo del banco */
+.icono-logo::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 16px;
+    height: 12px;
+    border: 3px solid #ffffff;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+}
+
+.nombre-banco {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0d225a;
+    letter-spacing: -0.5px;
+}
+
+/* Campos de formulario */
+.grupo-campo {
+    margin-bottom: 20px;
+}
+
+.etiqueta-campo {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #7b8595;
+    margin-bottom: 6px;
+}
+
+.entrada-texto {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e1e5eb;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #2d3748;
+    background-color: #fafbfc;
+    transition: all 0.2s ease;
+}
+
+.entrada-texto:focus {
+    outline: none;
+    border-color: #0d225a;
+    background-color: #ffffff;
+}
+
+/* Contenedor especial para el campo de contraseña y sus botones */
+.contenedor-clave {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.entrada-clave {
+    padding-right: 75px; /* Espacio para que los iconos no pisen el texto */
+}
+
+.herramientas-clave {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.boton-herramienta {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #a0aec0;
+    padding: 2px;
+}
+
+.boton-herramienta:hover {
+    color: #0d225a;
+}
+
+/* Botón principal de Ingresar */
+.boton-primario {
+    width: 100%;
+    padding: 13px;
+    background-color: #0d225a;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.boton-primario:hover {
+    background-color: #173785;
+}
+
+
+/* ==========================================
+   5. COLUMNA DERECHA (Banner Promocional)
+   ========================================== */
+.columna-promocional {
+    flex: 1;
+    background: linear-gradient(135deg, #2852ff 0%, #0c33d0 100%); /* Azul brillante característico */
+    color: #ffffff;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.titulo-promocional {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    max-width: 220px;
+    line-height: 1.3;
+    z-index: 2;
+}
+
+.contenedor-ilustracion {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.imagen-promocional {
+    max-width: 200px;
+    height: auto;
+}
+
+/* Puntos de navegación del carrusel */
+.puntos-carrusel {
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.punto {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.punto.activo {
+    width: 20px;
+    border-radius: 4px;
+    background-color: #ffffff;
+}
+
+
+/* ==========================================
+   6. PIE DE PÁGINA Y SOPORTE
+   ========================================== */
+.pie-pagina {
+    width: 100%;
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    padding: 0 10px;
+}
+
+.soporte-tecnico {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.telefono-soporte {
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.telefono-soporte:hover {
+    text-decoration: underline;
+}
+
+.enlace-inferior {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icono-cuadro-rojo {
+    width: 12px;
+    height: 12px;
+    background-color: #e53e3e;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.enlace-creditos {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+}
+
+.enlace-creditos:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+
+/* ==========================================
+   7. DISEÑO RESPONSIVO (Móviles y Tablets)
+   ========================================== */
+@media (max-width: 768px) {
+    .contenedor-principal {
+        padding: 20px 10px;
+    }
+
+    .tarjeta-autenticacion {
+        flex-direction: column;
+    }
+
+    .columna-promocional {
+        min-height: 300px;
+        padding: 30px;
+    }
+
+    .pie-pagina {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}

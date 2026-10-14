@@ -1,12 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-    
-    </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Préstamos Bancarios - Resumen</title>
+    <!-- Enlace preparado para la hoja de estilos CSS -->
+    <link rel="stylesheet" href="../css/reportes.css">
+</head>
+<body>
+
+    <!-- CONTENEDOR PRINCIPAL DEL REPORTE -->
+    <div class="contenedor-reporte">
+
+        <!-- ==========================================
+             CABECERA PRINCIPAL DEL REPORTE
+             ========================================== -->
+        <header class="cabecera-reporte">
+            <h1 class="titulo-reporte">REPORTE DE PRÉSTAMOS BANCARIOS | <span class="subtitulo-resumen">RESUMEN</span></h1>
+        </header>
+
+        <!-- ==========================================
+             PANEL SUPERIOR: TARJETAS DE MÉTRICAS CLAVE (KPIs)
+             ========================================== -->
+        <section class="seccion-kpis">
+            
+            <!-- Tarjeta 1: Total de Solicitudes de Préstamo -->
+            <article class="tarjeta-kpi destacada">
+                <h3 class="etiqueta-kpi">Total Solicitudes de Préstamo</h3>
+                <div class="valor-kpi">11.7K</div>
+                <div class="desglose-kpi">
+                    <div class="metrica-mtd">
+                        <span class="sub-etiqueta">MTD</span>
+                        <span class="sub-valor">1.3K</span>
+                    </div>
+                    <div class="metrica-mom">
+                        <span class="sub-etiqueta">MoM</span>
+                        <span class="sub-valor">6.42%</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Tarjeta 2: Monto Total Financiamiento -->
+            <article class="tarjeta-kpi">
+                <h3 class="etiqueta-kpi">Monto Total Financiado</h3>
+                <div class="valor-kpi">$130.7M</div>
+                <div class="desglose-kpi">
+                    <div class="metrica-mtd">
+                        <span class="sub-etiqueta">MTD</span>
+                        <span class="sub-valor">$15.7</span>
+                    </div>
+                    <div class="metrica-mom">
+                        <span class="sub-etiqueta">MoM</span>
+                        <span class="sub-valor">7.08%</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Tarjeta 3: Monto Total Recibido -->
+            <article class="tarjeta-kpi">
+                <h3 class="etiqueta-kpi">Monto Total Recibido</h3>
+                <div class="valor-kpi">$140.8M</div>
+                <div class="desglose-kpi">
+                    <div class="metrica-mtd">
+                        <span class="sub-etiqueta">MTD</span>
+                        <span class="sub-valor">$16.8</span>
+                    </div>
+                    <div class="metrica-mom">
+                        <span class="sub-etiqueta">MoM</span>
+                        <span class="sub-valor">9.48%</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Tarjeta 4: Tasa de Interés Promedio -->
+            <article class="tarjeta-kpi">
+                <h3 class="etiqueta-kpi">Tasa de Interés Promedio</h3>
+                <div class="valor-kpi">11.03%</div>
+                <div class="desglose-kpi">
+                    <div class="metrica-mtd">
+                        <span class="sub-etiqueta">MTD</span>
+                        <span class="sub-valor">11.13</span>
+                    </div>
+                    <div class="metrica-mom">
+                        <span class="sub-etiqueta">MoM</span>
+                        <span class="sub-valor">0.41%</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Tarjeta 5: DTI Promedio (Debt-to-Income) -->
+            <article class="tarjeta-kpi">
+                <h3 class="etiqueta-kpi">DTI Promedio</h3>
+                <div class="valor-kpi">13.43%</div>
+                <div class="desglose-kpi">
+                    <div class="metrica-mtd">
+                        <span class="sub-etiqueta">MTD</span>
+                        <span class="sub-valor">13.57</span>
+                    </div>
+                    <div class="metrica-mom">
+                        <span class="sub-etiqueta">MoM</span>
+                        <span class="sub-valor">1.25%</span>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+
+        <!-- ==========================================
+             CUERPO PRINCIPAL: FILTROS LATERALES Y GRÁFICOS
+             ========================================== -->
+        <div class="cuerpo-dashboard">
+
+            <!-- BARRA LATERAL DE FILTROS Y NAVEGACIÓN -->
+            <aside class="panel-filtros">
+                
+                <!-- Logo del banco / Institución -->
+                <div class="logo-institucion">
+                    <div class="icono-banco">🏛</div>
+                </div>
+
+                <!-- Botones de navegación de vistas -->
+                <nav class="navegacion-vistas">
+                    <button type="button" class="boton-vista activo">RESUMEN</button>
+                    <button type="button" class="boton-vista">GENERAL</button>
+                    <button type="button" class="boton-vista">DETALLES</button>
+                </nav>
+
+                <!-- Filtro por Calificación (Grade) -->
+                <div class="grupo-filtro">
+                    <div class="encabezado-filtro">
+                        <span class="titulo-filtro">calificación</span>
+                        <span class="iconos-filtro">🎛 ⚙</span>
+                    </div>
+                    <div class="grilla-calificaciones">
+                        <button type="button" class="btn-calificacion activo">A</button>
+                        <button type="button" class="btn-calificacion">B</button>
+                        <button type="button" class="btn-calificacion">C</button>
+                        <button type="button" class="btn-calificacion">D</button>
+                        <button type="button" class="btn-calificacion">E</button>
+                        <button type="button" class="btn-calificacion">F</button>
+                        <button type="button" class="btn-calificacion">G</button>
+                    </div>
+                </div>
+
+                <!-- Filtro por Propósito (Purpose) -->
+                <div class="grupo-filtro">
+                    <div class="encabezado-filtro">
+                        <span class="titulo-filtro">propósito</span>
+                        <span class="iconos-filtro">🎛 ⚙</span>
+                    </div>
+                    <div class="lista-propositos">
+                        <div class="item-proposito seleccionado">auto</div>
+                        <div class="item-proposito">tarjeta de crédito</div>
+                        <div class="item-proposito">consolidación de deudas</div>
+                        <div class="item-proposito">educacional</div>
+                        <div class="item-proposito">mejora del hogar</div>
+                        <div class="item-proposito">casa</div>
+                        <div class="item-proposito">compra mayor</div>
+                        <div class="item-proposito">médico</div>
+                    </div>
+                </div>
+
+            </aside>
+
+
+            <!-- GRILLA DE GRÁFICOS Y ESTADÍSTICAS -->
+            <main class="grilla-graficos">
+
+                <!-- Fila 1: Gráfico de Tendencia Mensual y Mapa Geográfico -->
+                <div class="fila-graficos">
+                    
+                    <!-- Gráfico 1: Solicitudes por Mes (Línea de tiempo) -->
+                    <article class="tarjeta-grafico span-2">
+                        <h3 class="titulo-grafico">Total Solicitudes de Préstamo por Mes</h3>
+                        <div class="contenedor-canvas">
+                            <canvas id="grafico-solicitudes-mes" class="canvas-elemento"></canvas>
+                        </div>
+                    </article>
+
+                    <!-- Gráfico 2: Solicitudes por Estado (Mapa de calor) -->
+                    <article class="tarjeta-grafico span-2">
+                        <h3 class="titulo-grafico">Total Solicitudes de Préstamo por Estado</h3>
+                        <div class="contenedor-mapa">
+                            <div class="mapa-eeuu-placeholder">🗺️ [Mapa de Calor de EE.UU.]</div>
+                            <div class="leyenda-mapa">
+                                <span class="escala-alto">6894</span>
+                                <span class="escala-medio">3448.5</span>
+                                <span class="escala-bajo">3</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Gráfico 3: Solicitudes por Plazo (Gráfico de Dona) -->
+                    <article class="tarjeta-grafico">
+                        <h3 class="titulo-grafico">Total Solicitudes por Plazo</h3>
+                        <div class="leyenda-plazos">
+                            <span class="plazo-36">■ 36 meses</span>
+                            <span class="plazo-60">■ 60 meses</span>
+                        </div>
+                        <div class="contenedor-dona">
+                            <canvas id="grafico-plazos" class="canvas-elemento"></canvas>
+                            <div class="etiquetas-porcentaje">
+                                <span class="porcentaje-1">27%</span>
+                                <span class="porcentaje-2">73%</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+
+                <!-- Fila 2: Desglose por Empleabilidad, Propósito y Vivienda -->
+                <div class="fila-graficos">
+                    
+                    <!-- Gráfico 4: Solicitudes por Antigüedad Laboral (Barras Horizontales) -->
+                    <article class="tarjeta-grafico">
+                        <h3 class="titulo-grafico">Total Solicitudes por Antigüedad Laboral</h3>
+                        <div class="lista-barras-horizontales">
+                            <div class="barra-fila"><span>10+ años</span><div class="barra" style="width: 100%;"></div><span class="valor">8.9K</span></div>
+                            <div class="barra-fila"><span>&lt; 1 año</span><div class="barra" style="width: 50%;"></div><span class="valor">4.6K</span></div>
+                            <div class="barra-fila"><span>2 años</span><div class="barra" style="width: 48%;"></div><span class="valor">4.4K</span></div>
+                            <div class="barra-fila"><span>3 años</span><div class="barra" style="width: 45%;"></div><span class="valor">4.1K</span></div>
+                            <div class="barra-fila"><span>4 años</span><div class="barra" style="width: 38%;"></div><span class="valor">3.4K</span></div>
+                            <div class="barra-fila"><span>5 años</span><div class="barra" style="width: 36%;"></div><span class="valor">3.3K</span></div>
+                            <div class="barra-fila"><span>1 año</span><div class="barra" style="width: 35%;"></div><span class="valor">3.2K</span></div>
+                            <div class="barra-fila"><span>6 años</span><div class="barra" style="width: 24%;"></div><span class="valor">2.2K</span></div>
+                            <div class="barra-fila"><span>7 años</span><div class="barra" style="width: 20%;"></div><span class="valor">1.8K</span></div>
+                            <div class="barra-fila"><span>8 años</span><div class="barra" style="width: 17%;"></div><span class="valor">1.5K</span></div>
+                            <div class="barra-fila"><span>9 años</span><div class="barra" style="width: 15%;"></div><span class="valor">1.3K</span></div>
+                        </div>
+                    </article>
+
+                    <!-- Gráfico 5: Solicitudes por Propósito (Barras Horizontales Detalladas) -->
+                    <article class="tarjeta-grafico">
+                        <h3 class="titulo-grafico">Total Solicitudes por Propósito</h3>
+                        <div class="lista-barras-horizontales">
+                            <div class="barra-fila"><span>tarjeta de crédito</span><div class="barra verde" style="width: 100%;"></div><span class="valor">18.2K</span></div>
+                            <div class="barra-fila"><span>mejora del hogar</span><div class="barra verde" style="width: 25%;"></div><span class="valor">5.0K</span></div>
+                            <div class="barra-fila"><span>consolidación de deudas</span><div class="barra verde" style="width: 20%;"></div><span class="valor">3.8K</span></div>
+                            <div class="barra-fila"><span>educacional</span><div class="barra verde" style="width: 15%;"></div><span class="valor">2.9K</span></div>
+                            <div class="barra-fila"><span>casa</span><div class="barra verde" style="width: 12%;"></div><span class="valor">2.1K</span></div>
+                            <div class="barra-fila"><span>compra mayor</span><div class="barra verde" style="width: 10%;"></div><span class="valor">1.8K</span></div>
+                            <div class="barra-fila"><span>médico</span><div class="barra verde" style="width: 8%;"></div><span class="valor">1.5K</span></div>
+                            <div class="barra-fila"><span>boda</span><div class="barra verde" style="width: 5%;"></div><span class="valor">0.9K</span></div>
+                            <div class="barra-fila"><span>mudanza</span><div class="barra verde" style="width: 4%;"></div><span class="valor">0.7K</span></div>
+                            <div class="barra-fila"><span>vacaciones</span><div class="barra verde" style="width: 3%;"></div><span class="valor">0.6K</span></div>
+                            <div class="barra-fila"><span>energía renovable</span><div class="barra verde" style="width: 1%;"></div><span class="valor">0.1K</span></div>
+                        </div>
+                    </article>
+
+                    <!-- Gráfico 6: Solicitudes por Tenencia de Vivienda (Gráfico de Distribución) -->
+                    <article class="tarjeta-grafico">
+                        <h3 class="titulo-grafico">Total Solicitudes por Tenencia de Vivienda</h3>
+                        <div class="contenedor-distribucion-vivienda">
+                            <div class="bloque-vivienda alquiler">
+                                <span class="etiqueta-vivienda">ALQUILER, 18439</span>
+                            </div>
+                            <div class="bloque-vivienda hipoteca">
+                                <span class="etiqueta-vivienda">HIPOTECA, 17198</span>
+                            </div>
+                            <div class="bloque-vivienda propio">
+                                <span class="etiqueta-vivienda">PROPIO, 2838</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- Archivo de JavaScript en español -->
+    <script src="../javascrip/reportes.js"></script>
+</body>
 </html>

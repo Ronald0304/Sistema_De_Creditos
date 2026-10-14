@@ -1,0 +1,416 @@
+/* ==========================================
+   1. ESTILOS GLOBALES Y VARIABLES
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #1a1c23; /* Fondo general oscuro */
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ==========================================
+   2. CONTENEDOR PRINCIPAL DEL REPORTE
+   ========================================== */
+.contenedor-reporte {
+    width: 100%;
+    max-width: 1400px;
+    background-color: #12141c;
+    border-radius: 12px;
+    border: 1px solid #2d3142;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cabecera */
+.cabecera-reporte {
+    text-align: center;
+    border-bottom: 1px solid #2d3142;
+    padding-bottom: 15px;
+}
+
+.titulo-reporte {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+
+.subtitulo-resumen {
+    color: #4da6ff;
+}
+
+/* ==========================================
+   3. SECCIÓN DE TARJETAS KPI (Superiores)
+   ========================================== */
+.seccion-kpis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.tarjeta-kpi {
+    background-color: #1b1f2e;
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid #2d3142;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* La primera tarjeta destaca con un fondo naranja/terracota */
+.tarjeta-kpi.destacada {
+    background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
+    border: none;
+}
+
+.etiqueta-kpi {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #a0aec0;
+    margin-bottom: 8px;
+}
+
+.tarjeta-kpi.destacada .etiqueta-kpi {
+    color: #fdebd0;
+}
+
+.valor-kpi {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.desglose-kpi {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 8px;
+    font-size: 0.75rem;
+}
+
+.sub-etiqueta {
+    font-weight: 700;
+    color: #a0aec0;
+    margin-right: 4px;
+}
+
+.tarjeta-kpi.destacada .sub-etiqueta {
+    color: #fdebd0;
+}
+
+.sub-valor {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   4. CUERPO PRINCIPAL (Filtros + Gráficos)
+   ========================================== */
+.cuerpo-dashboard {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 20px;
+}
+
+/* --- Panel de Filtros Izquierdo --- */
+.panel-filtros {
+    background-color: #1b1f2e;
+    border-radius: 8px;
+    border: 1px solid #2d3142;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.logo-institucion {
+    text-align: center;
+    font-size: 1.5rem;
+    background-color: #12141c;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #2d3142;
+}
+
+.navegacion-vistas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.boton-vista {
+    width: 100%;
+    padding: 10px;
+    background-color: #24293e;
+    border: none;
+    border-radius: 4px;
+    color: #a0aec0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.boton-vista.activo, .boton-vista:hover {
+    background-color: #e67e22;
+    color: #ffffff;
+}
+
+.grupo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.encabezado-filtro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: #a0aec0;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.grilla-calificaciones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+
+.btn-calificacion {
+    background-color: #24293e;
+    border: 1px solid #2d3142;
+    color: #ffffff;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-calificacion.activo {
+    background-color: #4da6ff;
+    color: #12141c;
+}
+
+.lista-propositos {
+    background-color: #12141c;
+    border: 1px solid #2d3142;
+    border-radius: 6px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-proposito {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+    color: #a0aec0;
+    border-bottom: 1px solid #1b1f2e;
+    cursor: pointer;
+}
+
+.item-proposito.seleccionado, .item-proposito:hover {
+    background-color: #24293e;
+    color: #ffffff;
+}
+
+
+/* --- Grilla de Gráficos --- */
+.grilla-graficos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.fila-graficos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.tarjeta-grafico {
+    background-color: #1b1f2e;
+    border-radius: 8px;
+    border: 1px solid #2d3142;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tarjeta-grafico.span-2 {
+    grid-column: span 1.5; /* Ocupa espacio proporcional */
+}
+
+.titulo-grafico {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.contenedor-canvas {
+    height: 180px;
+}
+
+.canvas-elemento {
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos de Mapa y Dona */
+.contenedor-mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
+    position: relative;
+}
+
+.mapa-eeuu-placeholder {
+    font-size: 0.8rem;
+    color: #718096;
+}
+
+.leyenda-mapa {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.65rem;
+    color: #a0aec0;
+    gap: 4px;
+}
+
+.leyenda-plazos {
+    display: flex;
+    gap: 15px;
+    font-size: 0.7rem;
+    color: #a0aec0;
+    margin-bottom: 5px;
+}
+
+.plazo-36 { color: #4da6ff; }
+.plazo-60 { color: #e67e22; }
+
+.contenedor-dona {
+    height: 150px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.etiquetas-porcentaje {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Listas de Barras Horizontales */
+.lista-barras-horizontales {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.barra-fila {
+    display: grid;
+    grid-template-columns: 110px 1fr 40px;
+    align-items: center;
+    font-size: 0.7rem;
+    color: #a0aec0;
+}
+
+.barra {
+    height: 8px;
+    background-color: #f1c40f; /* Amarillo corporativo */
+    border-radius: 2px;
+}
+
+.barra.verde {
+    background-color: #2ecc71; /* Verde corporativo */
+}
+
+.valor {
+    text-align: right;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Tenencia de Vivienda (Bloques de distribución) */
+.contenedor-distribucion-vivienda {
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.bloque-vivienda {
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.bloque-vivienda.alquiler {
+    background-color: #f1c40f;
+    color: #12141c;
+    height: 50%;
+}
+
+.bloque-vivienda.hipoteca {
+    background-color: #4da6ff;
+    color: #12141c;
+    height: 40%;
+}
+
+.bloque-vivienda.propio {
+    background-color: #e67e22;
+    color: #ffffff;
+    height: 10%;
+}
+
+
+/* ==========================================
+   5. RESPONSIVIDAD
+   ========================================== */
+@media (max-width: 1200px) {
+    .seccion-kpis {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .cuerpo-dashboard {
+        grid-template-columns: 1fr;
+    }
+    .fila-graficos {
+        grid-template-columns: 1fr;
+    }
+}
