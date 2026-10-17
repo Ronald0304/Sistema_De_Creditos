@@ -1,16 +1,17 @@
-/* ==========================================
-   1. ESTILOS GLOBALES Y VARIABLES
-   ========================================== */
+/* ==========================================================================
+   1. IMPORTACIÓN DE FUENTE Y CONFIGURACIÓN GENERAL
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 body {
-    background-color: #f5f6f8; /* Color gris claro de fondo general */
-    color: #1a1a1a;
+    background-color: #060e1d; /* Fondo oscuro exterior de la página */
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -18,300 +19,349 @@ body {
     padding: 20px;
 }
 
-/* ==========================================
-   2. CONTENEDOR PRINCIPAL Y FONDO AZUL
-   ========================================== */
+/* Contenedor principal del sistema en dos columnas */
 .contenedor-principal {
-    width: 100%;
-    max-width: 1000px;
-    background-color: #0d225a; /* Fondo azul oscuro general de la pantalla */
-    border-radius: 20px;
-    padding: 60px 40px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 15px 35px rgba(13, 34, 90, 0.2);
-}
-
-/* ==========================================
-   3. TARJETA DE AUTENTICACIÓN (Contenedor Central)
-   ========================================== */
-.tarjeta-autenticacion {
     width: 100%;
-    max-width: 860px;
+    max-width: 980px;
     background-color: #ffffff;
-    border-radius: 16px;
-    display: flex;
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    min-height: 480px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
 }
 
-/* ==========================================
-   4. COLUMNA IZQUIERDA (Formulario)
-   ========================================== */
-.columna-formulario {
+/* ==========================================================================
+   2. PANEL IZQUIERDO (FONDO CON ANIMACIÓN DE ONDAS Y DESTELLES)
+   ========================================================================== */
+.panel-informativo {
     flex: 1;
-    padding: 45px 50px;
+    background: #040d1a;
+    color: #ffffff;
+    padding: 40px;
+    position: relative;
+    overflow: hidden; /* Corta las ondas para que no se salgan de la tarjeta */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-/* Cabecera del Logo */
-.cabecera-logo {
+/* Capa contenedor de las esferas/ondas flotantes */
+.fondo-animado-ondas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.45;
+    pointer-events: none; /* Evita interferencias con interacciones del usuario */
+}
+
+/* Estilo base de cada esfera difuminada */
+.onda {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(45px);
+}
+
+/* Esfera 1: Tono azul brillante superior */
+.onda-1 {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg, #0056b3, #00c6ff);
+    top: -60px;
+    left: -60px;
+    animation: movimientoOnda1 8s infinite alternate ease-in-out;
+}
+
+/* Esfera 2: Tono turquesa inferior */
+.onda-2 {
+    width: 320px;
+    height: 320px;
+    background: linear-gradient(135deg, #00c6ff, #004b93);
+    bottom: -80px;
+    right: -60px;
+    animation: movimientoOnda2 10s infinite alternate ease-in-out;
+}
+
+/* Esfera 3: Tono azul profundo central */
+.onda-3 {
+    width: 260px;
+    height: 260px;
+    background: linear-gradient(135deg, #16335c, #002244);
+    top: 35%;
+    left: 25%;
+    animation: movimientoOnda3 12s infinite alternate ease-in-out;
+}
+
+/* Keyframes para el movimiento fluido de las ondas */
+@keyframes movimientoOnda1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(45px, 50px) scale(1.15); }
+}
+
+@keyframes movimientoOnda2 {
+    0% { transform: translate(0, 0) scale(1.1); }
+    100% { transform: translate(-50px, -45px) scale(0.9); }
+}
+
+@keyframes movimientoOnda3 {
+    0% { transform: translate(0, 0) scale(0.95); }
+    100% { transform: translate(-35px, 40px) scale(1.2); }
+}
+
+/* Contenido de texto que flota por encima del fondo animado */
+.contenido-flotante {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+/* Logotipo */
+.encabezado-logo {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 35px;
 }
 
-.icono-logo {
-    width: 32px;
-    height: 32px;
-    background-color: #0d225a;
-    border-radius: 50%;
-    position: relative;
+.icono-logo-animado {
+    font-size: 26px;
+    background: rgba(0, 198, 255, 0.15);
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 198, 255, 0.3);
 }
 
-/* Simulación visual de la U estilizada del logo del banco */
-.icono-logo::after {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    width: 16px;
-    height: 12px;
-    border: 3px solid #ffffff;
-    border-top: none;
-    border-radius: 0 0 10px 10px;
-}
-
-.nombre-banco {
-    font-size: 1.4rem;
+.encabezado-logo h1 {
+    font-size: 26px;
     font-weight: 700;
-    color: #0d225a;
+    color: #ffffff;
     letter-spacing: -0.5px;
 }
 
-/* Campos de formulario */
-.grupo-campo {
-    margin-bottom: 20px;
-}
-
-.etiqueta-campo {
-    display: block;
-    font-size: 0.8rem;
+/* Textos informativos */
+.texto-central-animacion h2 {
+    font-size: 20px;
     font-weight: 600;
-    color: #7b8595;
-    margin-bottom: 6px;
+    color: #00c6ff;
+    margin-bottom: 8px;
 }
 
-.entrada-texto {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #e1e5eb;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    color: #2d3748;
-    background-color: #fafbfc;
-    transition: all 0.2s ease;
+.texto-central-animacion p {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.5;
 }
 
-.entrada-texto:focus {
-    outline: none;
-    border-color: #0d225a;
-    background-color: #ffffff;
+.lista-caracteristicas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 20px;
 }
 
-/* Contenedor especial para el campo de contraseña y sus botones */
-.contenedor-clave {
-    position: relative;
+.lista-caracteristicas li {
     display: flex;
     align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #cbd5e1;
 }
 
-.entrada-clave {
-    padding-right: 75px; /* Espacio para que los iconos no pisen el texto */
-}
-
-.herramientas-clave {
-    position: absolute;
-    right: 12px;
-    display: flex;
-    gap: 8px;
-}
-
-.boton-herramienta {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: #a0aec0;
-    padding: 2px;
-}
-
-.boton-herramienta:hover {
-    color: #0d225a;
-}
-
-/* Botón principal de Ingresar */
-.boton-primario {
-    width: 100%;
-    padding: 13px;
-    background-color: #0d225a;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.2s ease;
-}
-
-.boton-primario:hover {
-    background-color: #173785;
-}
-
-
-/* ==========================================
-   5. COLUMNA DERECHA (Banner Promocional)
-   ========================================== */
-.columna-promocional {
+/* ==========================================================================
+   3. PANEL DERECHO (FORMULARIO MONTAJE REACT)
+   ========================================================================== */
+.panel-formulario {
     flex: 1;
-    background: linear-gradient(135deg, #2852ff 0%, #0c33d0 100%); /* Azul brillante característico */
-    color: #ffffff;
+    background-color: #ffffff;
     padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+    z-index: 2;
 }
 
-.titulo-promocional {
-    font-size: 1.4rem;
+.encabezado-soporte {
+    text-align: right;
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
+
+.encabezado-soporte a {
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.encabezado-soporte a:hover {
+    text-decoration: underline;
+}
+
+.bienvenida {
+    margin-bottom: 20px;
+}
+
+.bienvenida h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+
+.bienvenida p {
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* Estructura del formulario de React */
+#formulario-login {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.grupo-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.grupo-campo label {
+    font-size: 12px;
     font-weight: 600;
-    text-align: center;
-    max-width: 220px;
-    line-height: 1.3;
-    z-index: 2;
+    color: #334155;
 }
 
-.contenedor-ilustracion {
-    width: 100%;
+.campo-con-icono {
+    position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin: 20px 0;
 }
 
-.imagen-promocional {
-    max-width: 200px;
-    height: auto;
+.icono-campo {
+    position: absolute;
+    left: 14px;
+    font-size: 15px;
+    color: #94a3b8;
+    pointer-events: none;
 }
 
-/* Puntos de navegación del carrusel */
-.puntos-carrusel {
-    display: flex;
-    gap: 8px;
-    z-index: 2;
-}
-
-.punto {
-    width: 8px;
-    height: 8px;
-    background-color: rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.punto.activo {
-    width: 20px;
-    border-radius: 4px;
-    background-color: #ffffff;
-}
-
-
-/* ==========================================
-   6. PIE DE PÁGINA Y SOPORTE
-   ========================================== */
-.pie-pagina {
+.campo-con-icono input,
+.campo-con-icono select {
     width: 100%;
-    margin-top: 35px;
+    padding: 11px 14px 11px 40px;
+    font-size: 14px;
+    color: #1e293b;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.campo-con-icono input:focus,
+.campo-con-icono select:focus {
+    background-color: #ffffff;
+    border-color: #0056b3;
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+}
+
+.boton-ver-contrasena {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 4px;
+}
+
+/* Opciones de recordar sesión y recuperar contraseña */
+.opciones-adicionales {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.85rem;
-    padding: 0 10px;
+    font-size: 12px;
 }
 
-.soporte-tecnico {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.telefono-soporte {
-    color: #ffffff;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 0.95rem;
-}
-
-.telefono-soporte:hover {
-    text-decoration: underline;
-}
-
-.enlace-inferior {
+.opcion-recordar {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    color: #475569;
+    cursor: pointer;
 }
 
-.icono-cuadro-rojo {
-    width: 12px;
-    height: 12px;
-    background-color: #e53e3e;
-    display: inline-block;
-    border-radius: 2px;
-}
-
-.enlace-creditos {
-    color: rgba(255, 255, 255, 0.7);
+.enlace-olvidaste {
+    color: #0056b3;
     text-decoration: none;
+    font-weight: 500;
 }
 
-.enlace-creditos:hover {
-    color: #ffffff;
+.enlace-olvidaste:hover {
     text-decoration: underline;
 }
 
+/* Botón principal */
+.boton-ingresar {
+    width: 100%;
+    padding: 13px;
+    background-color: #0a192f;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
 
-/* ==========================================
-   7. DISEÑO RESPONSIVO (Móviles y Tablets)
-   ========================================== */
+.boton-ingresar:hover {
+    background-color: #16335c;
+}
+
+.boton-ingresar:active {
+    transform: scale(0.99);
+}
+
+/* Mensaje SSL */
+.insignia-seguridad {
+    text-align: center;
+    background-color: #ecfdf5;
+    color: #065f46;
+    padding: 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.pie-formulario {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.pie-formulario p {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.pie-formulario a {
+    color: #64748b;
+    text-decoration: none;
+}
+
+/* Adaptación a dispositivos móviles */
 @media (max-width: 768px) {
     .contenedor-principal {
-        padding: 20px 10px;
-    }
-
-    .tarjeta-autenticacion {
         flex-direction: column;
+        max-width: 420px;
     }
-
-    .columna-promocional {
-        min-height: 300px;
-        padding: 30px;
-    }
-
-    .pie-pagina {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
+    .panel-informativo {
+        display: none; /* Se oculta el panel de ondas en móviles para ahorrar espacio */
     }
 }

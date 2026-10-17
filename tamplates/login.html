@@ -3,118 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Energobank - Iniciar Sesión</title>
-    <!-- Hoja de estilos en español -->
+    <title>CrediManager - Inicio de Sesión</title>
+
+    <!-- Enlace al archivo CSS (Sube un nivel para entrar a la carpeta 'css') -->
     <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
 
-    <!-- FONDO PRINCIPAL Y CONTENEDOR GENERAL DE LA PÁGINA -->
+    <!-- CONTENEDOR PRINCIPAL: Agrupa toda la tarjeta del sistema -->
     <div class="contenedor-principal">
 
-        <!-- TARJETA PRINCIPAL DEL LOGIN (Dividida en 2 columnas) -->
-        <div class="tarjeta-autenticacion">
+        <!-- ==========================================================
+             SECCIÓN IZQUIERDA: Panel Informativo con Fondo Animado
+             ========================================================== -->
+        <section class="panel-informativo">
+            
+            <!-- Capas decorativas para el fondo animado de ondas (CSS) -->
+            <div class="fondo-animado-ondas">
+                <div class="onda onda-1"></div>
+                <div class="onda onda-2"></div>
+                <div class="onda onda-3"></div>
+            </div>
 
-            <!-- ==========================================
-                 SECCIÓN IZQUIERDA: FORMULARIO DE ACCESO
-                 ========================================== -->
-            <div class="columna-formulario">
+            <!-- Contenido que flota sobre las ondas en movimiento -->
+            <div class="contenido-flotante">
                 
-                <!-- Logotipo e Isotipu de Energobank -->
-                <div class="cabecera-logo">
-                    <div class="icono-logo"></div> <!-- Icono circular del banco -->
-                    <span class="nombre-banco">energobank</span>
+                <!-- Encabezado con el logotipo y título de la empresa -->
+                <header class="encabezado-logo">
+                    <div class="icono-logo-animado">🛡️</div>
+                    <h1>CrediManager</h1>
+                </header>
+
+                <!-- Lema principal e información central -->
+                <div class="texto-central-animacion">
+                    <h2>Soluciones de Crédito Corporativo</h2>
+                    <p>Plataforma de gestión financiera inteligente, segura y en tiempo real.</p>
                 </div>
 
-                <!-- Formulario de Inicio de Sesión -->
-                <form id="formulario-inicio-sesion" class="formulario-login" action="#" method="POST">
-                    
-                    <!-- Campo: Usuario -->
-                    <div class="grupo-campo">
-                        <label for="usuario" class="etiqueta-campo">Usuario</label>
-                        <input 
-                            type="text" 
-                            id="usuario" 
-                            name="usuario" 
-                            placeholder="Ivanov Ivan Ivanovich" 
-                            required 
-                            class="entrada-texto">
-                    </div>
-
-                    <!-- Campo: Contraseña -->
-                    <div class="grupo-campo">
-                        <label for="clave" class="etiqueta-campo">Contraseña</label>
-                        <div class="contenedor-clave">
-                            <input 
-                                type="password" 
-                                id="clave" 
-                                name="clave" 
-                                placeholder="*** *** *** ***" 
-                                required 
-                                class="entrada-texto entrada-clave">
-                            <!-- Iconos o botones dentro del campo de contraseña (teclado virtual / visibilidad) -->
-                            <div class="herramientas-clave">
-                                <button type="button" id="boton-teclado-virtual" class="boton-herramienta" aria-label="Teclado virtual">⌨</button>
-                                <button type="button" id="boton-mostrar-clave" class="boton-herramienta" aria-label="Mostrar contraseña">👁</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Botón de Envío / Iniciar Sesión -->
-                    <button type="submit" id="boton-ingresar" class="boton-primario">
-                        Ingresar
-                    </button>
-
-                </form>
+                <!-- Lista de ventajas del sistema -->
+                <ul class="lista-caracteristicas">
+                    <li>
+                        <span class="icono">🔒</span>
+                        <span>Seguridad y Confidencialidad Avanzada</span>
+                    </li>
+                    <li>
+                        <span class="icono">📈</span>
+                        <span>Análisis de Riesgo Automatizado</span>
+                    </li>
+                    <li>
+                        <span class="icono">📋</span>
+                        <span>Cumplimiento Normativo Integrado</span>
+                    </li>
+                </ul>
 
             </div>
 
-
-            <!-- ==========================================
-                 SECCIÓN DERECHA: PANEL PROMOCIONAL Y CARRUSEL
-                 ========================================== -->
-            <div class="columna-promocional">
-                
-                <!-- Mensaje publicitario -->
-                <h2 class="titulo-promocional">¿Quieres ser cliente del banco?</h2>
-
-                <!-- Ilustración 3D (Caja fuerte con porcentaje y monedas) -->
-                <div class="contenedor-ilustracion">
-                    <img src="ilustracion-banco.png" alt="Ilustración de caja fuerte financiera" class="imagen-promocional">
-                </div>
-
-                <!-- Puntos de navegación del carrusel/deslizador -->
-                <div class="puntos-carrusel">
-                    <span class="punto"></span>
-                    <span class="punto"></span>
-                    <span class="punto activo"></span>
-                    <span class="punto"></span>
-                </div>
-
-            </div>
-
-        </div>
+        </section>
 
 
-        <!-- ==========================================
-             PIE DE PÁGINA (Soporte Técnico y Enlaces)
-             ========================================== -->
-        <footer class="pie-pagina">
-            <div class="soporte-tecnico">
-                <span class="texto-soporte">Soporte técnico a clientes:</span>
-                <a href="tel:+78432316080" class="telefono-soporte">+7 (843) 231-60-80</a>
-            </div>
-
-            <!-- Marca de agua / Enlace externo inferior -->
-            <div class="enlace-inferior">
-                <span class="icono-cuadro-rojo"></span>
-                <a href="https://rdbx.ru" target="_blank" class="enlace-creditos">rdbx.ru · Energobank ↗</a>
-            </div>
-        </footer>
+        <!-- ==========================================================
+             SECCIÓN DERECHA: Punto de montaje para React
+             ========================================================== -->
+        <section id="raiz-formulario-react" class="panel-formulario">
+            <!-- 
+                Este contenedor está identificado con id="raiz-formulario-react".
+                Tu archivo 'main.jsx' buscará este ID e inyectará aquí 
+                todo el formulario interactivo construido con React (login2.jsx).
+            -->
+        </section>
 
     </div>
 
-    <!-- Archivo de JavaScript en español -->
-    <script src="../javascrip/login.js"></script>
+    <!-- 
+        Carga del script principal de React.
+        Usa type="module" porque utilizas sintaxis de módulos de JS (import/export).
+        Sube un nivel con '../' para acceder a tu carpeta 'javascrip'.
+    -->
+    <script type="module" src="../javascrip/main.jsx"></script>
+
 </body>
 </html>
