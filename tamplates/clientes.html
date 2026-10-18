@@ -1,12 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-    
-    </body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrediManager - Registrar Cliente</title>
+  
+  <!-- Hojas de estilo locales -->
+  <link rel="stylesheet" href="../css/aprobaciones.css">
+  <link rel="stylesheet" href="../css/clientes.css">
+  
+  <!-- Tipografía desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- CONTENEDOR PRINCIPAL DEL SISTEMA -->
+  <div class="contenedor-app">
+
+    <!-- ======================================================= -->
+    <!-- 1. BARRA LATERAL DE NAVEGACIÓN (OFICIAL DE CRÉDITO)     -->
+    <!-- ======================================================= -->
+    <aside class="barra-lateral">
+      
+      <!-- Logotipo y Nombre del Sistema -->
+      <div class="logotipo-contenedor">
+        <div class="icono-logo">SC</div>
+        <div class="texto-logo">
+          <h2>Sistema de</h2>
+          <span>Créditos</span>
+        </div>
+      </div>
+
+      <!-- Menú de Navegación del Oficial -->
+      <nav class="menu-navegacion">
+        <a href="clientes.html" class="enlace-nav activo">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Clientes</span>  
+        </a>
+        <a href="solicitudes.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Solicitudes</span>
+        </a>
+        <a href="garantias.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Garantías</span>
+        </a>
+        <a href="desembolsos.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Desembolsos</span>
+        </a>
+      </nav>
+
+      <!-- Pie de la Barra Lateral: Usuario Activo (Cargado dinámicamente) -->
+      <div class="tarjeta-usuario">
+        <div class="avatar-usuario">AT</div>
+        <div class="detalles-usuario">
+          <p class="nombre-usuario">Ana Torrez</p>
+          <span class="rol-usuario">Oficial de Crédito</span>
+        </div>
+      </div>
+
+    </aside>
+
+
+    <!-- ======================================================= -->
+    <!-- 2. CONTENIDO PRINCIPAL: FORMULARIO REGISTRAR CLIENTE    -->
+    <!-- ======================================================= -->
+    <main class="contenido-principal">
+
+      <!-- Miga de Pan (Breadcrumb) -->
+      <header class="encabezado-seccion">
+        <nav class="miga-de-pan" aria-label="Navegación secundaria">
+          <span>Clientes</span>
+          <span class="separador">/</span>
+          <span class="pagina-actual">Registrar cliente</span>
+        </nav>
+        <h1 class="titulo-pagina">Registrar cliente</h1>
+      </header>
+
+      <!-- Tarjeta Contenedora del Formulario -->
+      <section class="seccion-formulario-cliente">
+        
+        <div class="cabecera-form-card">
+          <h2>Registrar cliente</h2>
+          <p class="subtitulo-form">Los campos con * son obligatorios</p>
+        </div>
+
+        <!-- FORMULARIO DE REGISTRO -->
+        <form id="form-registrar-cliente" class="formulario-tarjeta-datos">
+
+          <div class="fila-campos">
+            <!-- CI -->
+            <div class="grupo-input">
+              <label for="ci">CI *</label>
+              <input type="text" id="ci" name="ci" placeholder="4587231" required>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="grupo-input">
+              <label for="telefono">Teléfono</label>
+              <input type="text" id="telefono" name="telefono" placeholder="70012345">
+            </div>
+          </div>
+
+          <div class="fila-campos">
+            <!-- Nombres -->
+            <div class="grupo-input">
+              <label for="nombres">Nombres *</label>
+              <input type="text" id="nombres" name="nombres" placeholder="María Elena" required>
+            </div>
+
+            <!-- Apellidos -->
+            <div class="grupo-input">
+              <label for="apellidos">Apellidos *</label>
+              <input type="text" id="apellidos" name="apellidos" placeholder="Quispe Mamani" required>
+            </div>
+          </div>
+
+          <div class="fila-campos">
+            <!-- Dirección -->
+            <div class="grupo-input">
+              <label for="direccion">Dirección</label>
+              <input type="text" id="direccion" name="direccion" placeholder="Sopocachi, La Paz">
+            </div>
+
+            <!-- Ingresos Mensuales -->
+            <div class="grupo-input">
+              <label for="ingresos_mensuales">Ingresos mensuales (Bs) *</label>
+              <input type="number" step="0.01" id="ingresos_mensuales" name="ingresos_mensuales" placeholder="6500.00" required>
+            </div>
+          </div>
+
+          <!-- Alerta informativa validación CI -->
+          <div class="alerta-aviso">
+            <span>⚠️ Al guardar se verifica que el CI no esté registrado</span>
+          </div>
+
+          <!-- Botones de Acción -->
+          <div class="botones-contenedor">
+            <button type="reset" class="boton-secundario">Cancelar</button>
+            <button type="submit" class="boton-primario">Guardar cliente</button>
+          </div>
+
+        </form>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Script para la gestión e interacción de clientes -->
+  <script src="../javascrip/clientes.js"></script>
+
+</body>
 </html>

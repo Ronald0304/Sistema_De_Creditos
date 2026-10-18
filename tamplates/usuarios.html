@@ -1,12 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-    
-    </body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrediManager - Gestión de Usuarios</title>
+
+  <link rel="stylesheet" href="../css/aprobaciones.css">
+  <link rel="stylesheet" href="../css/desembolsos.css">
+  <link rel="stylesheet" href="../css/pagos.css">
+  <link rel="stylesheet" href="../css/usuarios.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="contenedor-app">
+
+    <!-- BARRA LATERAL SIMPLIFICADA (2 OPCIONES) -->
+    <aside class="barra-lateral">
+      <div class="logotipo-contenedor">
+        <div class="icono-logo">SC</div>
+        <div class="texto-logo">
+          <h2>Sistema de</h2>
+          <span>Créditos</span>
+        </div>
+      </div>
+
+      <nav class="menu-navegacion">
+        <a href="usuarios.html" class="enlace-nav activo">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Gestión Usuarios</span>
+        </a>
+        <a href="perfil.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Mi Perfil</span>
+        </a>
+      </nav>
+
+      <!-- Tarjeta de usuario inferior -->
+      <div class="tarjeta-usuario" style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div class="avatar-usuario" id="sidebar-avatar">--</div>
+          <div class="detalles-usuario">
+            <p class="nombre-usuario" id="sidebar-nombre" style="font-size:12px; margin:0;">Cargando...</p>
+            <span class="rol-usuario" id="sidebar-rol" style="font-size:10px;">Administrador</span>
+          </div>
+        </div>
+        <button type="button" id="btn-cerrar-sesion" title="Cerrar Sesión" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:16px;">
+          
+        </button>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido-principal">
+      <header class="encabezado-seccion">
+        <nav class="miga-de-pan">
+          <span>Administración</span>
+          <span class="separador">/</span>
+          <span class="pagina-actual">Gestión de Usuarios</span>
+        </nav>
+        <h1 class="titulo-pagina">Gestión de Usuarios y Roles</h1>
+      </header>
+
+      <section class="seccion-formulario-desembolso">
+        
+        <!-- FORMULARIO PARA REGISTRAR NUEVO USUARIO -->
+        <div class="tarjeta-bloque" style="margin-bottom: 25px;">
+          <h3 class="etiqueta-bloque">REGISTRAR NUEVO USUARIO</h3>
+          
+          <form id="form-registrar-usuario">
+            <div class="fila-campos-desembolso tres-columnas" style="margin-bottom: 15px;">
+              <div class="grupo-input">
+                <label for="nombre_completo">Nombre Completo *</label>
+                <input type="text" id="nombre_completo" placeholder="Ej: Juan Pérez Rojas" required>
+              </div>
+
+              <div class="grupo-input">
+                <label for="login">Usuario (Login) *</label>
+                <input type="text" id="login" placeholder="Ej: jperez" required>
+              </div>
+
+              <div class="grupo-input">
+                <label for="clave_hash">Contraseña *</label>
+                <input type="password" id="clave_hash" placeholder="********" required>
+              </div>
+            </div>
+
+            <div class="fila-campos-desembolso tres-columnas">
+              <div class="grupo-input">
+                <label for="rol">Rol del Sistema *</label>
+                <select id="rol" required>
+                  <option value="CAJERO">Cajero</option>
+                  <option value="OFICIAL">Oficial de Crédito</option>
+                  <option value="ANALISTA">Analista de Crédito</option>
+                  <option value="JEFE">Jefe de Créditos</option>
+                  <option value="ADMIN">Administrador</option>
+                </select>
+              </div>
+
+              <div class="grupo-input">
+                <label for="limite_aprobacion">Límite de Aprobación (Bs)</label>
+                <input type="number" step="0.01" id="limite_aprobacion" value="0.00" placeholder="0.00">
+              </div>
+
+              <div class="grupo-input" style="align-self: flex-end;">
+                <button type="submit" class="boton-primario" style="width:100%; background:#10b981;">Guardar Usuario</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- TABLA DE LISTADO Y EDICIÓN DE USUARIOS -->
+        <div class="tarjeta-bloque">
+          <h3 class="etiqueta-bloque">USUARIOS Y ROLES REGISTRADOS</h3>
+          
+          <table class="tabla-datos">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre Completo</th>
+                <th>Usuario</th>
+                <th>Rol</th>
+                <th>Límite Aprobación</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-usuarios">
+              <tr>
+                <td colspan="7" class="texto-vacio">Cargando usuarios...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  <script src="../javascrip/usuarios.js"></script>
+</body>
 </html>

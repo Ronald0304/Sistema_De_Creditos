@@ -1,0 +1,136 @@
+/* ==========================================================
+   ESTILOS ESPECÍFICOS: MÓDULO CLIENTES / REGISTRAR CLIENTE
+   ========================================================== */
+
+.seccion-formulario-cliente {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+  max-width: 950px;
+}
+
+.cabecera-form-card h2 {
+  font-size: 1.4rem;
+  color: #1e293b;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.subtitulo-form {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.formulario-tarjeta-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Filas divididas en dos columnas para los campos */
+.fila-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.grupo-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.grupo-input label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.grupo-input input {
+  padding: 12px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.grupo-input input::placeholder {
+  color: #94a3b8;
+}
+
+.grupo-input input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Alerta amarilla de validación de CI */
+.alerta-aviso {
+  background-color: #fef3c7;
+  border: 1px solid #fcd34d;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #b45309;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+/* Contenedor de botones de acción */
+.botones-contenedor {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 15px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+}
+
+.boton-primario {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 11px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.boton-primario:hover {
+  background-color: #1d4ed8;
+}
+
+.boton-secundario {
+  background-color: #ffffff;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  padding: 11px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.boton-secundario:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .fila-campos {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .seccion-formulario-cliente {
+    padding: 20px;
+  }
+}

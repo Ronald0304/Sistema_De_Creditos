@@ -1,12 +1,295 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrato de Crédito y Cronograma de Pagos</title>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #525252;
+      color: #1e293b;
+      padding: 30px 0;
+    }
+
+    .hoja-contrato {
+      background: white;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 20mm;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .encabezado-empresa {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .logo-texto h2 {
+      font-size: 18px;
+      color: #0f172a;
+    }
+
+    .logo-texto p {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .info-documento h1 {
+      font-size: 16px;
+      text-align: right;
+      color: #1e293b;
+    }
+
+    .info-documento p {
+      font-size: 12px;
+      text-align: right;
+      color: #2563eb;
+      font-weight: 600;
+    }
+
+    h3 {
+      font-size: 14px;
+      color: #0f172a;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 4px;
+    }
+
+    p, li {
+      font-size: 11px;
+      line-height: 1.5;
+      color: #334155;
+      text-align: justify;
+    }
+
+    ul {
+      margin-left: 15px;
+      margin-top: 5px;
+    }
+
+    .grid-datos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      margin-top: 10px;
+    }
+
+    .grid-datos p {
+      font-size: 12px;
+    }
+
+    .tabla-cronograma {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 10px;
+    }
+
+    .tabla-cronograma th, .tabla-cronograma td {
+      border: 1px solid #cbd5e1;
+      padding: 6px 8px;
+      text-align: center;
+    }
+
+    .tabla-cronograma th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .seccion-firmas {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 50px;
+      page-break-inside: avoid;
+    }
+
+    .caja-firma {
+      width: 40%;
+      text-align: center;
+      border-top: 1px solid #0f172a;
+      padding-top: 8px;
+    }
+
+    .caja-firma p {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .caja-firma span {
+      font-size: 10px;
+      color: #64748b;
+    }
+
+    .barra-botones {
+      width: 210mm;
+      margin: 0 auto 20px auto;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-size: 13px;
+    }
+
+    .btn-imprimir {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    .btn-volver {
+      background-color: #64748b;
+      color: white;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* Optimización para impresión en PDF o Papel */
+    @media print {
+      body {
+        background-color: white;
+        padding: 0;
+      }
+      .hoja-contrato {
+        box-shadow: none;
+        padding: 0;
+        width: 100%;
+      }
+      .barra-botones {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra superior con acciones (se oculta al imprimir) -->
+  <div class="barra-botones">
+    <a href="aprobaciones.html" class="btn btn-volver">Volver a la Bandeja</a>
+    <button onclick="window.print()" class="btn btn-imprimir">🖨️ Imprimir Contrato PDF</button>
+  </div>
+
+  <!-- Documento de Contrato Formato Carta -->
+  <div class="hoja-contrato">
     
-    </body>
+    <div class="encabezado-empresa">
+      <div class="logo-texto">
+        <h2>SISTEMA DE CRÉDITOS</h2>
+        <p>Institución Financiera Autorizada</p>
+      </div>
+      <div class="info-documento">
+        <h1>CONTRATO DE MUTUO Y PRÉSTAMO</h1>
+        <p id="lbl-nro-contrato">N° CT-2025-0001</p>
+      </div>
+    </div>
+
+    <h3>1. COMPARECIENTES</h3>
+    <p>
+      Conste por el presente documento privado de otorgamiento de crédito, que se suscribe al tenor de las siguientes cláusulas y condiciones, entre la institución <strong>SISTEMA DE CRÉDITOS</strong>, representada legalmente por el Jefe de Créditos en adelante <strong>LA ENTIDAD</strong>, y por otra parte la persona cuyos datos se detallan a continuación, en calidad de <strong>DEUDOR</strong>:
+    </p>
+
+    <div class="grid-datos">
+      <div>
+        <p><strong>Nombres y Apellidos:</strong> <span id="txt-cliente-nombre">María Elena Quispe</span></p>
+        <p><strong>Cédula de Identidad (CI):</strong> <span id="txt-cliente-ci">1234567 LP</span></p>
+      </div>
+      <div>
+        <p><strong>Teléfono de Contacto:</strong> <span id="txt-cliente-tel">71234567</span></p>
+        <p><strong>Dirección Domiciliaria:</strong> <span id="txt-cliente-dir">Av. 6 de Marzo</span></p>
+      </div>
+    </div>
+
+    <h3>2. OBJETO Y CONDICIONES FINANCIERAS</h3>
+    <p>
+      LA ENTIDAD otorga al DEUDOR un préstamo de dinero bajo la modalidad de crédito comercial/consumo, sujeto a los siguientes parámetros aprobados por el comité de riesgos:
+    </p>
+    <ul>
+      <li><strong>Monto Aprobado:</strong> Bs. <span id="txt-monto">30,000.00</span> (Treinta Mil 00/100 Bolivianos).</li>
+      <li><strong>Destino del Crédito:</strong> <span id="txt-destino">Capital de trabajo</span>.</li>
+      <li><strong>Plazo del Préstamo:</strong> <span id="txt-plazo">12</span> meses computados a partir de la fecha de desembolso.</li>
+      <li><strong>Tasa de Interés Anual:</strong> 12.00% fija sobre saldos de capital.</li>
+      <li><strong>Sistema de Amortización:</strong> Sistema Francés (Cuotas fijas mensuales que incluyen capital e interés).</li>
+    </ul>
+
+    <h3>3. TÉRMINOS, CONDICIONES Y MORA</h3>
+    <p>
+      <strong>PRIMERA (FORMA DE PAGO):</strong> El DEUDOR se obliga a cancelar el monto total adeudado mediante cuotas mensuales y consecutivas, las mismas que se detallan en el cronograma adjunto en la parte inferior del presente contrato.<br>
+      <strong>SEGUNDA (MORA E INTERESES PENALES):</strong> La falta de pago de una o más cuotas a su fecha de vencimiento fijada en el cronograma generará automáticamente mora, aplicándose los intereses penales establecidos por la normativa interna de LA ENTIDAD sin necesidad de requerimiento judicial o extrajudicial alguno.<br>
+      <strong>TERCERA (EXIGIBILIDAD ANTICIPADA):</strong> LA ENTIDAD podrá declarar de plazo vencido la totalidad de la obligación y exigir el pago inmediato del saldo de capital pendiente en caso de incumplimiento de pago de dos o más cuotas sucesivas.
+    </p>
+
+    <h3>4. CRONOGRAMA DE PAGOS (SISTEMA)</h3>
+    <table class="tabla-cronograma">
+      <thead>
+        <tr>
+          <th>N° Cuota</th>
+          <th>Fecha Vencimiento</th>
+          <th>Capital (Bs)</th>
+          <th>Interés (Bs)</th>
+          <th>Cuota Total (Bs)</th>
+          <th>Saldo Capital (Bs)</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-cuerpo-cronograma">
+        <!-- Las filas del cronograma se cargarán dinámicamente o de forma estática -->
+        <tr>
+          <td>1</td>
+          <td>2025-12-06</td>
+          <td>2,301.50</td>
+          <td>300.00</td>
+          <td>2,601.50</td>
+          <td>27,698.50</td>
+        </tr>
+        <tr>
+          <td colspan="6" style="text-align: center; color: #64748b;">... (Cronograma completo generado según plazo)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 15px; font-size: 10px; color: #64748b; text-align: center;">
+      En señal de conformidad y aceptación de todas las cláusulas precedentes, las partes firman el presente documento físico en la ciudad de La Paz.
+    </p>
+
+    <!-- ZONA DE FIRMAS -->
+    <div class="seccion-firmas">
+      <div class="caja-firma">
+        <p>REPRESENTANTE DE LA ENTIDAD</p>
+        <span>Jefe de Créditos / Oficial</span>
+      </div>
+      <div class="caja-firma">
+        <p id="firma-nombre-cliente">María Elena Quispe</p>
+        <span>DEUDOR / CLIENTE<br>C.I.: 1234567</span>
+      </div>
+    </div>
+
+  </div>
+  <script src="../javascrip/contrato.js"></script>
+</body>
 </html>

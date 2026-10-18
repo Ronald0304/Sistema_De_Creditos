@@ -1,0 +1,170 @@
+/* Ajustes específicos para el módulo de Caja y Pagos */
+
+.tres-columnas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  background-color: #f8fafc;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.tres-columnas span {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.badge-estado {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge-pendiente {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.badge-pagada {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.badge-vencida {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.boton-pagar {
+  background-color: #16a34a;
+  color: #ffffff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.boton-pagar:hover {
+  background-color: #15803d;
+}
+
+.boton-pagar:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.texto-vacio {
+  text-align: center;
+  color: #64748b;
+  font-style: italic;
+  padding: 1.5rem !important;
+}
+
+/* ========================================== */
+/* DISEÑO MODERNO PARA MODALES Y COMPROBANTES */
+/* ========================================== */
+
+.modal {
+  backdrop-filter: blur(5px);
+  background: rgba(15, 23, 42, 0.65) !important;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+/* Caja del Modal de Pago */
+#modalPago > div, 
+#modalRecibo > div {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  width: 440px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  font-family: 'Inter', sans-serif;
+  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#modalPago h3 {
+  margin-top: 0;
+  color: #1e293b;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+#modalPago label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+#inputMontoRecibido {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  outline: none;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+#inputMontoRecibido:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+#textCambio {
+  color: #059669;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 6px 0;
+}
+
+/* Botones dentro de los modales */
+#modalPago button, #modalRecibo button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, transform 0.1s;
+}
+
+#modalPago button:active, #modalRecibo button:active {
+  transform: scale(0.98);
+}
+
+/* Botón Cancelar */
+#modalPago button:first-child {
+  background: #f1f5f9;
+  color: #475569;
+}
+#modalPago button:first-child:hover {
+  background: #e2e8f0;
+}
+
+/* Botón Confirmar Pago */
+#btnConfirmarPago {
+  background: #10b981 !important;
+  color: white !important;
+}
+#btnConfirmarPago:hover {
+  background: #059669 !important;
+}
+
+/* Animaciones fluidas */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

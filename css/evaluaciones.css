@@ -1,0 +1,215 @@
+/* ======================================================= */
+/* ESTILOS PARA EL MÓDULO DE EVALUACIONES (ANALISTA)       */
+/* ======================================================= */
+
+.seccion-formulario-evaluacion {
+  font-family: 'Inter', sans-serif;
+}
+
+.formulario-tarjeta-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cabecera-selector-solicitud {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.label-select-sol {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.select-solicitud-header {
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  outline: none;
+  cursor: pointer;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.titulo-evaluacion-box {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem 1.8rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.titulo-con-badge {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.titulo-con-badge h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.badge-estado-eval {
+  background-color: #fef3c7;
+  color: #d97706;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.subtitulo-cliente {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin: 0;
+  font-weight: 500;
+}
+
+.tarjeta-bloque {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.8rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.etiqueta-bloque {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+.fila-campos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.fila-campos-grid.tres-cols {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+  .fila-campos-grid.tres-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grupo-input label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.grupo-input input,
+.grupo-input select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #ffffff;
+  color: #1f2937;
+  transition: all 0.2s ease;
+}
+
+.grupo-input input:focus,
+.grupo-input select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Input Capacidad Calculada Resaltado en Verde */
+.input-verde-resaltado {
+  background-color: #f0fdf4 !important;
+  border-color: #bbf7d0 !important;
+  color: #15803d !important;
+  font-weight: 700;
+}
+
+/* Fila Riesgo y Radio buttons */
+.fila-riesgo-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .fila-riesgo-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.radio-botones-contenedor {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.radio-favorable {
+  color: #16a34a;
+}
+
+.radio-desfavorable {
+  color: #dc2626;
+}
+
+.radio-label input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.contenedor-boton-derecha {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.boton-primario {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.75rem 1.8rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.boton-primario:hover {
+  background-color: #1d4ed8;
+}
+
+.boton-primario:active {
+  transform: scale(0.98);
+}

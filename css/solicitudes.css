@@ -1,0 +1,247 @@
+/* ======================================================= */
+/* ESTILOS MEJORADOS Y COMPLETOS PARA NUEVA SOLICITUD      */
+/* ======================================================= */
+
+.seccion-formulario-solicitud {
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+}
+
+.formulario-tarjeta-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tarjeta-bloque {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.8rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.etiqueta-bloque {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+/* Buscador de Cliente */
+.fila-busqueda-cliente {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.grupo-input-inline {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.25rem 0.5rem;
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.grupo-input-inline:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.grupo-input-inline input {
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  width: 180px;
+  color: #1f2937;
+  background: transparent;
+}
+
+.boton-buscar {
+  background: transparent;
+  border: none;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  transition: color 0.2s ease;
+}
+
+.boton-buscar:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Badge de cliente encontrado */
+.badge-cliente {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #dcfce7;
+  color: #15803d;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 1px solid #bbf7d0;
+}
+
+.badge-cliente.oculto {
+  display: none;
+}
+
+.icono-check {
+  background-color: #16a34a;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+/* Fila de Campos */
+.fila-campos-solicitud {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.grupo-input label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.grupo-input input,
+.grupo-input select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #ffffff;
+  color: #1f2937;
+  transition: all 0.2s ease;
+}
+
+.grupo-input input:focus,
+.grupo-input select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Checkboxes Documentación */
+.lista-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+  color: #1f2937;
+  cursor: pointer;
+  font-weight: 500;
+  user-select: none;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #2563eb;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Pie del Formulario y Botones */
+.pie-formulario-solicitud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .pie-formulario-solicitud {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.nota-estado {
+  font-size: 0.92rem;
+  color: #6b7280;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge-estado-registrada {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: inline-block;
+}
+
+.botones-contenedor {
+  display: flex;
+  gap: 1rem;
+}
+
+.boton-primario {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.boton-primario:hover {
+  background-color: #1d4ed8;
+}
+
+.boton-primario:active {
+  transform: scale(0.98);
+}
+
+.boton-secundario {
+  background-color: #f3f4f6;
+  color: #374151;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.boton-secundario:hover {
+  background-color: #e5e7eb;
+}

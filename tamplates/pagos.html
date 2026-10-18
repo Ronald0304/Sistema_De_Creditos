@@ -1,11 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrediManager - Caja y Registro de Pagos</title>
+
+  <link rel="stylesheet" href="../css/aprobaciones.css">
+  <link rel="stylesheet" href="../css/desembolsos.css">
+  <link rel="stylesheet" href="../css/pagos.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    @media print {
+      body * { visibility: hidden; }
+      #areaImpresion, #areaImpresion * { visibility: visible; }
+      #areaImpresion { position: absolute; left: 0; top: 0; width: 100%; }
+      .no-print { display: none !important; }
+    }
+  </style>
 </head>
 <body>
-    
+
+  <div class="contenedor-app">
+    <!-- BARRA LATERAL CAJERO -->
+    <!-- BARRA LATERAL CAJERO -->
+    <aside class="barra-lateral">
+      <div class="logotipo-contenedor">
+        <div class="icono-logo">SC</div>
+        <div class="texto-logo">
+          <h2>Sistema de</h2>
+          <span>Créditos</span>
+        </div>
+      </div>
+
+      <nav class="menu-navegacion">
+        <a href="pagos.html" class="enlace-nav activo">
+          <span class="icono-nav">💳</span>
+          <span class="texto-nav">Caja / Pagos</span>  
+        </a>
+        <!-- Enlace agregado para ir al perfil y cerrar sesión -->
+        <a href="perfil.html" class="enlace-nav">
+          <span class="icono-nav">👤</span>
+          <span class="texto-nav">Mi Perfil</span>
+        </a>
+      </nav>
+
+      <div class="tarjeta-usuario">
+        <div class="avatar-usuario" id="sidebar-avatar">--</div>
+        <div class="detalles-usuario">
+          <p class="nombre-usuario" id="sidebar-nombre">Cargando...</p>
+          <span class="rol-usuario" id="sidebar-rol">Cargando...</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido-principal">
+      <header class="encabezado-seccion">
+        <nav class="miga-de-pan">
+          <span>Caja</span>
+          <span class="separador">/</span>
+          <span class="pagina-actual">Registrar Pago</span>
+        </nav>
+        <h1 class="titulo-pagina">Cobro de Cuotas de Crédito</h1>
+      </header>
+
+      <section class="seccion-formulario-desembolso">
+        <!-- BUSCADOR -->
+        <div class="tarjeta-bloque">
+          <h3 class="etiqueta-bloque">BUSCAR CRÉDITO DE CLIENTE</h3>
+          <div class="fila-campos-desembolso">
+            <div class="grupo-input">
+              <label for="buscar_credito">Número de Crédito o C.I. del Cliente *</label>
+              <input type="text" id="buscar_credito" placeholder="Ej: 2026-0001 o 9876543" required>
+            </div>
+            <div class="grupo-input" style="align-self: flex-end;">
+              <button type="button" id="btn-buscar-credito" class="boton-primario">Buscar Crédito</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DETALLE DEL CRÉDITO Y CUOTAS -->
+        <div id="seccion-detalle-pago" class="tarjeta-bloque" style="display: none;">
+          <h3 class="etiqueta-bloque">DETALLE DEL CRÉDITO Y CUOTAS PENDIENTES</h3>
+          
+          <div class="fila-campos-desembolso tres-columnas" style="margin-bottom: 20px;">
+            <div><strong>Cliente:</strong> <span id="info-cliente">--</span></div>
+            <div><strong>Monto Crédito:</strong> Bs. <span id="info-monto">0.00</span></div>
+            <div><strong>Estado Crédito:</strong> <span id="info-estado">--</span></div>
+          </div>
+
+          <table class="tabla-datos">
+            <thead>
+              <tr>
+                <th>Nro. Cuota</th>
+                <th>Vencimiento</th>
+                <th>Capital (Bs)</th>
+                <th>Interés (Bs)</th>
+                <th>Monto Cuota (Bs)</th>
+                <th>Estado</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-cuotas">
+              <tr>
+                <td colspan="7" class="texto-vacio">Ingrese un número de crédito para consultar cuotas</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL DE COBRO EN EFECTIVO -->
+  <div id="modalPago" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+    <div style="background:#fff; padding:25px; border-radius:10px; width:400px; box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+      <h3 style="margin-top:0;">Registrar Pago de Cuota</h3>
+      <hr>
+      <p><strong>Cuota:</strong> <span id="pagoCuotaNum">--</span></p>
+      <p><strong>Monto Cuota:</strong> Bs. <span id="pagoMontoTotal">0.00</span></p>
+      
+      <div style="margin-top:15px;">
+        <label><strong>Monto Recibido en Efectivo (Bs.):</strong></label>
+        <input type="number" id="inputMontoRecibido" step="0.01" style="width:100%; padding:10px; margin-top:5px; font-size:16px; box-sizing:border-box;" placeholder="0.00">
+      </div>
+
+      <div style="margin-top:15px;">
+        <label><strong>Cambio / Vuelto a entregar:</strong></label>
+        <h3 id="textCambio" style="color:#28a745; margin:5px 0;">Bs. 0.00</h3>
+      </div>
+
+      <div style="margin-top:20px; text-align:right;">
+        <button type="button" onclick="cerrarModalPago()" style="padding:10px 15px; margin-right:10px; cursor:pointer;">Cancelar</button>
+        <button type="button" id="btnConfirmarPago" style="padding:10px 15px; background:#28a745; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">Confirmar Pago</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL / VISTA DEL RECIBO FACTURA -->
+  <div id="modalRecibo" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1100; align-items:center; justify-content:center;">
+    <div id="areaImpresion" style="background:#fff; padding:30px; border-radius:8px; width:420px; font-family: monospace; border:1px solid #ccc;">
+      <h2 style="text-align:center; margin-bottom:5px;">SISTEMA DE CRÉDITOS</h2>
+      <p style="text-align:center; margin:0; font-weight:bold;">COMPROBANTE DE PAGO</p>
+      <hr>
+      <p><strong>Nro. Recibo:</strong> <span id="recNum"></span></p>
+      <p><strong>Fecha:</strong> <span id="recFecha"></span></p>
+      <p><strong>Cajero Atendió:</strong> <span id="recCajero"></span></p> <!-- NUEVO -->
+      <hr>
+      <p><strong>Cliente:</strong> <span id="recCliente"></span></p>
+      <p><strong>C.I.:</strong> <span id="recCI"></span></p>
+      <p><strong>Nro. Crédito:</strong> <span id="recCredito"></span></p>
+      <p><strong>Nro. Cuota Pagada:</strong> #<span id="recCuota"></span></p>
+      <hr>
+      <p>Capital: Bs. <span id="recCapital"></span></p>
+      <p>Interés: Bs. <span id="recInteres"></span></p>
+      <h3 style="margin: 10px 0;">TOTAL PAGADO: Bs. <span id="recTotal"></span></h3>
+      <p>Efectivo Recibido: Bs. <span id="recRecibido"></span></p>
+      <p>Cambio Entregado: Bs. <span id="recCambio"></span></p>
+      <hr>
+      <p style="text-align:center;">*** Cuentas al día ***</p>
+      
+      <div style="text-align:center; margin-top:20px;" class="no-print">
+        <button type="button" onclick="window.print()" style="padding:10px 18px; background:#007bff; color:white; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">🖨️ Imprimir Recibo</button>
+        <button type="button" onclick="cerrarRecibo()" style="padding:10px 18px; margin-left:10px; cursor:pointer;">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../javascrip/pagos.js"></script>
 </body>
 </html>

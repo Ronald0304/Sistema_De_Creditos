@@ -1,0 +1,159 @@
+/* ======================================================= */
+/* ESTILOS PARA EL MÓDULO DE DESEMBOLSOS                   */
+/* ======================================================= */
+
+.seccion-formulario-desembolso {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.tarjeta-bloque {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.8rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.etiqueta-bloque {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+/* Filas de campos */
+.fila-campos-desembolso {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.fila-campos-desembolso.tres-columnas {
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .fila-campos-desembolso.tres-columnas {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grupo-input label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.grupo-input input,
+.grupo-input select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #ffffff;
+  color: #1f2937;
+  transition: all 0.2s ease;
+}
+
+.grupo-input input:focus,
+.grupo-input select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.grupo-input input[readonly] {
+  background-color: #f9fafb;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+/* Botón de Acción */
+.contenedor-boton-derecha {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.boton-primario {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.boton-primario:hover {
+  background-color: #1d4ed8;
+}
+
+.boton-primario:active {
+  transform: scale(0.98);
+}
+
+/* Tabla de Desembolsos */
+.tabla-desembolsos-contenedor {
+  padding: 1.8rem;
+}
+
+.tabla-datos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+.tabla-datos th,
+.tabla-datos td {
+  padding: 1rem 1.2rem;
+  text-align: left;
+  font-size: 0.92rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tabla-datos th {
+  color: #4b5563;
+  font-weight: 600;
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+.tabla-datos tr:hover td {
+  background-color: #f9fafb;
+}
+
+.tabla-datos td {
+  color: #1f2937;
+}
+
+.texto-vacio {
+  text-align: center;
+  color: #9ca3af;
+  padding: 2rem !important;
+  font-style: italic;
+}
+
+/* Badges de Estado para Desembolsos */
+.badge-estado-desembolsado {
+  background-color: #dcfce7;
+  color: #15803d;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  display: inline-block;
+}

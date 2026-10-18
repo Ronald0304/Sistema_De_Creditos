@@ -1,0 +1,548 @@
+/* ======================================================= */
+/* ESTILOS PROFESIONALES - DETALLE DE EVALUACIÓN Y RESULTADO */
+/* ======================================================= */
+
+.grid-dos-tarjetas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .grid-dos-tarjetas {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-evaluacion-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1rem;
+}
+
+.box-eval-item {
+  background: #f9fafb;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #f3f4f6;
+}
+
+.box-eval-item .lbl {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 600;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.box-eval-item .val {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+.val-capacidad {
+  color: #16a34a !important;
+}
+
+/* Clases de texto y etiquetas auxiliares */
+.texto-cliente-nombre {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  color: #111827;
+  font-weight: 700;
+}
+
+.texto-cliente-info {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 0.8rem;
+}
+
+.texto-ingresos-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.valor-ingresos-azul {
+  color: #2563eb;
+}
+
+.monto-solicitud-grande {
+  font-size: 1.8rem;
+  color: #2563eb;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.texto-plazo-destino {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.8rem;
+}
+
+.texto-limite-usuario {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* ======================================================= */
+/* ZONA DE AVISOS Y ALERTAS DE REGLAS DE NEGOCIO           */
+/* ======================================================= */
+
+.zona-avisos {
+  border: 2px dashed #d1d5db;
+  background: #f9fafb;
+  padding: 1.2rem;
+  border-radius: 10px;
+  color: #6b7280;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.zona-avisos.tiene-alertas {
+  border: none;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  text-align: left;
+}
+
+.alerta-desfavorable-box {
+  background-color: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  color: #991b1b;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.alerta-limite-box {
+  background-color: #fef3c7;
+  border: 1.5px solid #fde047;
+  color: #92400e;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.codigo-traza-alerta {
+  font-size: 0.78rem;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+/* ======================================================= */
+/* ESTILOS DE LA PANTALLA DE RESULTADO APROBADO            */
+/* ======================================================= */
+
+.alerta-aprobado-header {
+  background-color: #ecfdf5;
+  border: 1.5px solid #a7f3d0;
+  color: #065f46;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.icono-check-verde {
+  width: 40px;
+  height: 40px;
+  background-color: #10b981;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.alerta-aprobado-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #064e3b;
+  margin: 0 0 0.2rem 0;
+}
+
+.alerta-aprobado-header p {
+  font-size: 0.9rem;
+  color: #047857;
+  margin: 0;
+}
+
+.badge-aprobado-etiqueta {
+  margin-left: auto;
+  background-color: #d1fae5;
+  color: #047857;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.badge-estado-pequeno {
+  background-color: #d1fae5;
+  color: #047857;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* Tabla del Cronograma */
+.tabla-cronograma {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tabla-cronograma th {
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.tabla-cronograma td {
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  color: #374151;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.tabla-cronograma tr:hover td {
+  background-color: #f8fafc;
+}
+
+.btn-volver-bandeja {
+  background: #2563eb;
+  color: #ffffff;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+  display: inline-block;
+}
+
+.btn-volver-bandeja:hover {
+  background: #1d4ed8;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+}
+
+/* ======================================================= */
+/* BOTONES DE ACCIÓN DEL JEFE                              */
+/* ======================================================= */
+
+.acciones-jefe-contenedor {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-rechazar {
+  background: #ffffff;
+  color: #dc2626;
+  border: 1.5px solid #dc2626;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.btn-rechazar:hover {
+  background: #fee2e2;
+}
+
+.btn-aprobar {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 2.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(22, 163, 74, 0.2);
+}
+
+.btn-aprobar:hover {
+  background: #15803d;
+  box-shadow: 0 4px 6px rgba(22, 163, 74, 0.3);
+}
+
+.btn-aprobar:disabled {
+  background-color: #9ca3af !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  opacity: 0.7;
+}
+
+/* ======================================================= */
+/* ESTILOS DEL MODAL FLOTANTE DE APROBACIÓN                */
+/* ======================================================= */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeInModal 0.2s ease-out;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-contenedor {
+  background: #ffffff;
+  width: 90%;
+  max-width: 480px;
+  padding: 2.25rem;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  text-align: left;
+  animation: slideUpModal 0.25s ease-out;
+}
+
+@keyframes slideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-icono-exito {
+  width: 48px;
+  height: 48px;
+  background-color: #dcfce7;
+  color: #16a34a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.modal-titulo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+.modal-texto {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.modal-subtexto-auditoria {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin-bottom: 1.75rem;
+}
+
+.modal-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.modal-btn-secundario {
+  background: #ffffff;
+  color: #374151;
+  border: 1.5px solid #d1d5db;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.modal-btn-secundario:hover {
+  background: #f9fafb;
+}
+
+.modal-btn-primario {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  box-shadow: 0 2px 4px rgba(22, 163, 74, 0.2);
+}
+
+.modal-btn-primario:hover {
+  background: #15803d;
+}
+
+/* ======================================================= */
+/* ESTILOS DE LA PANTALLA DE RESULTADO RECHAZADO           */
+/* ======================================================= */
+
+.alerta-rechazado-header {
+  background-color: #fef2f2;
+  border: 1.5px solid #fecaca;
+  color: #991b1b;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.icono-equis-rojo {
+  width: 40px;
+  height: 40px;
+  background-color: #ef4444;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+.alerta-rechazado-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #7f1d1d;
+  margin: 0 0 0.2rem 0;
+}
+
+.alerta-rechazado-header p {
+  font-size: 0.9rem;
+  color: #b91c1c;
+  margin: 0;
+}
+
+.badge-rechazado-etiqueta {
+  margin-left: auto;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.caja-motivo-rechazo-texto {
+  background-color: #fef2f2;
+  border: 1.5px solid #fca5a5;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  color: #7f1d1d;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+/* Estilos para el modal de rechazo */
+.modal-icono-alerta-rojo {
+  width: 42px;
+  height: 42px;
+  background-color: #fee2e2;
+  color: #dc2626;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.modal-textarea-estilo {
+  width: 100%;
+  border: 1.5px solid #dc2626;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #111827;
+  resize: vertical;
+  outline: none;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.modal-textarea-estilo:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+.modal-btn-peligro {
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
+}
+
+.modal-btn-peligro:hover {
+  background: #b91c1c;
+}

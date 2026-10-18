@@ -65,24 +65,77 @@
 
 
         <!-- ==========================================================
-             SECCIÓN DERECHA: Punto de montaje para React
+             SECCIÓN DERECHA: Formulario de Inicio de Sesión (Plano HTML)
              ========================================================== -->
-        <section id="raiz-formulario-react" class="panel-formulario">
-            <!-- 
-                Este contenedor está identificado con id="raiz-formulario-react".
-                Tu archivo 'main.jsx' buscará este ID e inyectará aquí 
-                todo el formulario interactivo construido con React (login2.jsx).
-            -->
+        <section class="panel-formulario">
+
+            <!-- Saludo y subtítulo de bienvenida -->
+            <div class="bienvenida">
+                <h2>Iniciar Sesión</h2>
+            </div>
+
+            <!-- FORMULARIO DE INICIO DE SESIÓN -->
+            <form id="formulario-login">
+
+                <!-- CAMPO 1: Usuario o Correo electrónico -->
+                <div class="grupo-campo">
+                    <label for="campo-usuario">Usuario</label>
+                    <div class="campo-con-icono">
+                        <span class="icono-campo">👤</span>
+                        <input 
+                            type="text" 
+                            id="campo-usuario" 
+                            placeholder="usuario" 
+                            required
+                        />
+                    </div>
+                </div>
+
+                <!-- CAMPO 2: Contraseña con interactividad del botón del ojo -->
+                <div class="grupo-campo">
+                    <label for="campo-contrasena">Contraseña</label>
+                    <div class="campo-con-icono">
+                        <span class="icono-campo">🔒</span>
+                        <input 
+                            type="password" 
+                            id="campo-contrasena" 
+                            placeholder="••••••••" 
+                            required
+                        />
+                        <button 
+                            type="button" 
+                            class="boton-ver-contrasena" 
+                            title="Mostrar contraseña"
+                        >
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Botón principal de envío -->
+                <div class="grupo-boton">
+                    <button type="submit" class="boton-ingresar">
+                        Iniciar sesión
+                    </button>
+                </div>
+
+                <!-- Insignia de seguridad SSL -->
+                <div class="insignia-seguridad">
+                    <span> Conexión segura SSL/TLS - Datos protegidos ✅</span>
+                </div>
+
+            </form>
+
+            <!-- Pie de página del formulario -->
+            <footer class="pie-formulario">
+                <p>© 2026 CrediManager • <a href="#privacidad" id="enlace-privacidad">Política de Privacidad</a></p>
+            </footer>
+
         </section>
 
     </div>
 
-    <!-- 
-        Carga del script principal de React.
-        Usa type="module" porque utilizas sintaxis de módulos de JS (import/export).
-        Sube un nivel con '../' para acceder a tu carpeta 'javascrip'.
-    -->
-    <script type="module" src="../javascrip/main.jsx"></script>
+    <!-- Script JavaScript puro para manejar el formulario y la visibilidad de la contraseña -->
+    <script src="../javascrip/login.js"></script>
 
 </body>
 </html>

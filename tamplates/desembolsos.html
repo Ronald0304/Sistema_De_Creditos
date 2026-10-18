@@ -1,12 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-    
-    </body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrediManager - Registrar Desembolso</title>
+
+  <!-- Hojas de estilo -->
+  <link rel="stylesheet" href="../css/aprobaciones.css">
+  <link rel="stylesheet" href="../css/desembolsos.css">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="contenedor-app">
+
+    <!-- BARRA LATERAL DEL OFICIAL DE CRÉDITO -->
+    <aside class="barra-lateral">
+      <div class="logotipo-contenedor">
+        <div class="icono-logo">SC</div>
+        <div class="texto-logo">
+          <h2>Sistema de</h2>
+          <span>Créditos</span>
+        </div>
+      </div>
+
+      <nav class="menu-navegacion">
+        <a href="clientes.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Clientes</span>  
+        </a>
+        <a href="solicitudes.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Solicitudes</span>
+        </a>
+        <a href="garantias.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Garantías</span>
+        </a>
+        <a href="desembolsos.html" class="enlace-nav activo">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Desembolsos</span>
+        </a>
+      </nav>
+
+      <div class="tarjeta-usuario">
+        <div class="avatar-usuario">AT</div>
+        <div class="detalles-usuario">
+          <p class="nombre-usuario">Ana Torrez</p>
+          <span class="rol-usuario">Oficial de Crédito</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido-principal">
+      <header class="encabezado-seccion">
+        <nav class="miga-de-pan" aria-label="Navegación secundaria">
+          <span>Desembolsos</span>
+          <span class="separador">/</span>
+          <span class="pagina-actual">Confirmar desembolso</span>
+        </nav>
+        <h1 class="titulo-pagina">Gestión de Desembolsos</h1>
+      </header>
+
+      <section class="seccion-formulario-desembolso">
+        <!-- TARJETA FORMULARIO DESEMBOLSO -->
+        <form id="form-registrar-desembolso" class="tarjeta-bloque">
+          <h3 class="etiqueta-bloque">CONFIRMAR DESEMBOLSO DE CRÉDITO</h3>
+          
+          <div class="fila-campos-desembolso">
+            <!-- Solicitud Aprobada -->
+            <div class="grupo-input">
+              <label for="select-solicitud-aprobada">Solicitud Aprobada *</label>
+              <select id="select-solicitud-aprobada" required>
+                <option value="">Cargando solicitudes aprobadas...</option>
+              </select>
+            </div>
+
+            <!-- Número de Crédito -->
+            <div class="grupo-input">
+              <label for="numero_credito">Nro. de Crédito *</label>
+              <input type="text" id="numero_credito" value="2026-0001" required>
+            </div>
+          </div>
+
+          <div class="fila-campos-desembolso tres-columnas">
+            <!-- Monto Aprobado -->
+            <div class="grupo-input">
+              <label for="monto_aprobado">Monto Aprobado (Bs) *</label>
+              <input type="number" step="0.01" id="monto_aprobado" placeholder="0.00" required>
+            </div>
+
+            <!-- Tasa de Interés -->
+            <div class="grupo-input">
+              <label for="tasa_interes">Tasa de Interés (%) *</label>
+              <input type="number" step="0.01" id="tasa_interes" value="12.00" required>
+            </div>
+
+            <!-- Plazo Meses -->
+            <div class="grupo-input">
+              <label for="plazo_credito">Plazo (Meses) *</label>
+              <input type="number" id="plazo_credito" readonly>
+            </div>
+          </div>
+
+          <!-- Botón de Acción -->
+          <div class="contenedor-boton-derecha">
+            <button type="submit" class="boton-primario">Confirmar desembolso</button>
+          </div>
+        </form>
+
+        <!-- TARJETA TABLA DE CRÉDITOS DESEMBOLSADOS -->
+        <div class="tarjeta-bloque tabla-desembolsos-contenedor">
+          <h3 class="etiqueta-bloque">HISTORIAL DE CRÉDITOS DESEMBOLSADOS</h3>
+          
+          <table class="tabla-datos">
+            <thead>
+              <tr>
+                <th>Nro. Crédito</th>
+                <th>Cliente</th>
+                <th>Monto (Bs)</th>
+                <th>Plazo</th>
+                <th>Fecha Desembolso</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-desembolsos">
+              <tr>
+                <td colspan="6" class="texto-vacio">Cargando créditos desembolsados...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  <script src="../javascrip/desembolsos.js"></script>
+</body>
 </html>

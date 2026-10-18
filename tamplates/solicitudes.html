@@ -1,12 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-    
-    </body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrediManager - Nueva Solicitud de Crédito</title>
+
+  <!-- Hojas de estilo -->
+  <link rel="stylesheet" href="../css/aprobaciones.css">
+  <link rel="stylesheet" href="../css/solicitudes.css">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="contenedor-app">
+
+    <!-- BARRA LATERAL DEL OFICIAL DE CRÉDITO -->
+    <aside class="barra-lateral">
+      <div class="logotipo-contenedor">
+        <div class="icono-logo">SC</div>
+        <div class="texto-logo">
+          <h2>Sistema de</h2>
+          <span>Créditos</span>
+        </div>
+      </div>
+
+      <nav class="menu-navegacion">
+        <a href="clientes.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Clientes</span>  
+        </a>
+        <a href="solicitudes.html" class="enlace-nav activo">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Solicitudes</span>
+        </a>
+        <a href="garantias.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Garantías</span>
+        </a>
+        <a href="desembolsos.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Desembolsos</span>
+        </a>
+      </nav>
+
+      <div class="tarjeta-usuario">
+        <div class="avatar-usuario">AT</div>
+        <div class="detalles-usuario">
+          <p class="nombre-usuario">Ana Torrez</p>
+          <span class="rol-usuario">Oficial de Crédito</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido-principal">
+      <header class="encabezado-seccion">
+        <nav class="miga-de-pan" aria-label="Navegación secundaria">
+          <span>Solicitudes</span>
+          <span class="separador">/</span>
+          <span class="pagina-actual">Nueva solicitud</span>
+        </nav>
+        <h1 class="titulo-pagina">Nueva solicitud de crédito</h1>
+      </header>
+
+      <section class="seccion-formulario-solicitud">
+        <form id="form-nueva-solicitud" class="formulario-tarjeta-datos">
+
+          <!-- BLOQUE 1: CLIENTE -->
+          <div class="tarjeta-bloque">
+            <h3 class="etiqueta-bloque">CLIENTE</h3>
+            <div class="fila-busqueda-cliente">
+              <div class="grupo-input-inline">
+                <input type="text" id="ci_buscar" placeholder="CI 4587231" required>
+                <button type="button" id="btn-buscar-cliente" class="boton-buscar">Buscar</button>
+              </div>
+              
+              <!-- Badge de resultado del cliente -->
+              <div id="badge-cliente" class="badge-cliente oculto">
+                <span class="icono-check">✓</span>
+                <span id="nombre-cliente-encontrado">María Elena Quispe Mamani</span>
+              </div>
+            </div>
+            <!-- Input oculto para el ID del cliente -->
+            <input type="hidden" id="id_cliente_seleccionado">
+          </div>
+
+          <!-- BLOQUE 2: DATOS DE LA SOLICITUD -->
+          <div class="tarjeta-bloque">
+            <h3 class="etiqueta-bloque">DATOS DE LA SOLICITUD</h3>
+            <div class="fila-campos-solicitud">
+              <div class="grupo-input">
+                <label for="monto_solicitado">Monto (Bs) *</label>
+                <input type="number" step="0.01" id="monto_solicitado" placeholder="30,000.00" required>
+              </div>
+
+              <div class="grupo-input">
+                <label for="plazo_meses">Plazo (meses) *</label>
+                <select id="plazo_meses" required>
+                  <option value="6">6 meses</option>
+                  <option value="12" selected>12 meses</option>
+                  <option value="18">18 meses</option>
+                  <option value="24">24 meses</option>
+                  <option value="36">36 meses</option>
+                </select>
+              </div>
+
+              <div class="grupo-input">
+                <label for="destino">Destino *</label>
+                <select id="destino" required>
+                  <option value="Capital de trabajo" selected>Capital de trabajo</option>
+                  <option value="Consumo">Consumo</option>
+                  <option value="Educación">Educación</option>
+                  <option value="Compra de Vehículo">Compra de Vehículo</option>
+                  <option value="Mejora de vivienda">Mejora de vivienda</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOQUE 3: DOCUMENTACIÓN REQUERIDA -->
+          <div class="tarjeta-bloque">
+            <h3 class="etiqueta-bloque">DOCUMENTACIÓN REQUERIDA</h3>
+            <div class="lista-checkboxes">
+              <label class="checkbox-item">
+                <input type="checkbox" id="doc_ci" checked required>
+                <span>Fotocopia de CI</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" id="doc_ingresos" checked required>
+                <span>Boleta de pago o ingresos</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" id="doc_croquis" checked required>
+                <span>Croquis de domicilio</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- BLOQUE 4: NOTA DE ESTADO Y BOTONES DE ACCIÓN -->
+          <div class="pie-formulario-solicitud">
+            <p class="nota-estado">Se guardará en estado <span class="badge-estado-registrada">REGISTRADA</span></p>
+
+            <div class="botones-contenedor">
+              <button type="button" id="btn-cancelar" class="boton-secundario">Cancelar</button>
+              <button type="submit" class="boton-primario">Guardar solicitud</button>
+            </div>
+          </div>
+
+        </form>
+      </section>
+    </main>
+
+  </div>
+
+  <script src="../javascrip/solicitudes.js"></script>
+</body>
 </html>

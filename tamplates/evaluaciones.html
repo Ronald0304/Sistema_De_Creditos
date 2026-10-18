@@ -1,12 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-    
-    </body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrediManager - Evaluar Solicitud</title>
+
+  <!-- Hojas de estilo -->
+  <link rel="stylesheet" href="../css/aprobaciones.css">
+  <link rel="stylesheet" href="../css/evaluaciones.css">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="contenedor-app">
+
+    <!-- BARRA LATERAL DEL ANALISTA DE CRÉDITO -->
+    <aside class="barra-lateral">
+      <div class="logotipo-contenedor">
+        <div class="icono-logo">SC</div>
+        <div class="texto-logo">
+          <h2>Sistema de</h2>
+          <span>Créditos</span>
+        </div>
+      </div>
+
+      <nav class="menu-navegacion">
+        <a href="evaluaciones.html" class="enlace-nav activo">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Evaluaciones</span>  
+        </a>
+        <a href="perfil.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Mi perfil</span>
+        </a>
+      </nav>
+
+      <div class="tarjeta-usuario">
+        <div class="avatar-usuario">LR</div>
+        <div class="detalles-usuario">
+          <p class="nombre-usuario">Luis Rojas</p>
+          <span class="rol-usuario">Analista de Crédito</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido-principal">
+      <header class="encabezado-seccion">
+        <nav class="miga-de-pan" aria-label="Navegación secundaria">
+          <span>Evaluaciones</span>
+          <span class="separador">/</span>
+          <span id="miga-solicitud-actual" class="pagina-actual">Solicitud 101</span>
+        </nav>
+        
+        <div class="cabecera-selector-solicitud">
+          <label for="select-evaluar-solicitud" class="label-select-sol">Seleccionar Solicitud:</label>
+          <select id="select-evaluar-solicitud" class="select-solicitud-header">
+            <option value="">Cargando solicitudes...</option>
+          </select>
+        </div>
+      </header>
+
+      <section class="seccion-formulario-evaluacion">
+        <form id="form-evaluar-solicitud" class="formulario-tarjeta-datos">
+
+          <!-- ENCABEZADO DE LA TARJETA DE EVALUACIÓN -->
+          <div class="titulo-evaluacion-box">
+            <div class="titulo-con-badge">
+              <h2 id="titulo-solicitud-nro">Evaluar solicitud N° 101</h2>
+              <span id="badge-estado-sol" class="badge-estado-eval">EN_EVALUACION</span>
+            </div>
+            <p id="subtitulo-cliente-info" class="subtitulo-cliente">María Elena Quispe Mamani · Bs 30,000.00 a 12 meses</p>
+          </div>
+
+          <!-- BLOQUE 1: HISTORIAL CREDITICIO -->
+          <div class="tarjeta-bloque">
+            <h3 class="etiqueta-bloque">HISTORIAL CREDITICIO</h3>
+            <div class="fila-campos-grid">
+              <div class="grupo-input">
+                <label for="referencia_crediticia">Referencia *</label>
+                <input type="text" id="referencia_crediticia" value="R-04571" required>
+              </div>
+
+              <div class="grupo-input">
+                <label for="resultado_crediticio">Resultado *</label>
+                <select id="resultado_crediticio" required>
+                  <option value="SIN MORA" selected>SIN MORA</option>
+                  <option value="CON MORA LEVE">CON MORA LEVE</option>
+                  <option value="CON ANTECEDENTES NEGATIVOS">CON ANTECEDENTES NEGATIVOS</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOQUE 2: CAPACIDAD DE PAGO -->
+          <div class="tarjeta-bloque">
+            <h3 class="etiqueta-bloque">CAPACIDAD DE PAGO</h3>
+            <div class="fila-campos-grid tres-cols">
+              <div class="grupo-input">
+                <label for="ingresos">Ingresos (Bs) *</label>
+                <input type="number" step="0.01" id="ingresos" value="6500.00" required>
+              </div>
+
+              <div class="grupo-input">
+                <label for="gastos">Gastos (Bs) *</label>
+                <input type="number" step="0.01" id="gastos" value="3200.00" required>
+              </div>
+
+              <div class="grupo-input capacidad-calculada-box">
+                <label for="capacidad_calculada">Capacidad (calculada)</label>
+                <input type="text" id="capacidad_calculada" value="3300.00" readonly class="input-verde-resaltado">
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOQUE 3: RIESGO Y RESULTADO -->
+          <div class="tarjeta-bloque">
+            <h3 class="etiqueta-bloque">RIESGO</h3>
+            <div class="fila-riesgo-layout">
+              <div class="grupo-input">
+                <label for="nivel_riesgo">Nivel de riesgo *</label>
+                <select id="nivel_riesgo" required>
+                  <option value="BAJO">BAJO</option>
+                  <option value="MEDIO" selected>MEDIO</option>
+                  <option value="ALTO">ALTO</option>
+                </select>
+              </div>
+
+              <div class="grupo-input radio-resultado-grupo">
+                <label>Resultado *</label>
+                <div class="radio-botones-contenedor">
+                  <label class="radio-label radio-favorable">
+                    <input type="radio" name="resultado_evaluacion" value="FAVORABLE" checked>
+                    <span>FAVORABLE</span>
+                  </label>
+                  <label class="radio-label radio-desfavorable">
+                    <input type="radio" name="resultado_evaluacion" value="DESFAVORABLE">
+                    <span>DESFAVORABLE</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTÓN DE GUARDAR EVALUACIÓN -->
+          <div class="contenedor-boton-derecha">
+            <button type="submit" class="boton-primario">Guardar evaluación</button>
+          </div>
+
+        </form>
+      </section>
+    </main>
+
+  </div>
+
+  <script src="../javascrip/evaluaciones.js"></script>
+</body>
 </html>

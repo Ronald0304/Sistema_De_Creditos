@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
- "scripts": {
+  "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
-  }, 
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ronald0304/Sistema-Crediticio.git"
@@ -21,8 +21,11 @@
   },
   "homepage": "https://github.com/Ronald0304/Sistema-Crediticio#readme",
   "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "sqlite3": "^6.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.2",

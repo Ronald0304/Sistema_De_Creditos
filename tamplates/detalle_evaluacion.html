@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrediManager - Detalle de Evaluación</title>
+
+  <!-- Hojas de estilo[cite: 5] -->
+  <link rel="stylesheet" href="../css/aprobaciones.css">
+  <link rel="stylesheet" href="../css/evaluaciones.css">
+  <link rel="stylesheet" href="../css/detalle_evaluacion.css">
+
+  <!-- Fuentes[cite: 5] -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="contenedor-app">
+
+    <!-- BARRA LATERAL DEL JEFE DE CRÉDITOS[cite: 5] -->
+    <aside class="barra-lateral">
+      <div class="logotipo-contenedor">
+        <div class="icono-logo">SC</div>
+        <div class="texto-logo">
+          <h2>Sistema de</h2>
+          <span>Créditos</span>
+        </div>
+      </div>
+
+      <nav class="menu-navegacion">
+        <a href="aprobaciones.html" class="enlace-nav activo">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Bandeja de aprobación</span>  
+        </a>
+        <a href="historial.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Historial de decisiones</span>
+        </a>
+        <a href="perfil.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Mi perfil</span>
+        </a>
+      </nav>
+
+      <div class="tarjeta-usuario">
+        <div class="avatar-usuario">CM</div>
+        <div class="detalles-usuario">
+          <p class="nombre-usuario">Carlos Mullisaca Mendoza</p>
+          <span class="rol-usuario">Jefe de Créditos</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL[cite: 5] -->
+    <main class="contenido-principal">
+      <header class="encabezado-seccion">
+        <nav class="miga-de-pan" aria-label="Navegación secundaria">
+          <span>Aprobación</span>
+          <span class="separador">/</span>
+          <span id="miga-solicitud" class="pagina-actual">Solicitud 105 / Resultado</span>
+        </nav>
+      </header>
+
+      <section class="seccion-formulario-evaluacion">
+        <div class="formulario-tarjeta-datos">
+
+          <!-- ======================================================= -->
+          <!-- VISTA 1: DETALLE Y EVALUACIÓN (ESTADO: EN_EVALUACION)   -->
+          <!-- ======================================================= -->
+          <div id="seccion-evaluacion-activa">
+            
+            <!-- ENCABEZADO DE LA SOLICITUD -->
+            <div class="titulo-evaluacion-box">
+              <div class="titulo-con-badge">
+                <h2 id="det-titulo">Solicitud N° --</h2>
+                <span id="det-badge-estado" class="badge-estado-eval">--</span>
+              </div>
+              <p id="det-fechas-info" class="subtitulo-cliente">Registrada el -- · evaluada el --</p>
+            </div>
+
+            <!-- BLOQUES DE CLIENTE Y SOLICITUD -->
+            <div class="grid-dos-tarjetas">
+              <div class="tarjeta-bloque">
+                <h3 class="etiqueta-bloque">CLIENTE</h3>
+                <h2 id="det-cliente-nombre" class="texto-cliente-nombre">--</h2>
+                <p id="det-cliente-ci-tel" class="texto-cliente-info">--</p>
+                <p class="texto-ingresos-label">Ingresos mensuales <span id="det-cliente-ingresos" class="valor-ingresos-azul">Bs 0.00</span></p>
+              </div>
+
+              <div class="tarjeta-bloque">
+                <h3 class="etiqueta-bloque">SOLICITUD</h3>
+                <h2 id="det-solicitud-monto" class="monto-solicitud-grande">Bs 0.00</h2>
+                <p id="det-solicitud-plazo-destino" class="texto-plazo-destino">--</p>
+                <p class="texto-limite-usuario">Su límite de aprobación: <strong id="det-limite-aprobacion">Bs 50,000.00</strong></p>
+              </div>
+            </div>
+
+            <!-- BLOQUE DE EVALUACIÓN TÉCNICA -->
+            <div class="tarjeta-bloque" style="margin-top: 1.5rem;">
+              <h3 class="etiqueta-bloque">EVALUACIÓN</h3>
+              <div class="grid-evaluacion-items">
+                <div class="box-eval-item">
+                  <span class="lbl">Ingresos</span>
+                  <span id="eval-ingresos" class="val">0.00</span>
+                </div>
+                <div class="box-eval-item">
+                  <span class="lbl">Gastos</span>
+                  <span id="eval-gastos" class="val">0.00</span>
+                </div>
+                <div class="box-eval-item">
+                  <span class="lbl">Capacidad de pago</span>
+                  <span id="eval-capacidad" class="val val-capacidad">0.00</span>
+                </div>
+                <div class="box-eval-item">
+                  <span class="lbl">Riesgo</span>
+                  <span id="eval-riesgo" class="val val-riesgo-estilo">--</span>
+                </div>
+                <div class="box-eval-item">
+                  <span class="lbl">Resultado</span>
+                  <span id="eval-resultado" class="val val-resultado-estilo">--</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ZONA DE AVISOS (EXCEPCIONES DE REGLAS DE NEGOCIO RN03 Y RN04) -->
+            <div id="zona-de-avisos" class="zona-avisos" style="margin-top: 1.5rem;">
+              Zona de avisos: aparece solo si no se puede aprobar
+            </div>
+
+            <!-- BOTONES DE ACCIÓN DEL JEFE -->
+            <div class="acciones-jefe-contenedor" style="margin-top: 1.5rem;">
+              <button type="button" id="btn-accion-rechazar" class="btn-rechazar">Rechazar</button>
+              <button type="button" id="btn-accion-aprobar" class="btn-aprobar">Aprobar</button>
+            </div>
+
+          </div>
+
+
+          <!-- ======================================================= -->
+          <!-- VISTA 2: RESULTADO DE APROBACIÓN (ESTADO: APROBADA)     -->
+          <!-- ======================================================= -->
+          <div id="seccion-resultado-aprobado" style="display: none;">
+            
+            <div class="alerta-aprobado-header">
+              <div class="icono-check-verde">✓</div>
+              <div>
+                <h3>Solicitud <span id="res-id-solicitud">101</span> aprobada</h3>
+                <p>Se creó el crédito <span id="res-cod-credito">CR-2025-0001</span></p>
+              </div>
+              <span class="badge-aprobado-etiqueta">APROBADA</span>
+            </div>
+
+            <div class="grid-dos-tarjetas" style="margin-top: 1.5rem;">
+              <div class="tarjeta-bloque">
+                <h3 class="etiqueta-bloque">CRÉDITO</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                  <h2 id="res-val-credito" style="font-size: 1.4rem; color: #111827; margin: 0;">CR-2025-0001</h2>
+                  <span class="badge-estado-pequeno">APROBADO</span>
+                </div>
+              </div>
+              <div class="tarjeta-bloque">
+                <h3 class="etiqueta-bloque">CONTRATO</h3>
+                <div style="margin-top: 0.5rem;">
+                  <h2 id="res-val-contrato" style="font-size: 1.4rem; color: #111827; margin: 0;">CT-2025-0001 generado</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="tarjeta-bloque" style="margin-top: 1.5rem;">
+              <h3 class="etiqueta-bloque">CRONOGRAMA  · 12 % ANUAL</h3>
+              <div class="table-responsive" style="margin-top: 1rem;">
+                <table class="tabla-cronograma">
+                  <thead>
+                    <tr>
+                      <th>N°</th>
+                      <th>Vence</th>
+                      <th>Capital</th>
+                      <th>Interés</th>
+                      <th>Cuota</th>
+                      <th>Saldo</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabla-cuerpo-cronograma">
+                    <!-- Dinámico -->
+                  </tbody>
+                </table>
+              </div>
+              <p id="res-texto-cuotas-extra" style="margin-top: 1rem; font-size: 0.85rem; color: #6b7280; text-align: center;"></p>
+            </div>
+
+            <!-- Botón de Imprimir y Volver a la Bandeja (SOLO PARA APROBADOS) -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
+              <button type="button" onclick="const urlParams = new URLSearchParams(window.location.search); window.location.href = `contratos.html?id=${urlParams.get('id')}`;" class="boton-primario" style="background: #0284c7; display: flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 8px; color: white; border: none; cursor: pointer; font-weight: 500;">
+              Ver e Imprimir Contrato Formal (PDF)
+              </button>
+              <a href="aprobaciones.html" class="btn-volver-bandeja">Volver a la bandeja</a>
+            </div>
+
+          </div>
+
+
+          <!-- ======================================================= -->
+          <!-- VISTA 3: RESULTADO DE RECHAZO (ESTADO: RECHAZADA)       -->
+          <!-- ======================================================= -->
+          <div id="seccion-resultado-rechazado" style="display: none;">
+            
+            <div class="alerta-rechazado-header">
+              <div class="icono-equis-rojo">✕</div>
+              <div>
+                <h3>Solicitud <span id="res-rej-id-solicitud">105</span> rechazada</h3>
+                <p>La solicitud no cumplió con los criterios de aprobación del comité.</p>
+              </div>
+              <span class="badge-rechazado-etiqueta">RECHAZADA</span>
+            </div>
+
+            <div class="tarjeta-bloque" style="margin-top: 1.5rem;">
+              <h3 class="etiqueta-bloque">MOTIVO DEL RECHAZO (REGISTRADO EN AUDITORÍA)</h3>
+              <div class="caja-motivo-rechazo-texto">
+                <p id="res-val-motivo" style="margin: 0;">--</p>
+              </div>
+            </div>
+
+            <!-- Solo botón de volver a la bandeja (SIN impresión) -->
+            <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+              <a href="aprobaciones.html" class="btn-volver-bandeja">Volver a la bandeja</a>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+
+  <!-- ======================================================= -->
+  <!-- MODAL FLOTANTE DE APROBACIÓN                           -->
+  <!-- ======================================================= -->
+  <div id="modal-confirmar-aprobacion" class="modal-overlay" style="display: none;">
+    <div class="modal-contenedor">
+      <div class="modal-icono-exito">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h3 class="modal-titulo">Confirmar aprobación</h3>
+      <p id="modal-texto-descripcion" class="modal-texto">Se aprobará la solicitud...</p>
+      <p class="modal-subtexto-auditoria">Esta acción queda registrada en auditoría.</p>
+      
+      <div class="modal-botones">
+        <button type="button" id="modal-btn-cancelar" class="modal-btn-secundario">Cancelar</button>
+        <button type="button" id="modal-btn-confirmar" class="modal-btn-primario">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======================================================= -->
+  <!-- MODAL FLOTANTE DE RECHAZO                               -->
+  <!-- ======================================================= -->
+  <div id="modal-confirmar-rechazo" class="modal-overlay" style="display: none;">
+    <div class="modal-contenedor">
+      <div class="modal-icono-alerta-rojo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </div>
+      <h3 id="modal-rechazo-titulo" class="modal-titulo">Rechazar solicitud</h3>
+      
+      <div style="margin-top: 1rem;">
+        <label for="textarea-motivo-rechazo" style="display: block; font-size: 0.85rem; font-weight: 700; color: #374151; margin-bottom: 0.5rem;">
+          Motivo del rechazo (obligatorio)
+        </label>
+        <textarea id="textarea-motivo-rechazo" rows="4" placeholder="Escriba el motivo detallado del rechazo..." class="modal-textarea-estilo"></textarea>
+        <p class="modal-subtexto-auditoria" style="margin-top: 0.4rem; margin-bottom: 1.5rem;">Se guarda en SolicitudCredito.motivoRechazo</p>
+      </div>
+      
+      <div class="modal-botones">
+        <button type="button" id="modal-rechazo-btn-cancelar" class="modal-btn-secundario">Cancelar</button>
+        <button type="button" id="modal-rechazo-btn-confirmar" class="modal-btn-peligro">Rechazar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../javascrip/detalle_evaluacion.js"></script>
+</body>
+</html>

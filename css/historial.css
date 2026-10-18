@@ -1,0 +1,77 @@
+/* ======================================================= */
+/* ESTILOS PARA EL MÓDULO DE HISTORIAL DE DECISIONES       */
+/* ======================================================= */
+
+.seccion-tabla {
+  margin-top: 1.5rem;
+}
+
+.contenedor-tabla {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+.metrica-total {
+  border-left: 4px solid #2563eb;
+  background-color: #ffffff;
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.metrica-total .titulo-metrica {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.metrica-total .valor-metrica {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+/* Badges específicos para el historial */
+.badge-estado-aprobada {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  display: inline-block;
+}
+
+.badge-estado-desembolsado {
+  background-color: #dcfce7;
+  color: #15803d;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  display: inline-block;
+}
+
+.badge-estado-rechazada {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  display: inline-block;
+}
+
+.texto-vacio {
+  text-align: center;
+  color: #9ca3af;
+  padding: 2.5rem !important;
+  font-style: italic;
+}

@@ -1,11 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <!-- Configuración de caracteres y vista responsiva -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Créditos - Bandeja de Aprobación</title>
+  
+  <!-- Hojas de estilo locales -->
+  <link rel="stylesheet" href="../css/aprobaciones.css">
+  
+  <!-- Fuente tipográfica moderna desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+
+  <!-- CONTENEDOR PRINCIPAL DEL SISTEMA (GRID DE 2 COLUMNAS) -->
+  <div class="contenedor-app">
+
+    <!-- ======================================================= -->
+    <!-- 1. BARRA LATERAL DE NAVEGACIÓN (SIDEBAR)                 -->
+    <!-- ======================================================= -->
+    <aside class="barra-lateral">
+      
+      <!-- Logotipo y Nombre del Sistema -->
+      <div class="logotipo-contenedor">
+        <div class="icono-logo">SC</div>
+        <div class="texto-logo">
+          <h2>Sistema de</h2>
+          <span>Créditos</span>
+        </div>
+      </div>
+
+      <!-- Menú de Navegación Principal -->
+      <nav class="menu-navegacion">
+        <a href="aprobaciones.html" class="enlace-nav activo">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Bandeja de aprobación</span>  
+        </a>
+        <a href="historial.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Historial de decisiones</span>
+        </a>
+        <a href="perfil.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Mi perfil</span>
+        </a>
+      </nav>
+
+      <!-- Pie de la Barra Lateral: Usuario Activo -->
+      <div class="tarjeta-usuario">
+        <div class="avatar-usuario">CM</div>
+        <div class="detalles-usuario">
+          <p class="nombre-usuario">Carlos Mendoza</p>
+          <span class="rol-usuario">Jefe de Créditos</span>
+        </div>
+      </div>
+
+    </aside>
+
+
+    <!-- ======================================================= -->
+    <!-- 2. CONTENIDO PRINCIPAL (MAIN CONTENT)                   -->
+    <!-- ======================================================= -->
+    <main class="contenido-principal">
+
+      <!-- Miga de Pan (Breadcrumb) de Navegación -->
+      <header class="encabezado-seccion">
+        <nav class="miga-de-pan" aria-label="Navegación secundaria">
+          <span>Aprobación</span>
+          <span class="separador">/</span>
+          <span class="pagina-actual">Bandeja</span>
+        </nav>
+        <h1 class="titulo-pagina">Bandeja de aprobación</h1>
+      </header>
+
+      <!-- Panel de Métricas / Tarjetas de Resumen y Filtro -->
+      <section class="panel-metricas-filtros">
+        
+        <!-- Tarjetas Informativas con Indicadores -->
+        <!-- Tarjetas Informativas con Indicadores -->
+        <div class="grid-tarjetas-metricas">
+          
+          <div class="tarjeta-metrica metrica-evaluacion">
+            <span class="titulo-metrica">En evaluación</span>
+            <span class="valor-metrica" id="contador-evaluacion">0</span>
+          </div>
+
+          <div class="tarjeta-metrica metrica-aprobadas">
+            <span class="titulo-metrica">Aprobadas hoy</span>
+            <span class="valor-metrica" id="contador-aprobadas">0</span>
+          </div>
+
+          <div class="tarjeta-metrica metrica-rechazadas">
+            <span class="titulo-metrica">Rechazadas hoy</span>
+            <span class="valor-metrica" id="contador-rechazadas">0</span>
+          </div>
+
+        </div>
+        <!-- Selector de Filtro de Estado -->
+        <div class="contenedor-filtro">
+          <label for="filtro-estado" class="etiqueta-filtro">Estado:</label>
+          <select id="filtro-estado" class="desplegable-filtro">
+            <option value="TODOS">TODOS</option>
+            <option value="EN_EVALUACION">EN_EVALUACION</option>
+            <option value="APROBADA">APROBADA</option>
+            <option value="RECHAZADA">RECHAZADA</option>
+          </select>
+        </div>
+
+      </section>
+
+
+      <!-- ======================================================= -->
+      <!-- 3. TABLA DE SOLICITUDES DE CRÉDITO                      -->
+      <!-- ======================================================= -->
+      <section class="seccion-tabla">
+        <div class="contenedor-tabla">
+          
+          <table class="tabla-solicitudes">
+            <thead>
+              <tr>
+                <th scope="col">N°</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Monto (Bs)</th>
+                <th scope="col">Plazo</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Estado</th>
+                <th scope="col" class="texto-centrado">Acciones</th>
+              </tr>
+            </thead>
+            
+            <!-- El cuerpo de la tabla se llena dinámicamente con JavaScript o datos iniciales -->
+            <tbody id="cuerpo-tabla-solicitudes">
+  <!-- Se llenará dinámicamente desde la base de datos con JS -->
+            </tbody>
+          </table>
+
+        </div>
+
+        <!-- Pie Informativo de la Tabla -->
+        <footer class="pie-tabla">
+          <p id="mensaje-pie-tabla">Mostrando registros de ejemplo para evaluación de crédito.</p>
+        </footer>
+      </section>
+
+    </main>
+
+  </div>
+
+<!-- Script JavaScript principal -->
+  <script src="../javascrip/aprobaciones.js"></script>
+
 </body>
 </html>

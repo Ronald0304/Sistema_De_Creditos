@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrediManager - Historial de Decisiones</title>
+
+  <!-- Hojas de estilo -->
+  <link rel="stylesheet" href="../css/aprobaciones.css">
+  <link rel="stylesheet" href="../css/historial.css">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="contenedor-app">
+
+    <!-- BARRA LATERAL DINÁMICA -->
+    <aside class="barra-lateral">
+      <div class="logotipo-contenedor">
+        <div class="icono-logo">SC</div>
+        <div class="texto-logo">
+          <h2>Sistema de</h2>
+          <span>Créditos</span>
+        </div>
+      </div>
+
+      <nav id="menu-navegacion" class="menu-navegacion">
+        <!-- Se renderiza dinámicamente o se fija para el Jefe/Administrador -->
+        <a href="aprobaciones.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Bandeja de aprobación</span>  
+        </a>
+        <a href="historial.html" class="enlace-nav activo">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Historial de decisiones</span>
+        </a>
+        <a href="perfil.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Mi perfil</span>
+        </a>
+      </nav>
+
+      <div class="tarjeta-usuario">
+        <div class="avatar-usuario" id="sidebar-avatar">CM</div>
+        <div class="detalles-usuario">
+          <p class="nombre-usuario" id="sidebar-nombre">Carlos Mendoza</p>
+          <span class="rol-usuario" id="sidebar-rol">Jefe de Créditos</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido-principal">
+      <header class="encabezado-seccion">
+        <nav class="miga-de-pan" aria-label="Navegación secundaria">
+          <span>Decisiones</span>
+          <span class="separador">/</span>
+          <span class="pagina-actual">Historial</span>
+        </nav>
+        <h1 class="titulo-pagina">Historial de Decisiones Crediticias</h1>
+      </header>
+
+      <!-- PANEL DE MÉTRICAS Y FILTROS -->
+      <section class="panel-metricas-filtros">
+        <div class="grid-tarjetas-metricas">
+          <div class="tarjeta-metrica metrica-aprobadas">
+            <span class="titulo-metrica">Total Aprobadas</span>
+            <span class="valor-metrica" id="total-aprobadas">0</span>
+          </div>
+
+          <div class="tarjeta-metrica metrica-rechazadas">
+            <span class="titulo-metrica">Total Rechazadas</span>
+            <span class="valor-metrica" id="total-rechazadas">0</span>
+          </div>
+
+          <div class="tarjeta-metrica metrica-total">
+            <span class="titulo-metrica">Decisiones Registradas</span>
+            <span class="valor-metrica" id="total-decisiones">0</span>
+          </div>
+        </div>
+
+        <div class="contenedor-filtro">
+          <label for="filtro-decision" class="etiqueta-filtro">Filtrar Estado:</label>
+          <select id="filtro-decision" class="desplegable-filtro">
+            <option value="TODOS">TODOS</option>
+            <option value="APROBADA">APROBADAS</option>
+            <option value="DESEMBOLSADO">DESEMBOLSADOS</option>
+            <option value="RECHAZADA">RECHAZADAS</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- TABLA DE HISTORIAL -->
+      <section class="seccion-tabla">
+        <div class="contenedor-tabla">
+          <table class="tabla-solicitudes">
+            <thead>
+              <tr>
+                <th scope="col">N° Solicitud</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Monto (Bs)</th>
+                <th scope="col">Plazo</th>
+                <th scope="col">Fecha Solicitud</th>
+                <th scope="col">Responsable</th>
+                <th scope="col">Estado Final</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-historial">
+              <tr>
+                <td colspan="7" class="texto-vacio">Cargando historial de decisiones...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <footer class="pie-tabla">
+          <p id="mensaje-pie-historial">Mostrando todas las decisiones registradas en el sistema.</p>
+        </footer>
+      </section>
+    </main>
+
+  </div>
+
+  <script src="../javascrip/historial.js"></script>
+</body>
+</html>

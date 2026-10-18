@@ -1,0 +1,167 @@
+/* ======================================================= */
+/* ESTILOS PARA EL MÓDULO DE MI PERFIL                      */
+/* ======================================================= */
+
+.seccion-perfil {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.tarjeta-bloque {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.8rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.etiqueta-bloque {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+/* Encabezado del Perfil */
+.tarjeta-encabezado-perfil {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.avatar-perfil-grande {
+  width: 80px;
+  height: 80px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.info-principal-perfil h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.4rem 0;
+}
+
+.badget-rol-contenedor {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge-rol {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.badge-estado-activo {
+  background-color: #dcfce7;
+  color: #15803d;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.texto-usuario-login {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.texto-usuario-login strong {
+  color: #374151;
+}
+
+/* Grid de Información de la Cuenta */
+.grid-detalles-perfil {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.item-detalle {
+  background-color: #f9fafb;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #f3f4f6;
+}
+
+.label-detalle {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+}
+
+.valor-detalle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+/* Sección de Cerrar Sesión */
+.tarjeta-acciones-cerrar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #ef4444;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.titulo-cerrar-sesion {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #991b1b;
+  margin: 0 0 0.2rem 0;
+}
+
+.desc-cerrar-sesion {
+  font-size: 0.88rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.boton-peligro {
+  background-color: #ef4444;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+.boton-peligro:hover {
+  background-color: #dc2626;
+}
+
+.boton-peligro:active {
+  transform: scale(0.98);
+}

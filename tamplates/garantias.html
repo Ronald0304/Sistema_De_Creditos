@@ -1,11 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrediManager - Registrar Garantía</title>
+
+  <!-- Hojas de estilo -->
+  <link rel="stylesheet" href="../css/aprobaciones.css">
+  <link rel="stylesheet" href="../css/garantias.css">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+
+  <div class="contenedor-app">
+
+    <!-- BARRA LATERAL DEL OFICIAL DE CRÉDITO -->
+    <aside class="barra-lateral">
+      <div class="logotipo-contenedor">
+        <div class="icono-logo">SC</div>
+        <div class="texto-logo">
+          <h2>Sistema de</h2>
+          <span>Créditos</span>
+        </div>
+      </div>
+
+      <nav class="menu-navegacion">
+        <a href="clientes.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Clientes</span>  
+        </a>
+        <a href="solicitudes.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Solicitudes</span>
+        </a>
+        <a href="garantias.html" class="enlace-nav activo">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Garantías</span>
+        </a>
+        <a href="desembolsos.html" class="enlace-nav">
+          <span class="icono-nav"></span>
+          <span class="texto-nav">Desembolsos</span>
+        </a>
+      </nav>
+
+      <div class="tarjeta-usuario">
+        <div class="avatar-usuario">AT</div>
+        <div class="detalles-usuario">
+          <p class="nombre-usuario">Ana Torrez</p>
+          <span class="rol-usuario">Oficial de Crédito</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido-principal">
+      <header class="encabezado-seccion">
+        <nav class="miga-de-pan" aria-label="Navegación secundaria">
+          <span>Garantías</span>
+          <span class="separador">/</span>
+          <span class="pagina-actual">Registrar garantía</span>
+        </nav>
+        <h1 class="titulo-pagina">Registrar garantía</h1>
+      </header>
+
+      <section class="seccion-formulario-garantia">
+        <!-- TARJETA FORMULARIO -->
+        <form id="form-registrar-garantia" class="tarjeta-bloque">
+          <div class="fila-campos-garantia">
+            <!-- Solicitud -->
+            <div class="grupo-input">
+              <label for="select-solicitud">Solicitud *</label>
+              <select id="select-solicitud" required>
+                <option value="">Cargando solicitudes...</option>
+              </select>
+            </div>
+
+            <!-- Tipo -->
+            <div class="grupo-input">
+              <label for="tipo_garantia">Tipo *</label>
+              <select id="tipo_garantia" required>
+                <option value="Prendaria" selected>Prendaria</option>
+                <option value="Hipotecaria">Hipotecaria</option>
+                <option value="Personal">Personal</option>
+                <option value="Depósito a Plazo Fijo">Depósito a Plazo Fijo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="fila-campos-garantia tres-columnas">
+            <!-- Descripción -->
+            <div class="grupo-input col-larga">
+              <label for="descripcion_garantia">Descripción *</label>
+              <input type="text" id="descripcion_garantia" placeholder="Vehículo 1234ABC" required>
+            </div>
+
+            <!-- Valor -->
+            <div class="grupo-input">
+              <label for="valor_garantia">Valor (Bs) *</label>
+              <input type="number" step="0.01" id="valor_garantia" placeholder="45,000.00" required>
+            </div>
+
+            <!-- Estado -->
+            <div class="grupo-input">
+              <label for="estado_garantia">Estado *</label>
+              <select id="estado_garantia" required>
+                <option value="VIGENTE" selected>VIGENTE</option>
+                <option value="EN_CUSTODIA">EN CUSTODIA</option>
+                <option value="LIBERADA">LIBERADA</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Botón de Acción -->
+          <div class="contenedor-boton-derecha">
+            <button type="submit" class="boton-primario">Agregar garantía</button>
+          </div>
+        </form>
+
+        <!-- TARJETA TABLA DE GARANTÍAS DE LA SOLICITUD -->
+        <div class="tarjeta-bloque tabla-garantias-contenedor">
+          <h3 id="titulo-tabla-garantias" class="etiqueta-bloque">GARANTÍAS DE LA SOLICITUD</h3>
+          
+          <table class="tabla-datos">
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Descripción</th>
+                <th>Valor (Bs)</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-garantias">
+              <tr>
+                <td colspan="4" class="texto-vacio">Seleccione una solicitud para cargar sus garantías</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  <script src="../javascrip/garantias.js"></script>
 </body>
 </html>
