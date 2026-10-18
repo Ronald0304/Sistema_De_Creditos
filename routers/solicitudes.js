@@ -592,4 +592,48 @@ router.post('/cambiar-estado', (req, res) => {
   });
 });
 
+// ==========================================
+// 13. ENDPOINT PARA REPORTES DE GESTIÓN (GERENTE)
+// ==========================================
+router.get('/reportes/gestion', (req, res) => {
+  const anio = req.query.anio || '2026';
+
+  const sqlResumen = `
+    SELECT 
+      COUNT(c.id_credito) AS total_creditos,
+      COALESCE(SUM(c.monto_aprobado), 0) AS monto_total_colocado,
+      SUM(CASE WHEN c.estado = 'VIGENTE' THEN 1 ELSE 0 END) as creditos_vigentes,
+      SUM(CASE WHEN c.estado = 'CANCELADO' THEN 1 ELSE 0 END) as creditos_cancelados
+    FROM credito c
+  `;
+
+  db.get(sqlResumen, [], (err, resumen) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    // Consultar desglose por meses o estado para el reporte anual
+    const sqlCuotas = `
+      SELECT 
+        strftime('%m', fecha_vencimiento) AS mes,
+        COUNT(id_cuota) AS total_cuotas,
+        COALESCE(SUM(monto), 0) AS monto_esperado,
+        COALESCE(SUM(saldo), 0) AS monto_pendiente,
+        SUM(CASE WHEN estado = 'PAGADA' THEN 1 ELSE 0 END) AS cuotas_pagadas,
+        SUM(CASE WHEN estado = 'VENCIDA' THEN 1 ELSE 0 END) AS cuotas_vencidas
+      FROM cuota
+      WHERE strftime('%Y', fecha_vencimiento) = ?
+      GROUP BY mes
+      ORDER BY mes ASC
+    `;
+
+    db.all(sqlCuotas, [anio], (errC, cuotasMensuales) => {
+      if (errC) return res.status(500).json({ error: errC.message });
+
+      res.json({
+        resumenGeneral: resumen,
+        desgloseAnual: cuotasMensuales
+      });
+    });
+  });
+});
+
 module.exports = router;

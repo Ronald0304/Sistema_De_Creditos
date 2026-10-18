@@ -47,6 +47,10 @@ app.get('/contratos.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'tamplates', 'contratos.html'));
 });
 
+app.get('/reportes', (req, res) => {
+  res.sendFile(path.join(__dirname, 'tamplates', 'repostes.html'));
+});
+
 // <--- 3. REGISTRAR RUTA HTML PARA GESTIÓN DE USUARIOS
 app.get('/usuarios', (req, res) => {
   res.sendFile(path.join(__dirname, 'tamplates', 'usuarios.html'));

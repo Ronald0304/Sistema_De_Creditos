@@ -86,7 +86,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="texto-nav">Mi Perfil</span>
             </a>
         `;
-    } else {
+    } else if (rolUser === 'GERENTE') {
+        menuNav.innerHTML = `
+            <a href="reportes.html" class="enlace-nav activo">
+                <span class="texto-nav">Reportes de Gestión</span>  
+            </a>
+            <a href="perfil.html" class="enlace-nav">
+                <span class="texto-nav">Mi perfil</span>
+            </a>
+        `;
+    
+    }else {
         // Rol por defecto: OFICIAL
         menuNav.innerHTML = `
             <a href="clientes.html" class="enlace-nav">

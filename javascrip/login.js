@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = './pagos.html';
                 } else if (rol === 'ADMIN') {
                     window.location.href = './usuarios.html';
+                } else if (rol === 'GERENTE') {
+                    window.location.href = './reportes.html';
                 } else {
                     window.location.href = './aprobaciones.html'; // Redirigir a una página por defecto si el rol no coincide
                 }
