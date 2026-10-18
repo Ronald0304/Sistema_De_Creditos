@@ -128,7 +128,7 @@ body {
 }
 
 .icono-logo-animado {
-    font-size: 26px;
+    font-size: 40px;
     background: rgba(0, 198, 255, 0.15);
     padding: 8px 12px;
     border-radius: 12px;
@@ -136,7 +136,7 @@ body {
 }
 
 .encabezado-logo h1 {
-    font-size: 26px;
+    font-size: 33px;
     font-weight: 700;
     color: #ffffff;
     letter-spacing: -0.5px;
@@ -170,6 +170,14 @@ body {
     gap: 10px;
     font-size: 13px;
     color: #cbd5e1;
+}
+
+.imagen-bienvenida {
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* ==========================================================================

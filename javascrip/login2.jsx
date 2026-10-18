@@ -5,8 +5,6 @@ export default function LoginCrediManager() {
     const [usuario, setUsuario] = useState('');
     const [contrasena, setContrasena] = useState('');
     const [mostrarContrasena, setMostrarContrasena] = useState(false);
-    const [agencia, setAgencia] = useState('');
-    const [recordarSesion, setRecordarSesion] = useState(false);
 
     // Función para alternar la visibilidad de la contraseña (mostrar/ocultar con el icono del ojo)
     const toggleMostrarContrasena = () => {
@@ -30,17 +28,11 @@ export default function LoginCrediManager() {
 
     return (
         <>
-            {/* Encabezado superior del panel derecho (Versión y Soporte) */}
-            <div className="encabezado-soporte">
-                <span>Versión 2.1</span>
-                <span>•</span>
-                <a href="#soporte" onClick={(e) => e.preventDefault()}>Soporte técnico</a>
-            </div>
+
 
             {/* Saludo y subtítulo de bienvenida */}
             <div className="bienvenida">
-                <h2>Bienvenido</h2>
-                <p>Ingrese a su cuenta para continuar al sistema de gestión de crédito</p>
+                <h2>Iniciar Sesión</h2>
             </div>
 
             {/* FORMULARIO DE INICIO DE SESIÓN */}
@@ -81,43 +73,9 @@ export default function LoginCrediManager() {
                             onClick={toggleMostrarContrasena}
                             title={mostrarContrasena ? "Ocultar contraseña" : "Mostrar contraseña"}
                         >
-                            {mostrarContrasena ? "👁️‍🗨️" : "👁️"}
+                            {mostrarContrasena ? "👁️‍🗨️" : ""}
                         </button>
                     </div>
-                </div>
-
-                {/* CAMPO 3: Selector de Agencia */}
-                <div className="grupo-campo">
-                    <label htmlFor="campo-agencia">Agencia</label>
-                    <div className="campo-con-icono">
-                        <span className="icono-campo">🏢</span>
-                        <select 
-                            id="campo-agencia" 
-                            value={agencia}
-                            onChange={(e) => setAgencia(e.target.value)}
-                            required
-                        >
-                            <option value="" disabled>Seleccione Agencia</option>
-                            <option value="Agencia Central - La Paz">Agencia Central - La Paz</option>
-                            <option value="Agencia Santa Cruz">Agencia Santa Cruz</option>
-                            <option value="Agencia Cochabamba">Agencia Cochabamba</option>
-                        </select>
-                    </div>
-                </div>
-
-                {/* Opciones adicionales: Recordar sesión y recuperar contraseña */}
-                <div className="opciones-adicionales">
-                    <label className="opcion-recordar">
-                        <input 
-                            type="checkbox" 
-                            checked={recordarSesion}
-                            onChange={(e) => setRecordarSesion(e.target.checked)}
-                        />
-                        <span>Recordar sesión</span>
-                    </label>
-                    <a href="#recuperar" onClick={(e) => e.preventDefault()} className="enlace-olvidaste">
-                        ¿Olvidaste tu contraseña?
-                    </a>
                 </div>
 
                 {/* Botón principal de envío */}
@@ -129,7 +87,7 @@ export default function LoginCrediManager() {
 
                 {/* Insignia de seguridad SSL */}
                 <div className="insignia-seguridad">
-                    <span>🔒 Conexión segura SSL/TLS - Datos protegidos ✅</span>
+                    <span> Conexión segura SSL/TLS - Datos protegidos ✅</span>
                 </div>
 
             </form>

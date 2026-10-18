@@ -1,0 +1,31 @@
+{
+  "name": "sistema-crediticio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+ "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  }, 
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ronald0304/Sistema-Crediticio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ronald0304/Sistema-Crediticio/issues"
+  },
+  "homepage": "https://github.com/Ronald0304/Sistema-Crediticio#readme",
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "vite": "^8.3.4"
+  }
+}
