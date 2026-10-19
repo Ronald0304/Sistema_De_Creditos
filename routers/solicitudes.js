@@ -385,7 +385,7 @@ router.post('/desembolsos', (req, res) => {
 });
 
 // ==========================================
-// 9. ENDPOINTS PARA EVALUACIONES
+// 9. ENDPOINTS PARA EVALUACIONES (CORREGIDO)
 // ==========================================
 router.get('/evaluaciones/pendientes', (req, res) => {
   const sql = `
@@ -415,6 +415,7 @@ router.post('/evaluaciones', (req, res) => {
     return res.status(400).json({ error: 'Faltan campos obligatorios para la evaluación' });
   }
 
+  // 1. Crear tabla si no existe
   const crearTablaSQL = `
     CREATE TABLE IF NOT EXISTS evaluacion_credito (
       id_evaluacion INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -434,23 +435,34 @@ router.post('/evaluaciones', (req, res) => {
   db.run(crearTablaSQL, (err) => {
     if (err) return res.status(500).json({ error: err.message });
 
-    const capacidad_pago = ingresos - gastos;
-    const estadoSolicitud = (resultado_evaluacion === 'FAVORABLE') ? 'APROBADA' : 'RECHAZADA';
+    // 2. Asegurar que las columnas existan en bases de datos ya creadas
+    db.run(`ALTER TABLE evaluacion_credito ADD COLUMN referencia_crediticia TEXT`, () => {
+      db.run(`ALTER TABLE evaluacion_credito ADD COLUMN resultado_crediticio TEXT`, () => {
+        
+        const capacidad_pago = ingresos - gastos;
+        // Si el resultado es FAVORABLE pasa a EN_EVALUACION o APROBADA para que el jefe decida
+        const estadoSolicitud = (resultado_evaluacion === 'FAVORABLE') ? 'EN_EVALUACION' : 'RECHAZADA';
 
-    const sqlInsert = `
-      INSERT INTO evaluacion_credito (id_solicitud, referencia_crediticia, resultado_crediticio, ingresos, gastos, capacidad_pago, nivel_riesgo, resultado, fecha_evaluacion)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, DATE('now'))
-    `;
+        const sqlInsert = `
+          INSERT INTO evaluacion_credito (id_solicitud, referencia_crediticia, resultado_crediticio, ingresos, gastos, capacidad_pago, nivel_riesgo, resultado, fecha_evaluacion)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, DATE('now'))
+        `;
 
-    db.run(sqlInsert, [id_solicitud, referencia_crediticia, resultado_crediticio, ingresos, gastos, capacidad_pago, nivel_riesgo, resultado_evaluacion], function(err) {
-      if (err) return res.status(500).json({ error: err.message });
+        db.run(sqlInsert, [id_solicitud, referencia_crediticia, resultado_crediticio, ingresos, gastos, capacidad_pago, nivel_riesgo, resultado_evaluacion], function(errInsert) {
+          if (errInsert) return res.status(500).json({ error: errInsert.message });
 
-      db.run(`UPDATE solicitud_credito SET estado = ? WHERE id_solicitud = ?`, [estadoSolicitud, id_solicitud]);
+          // Actualizar estado de la solicitud
+          db.run(`UPDATE solicitud_credito SET estado = ? WHERE id_solicitud = ?`, [estadoSolicitud, id_solicitud], (errUpd) => {
+            if (errUpd) return res.status(500).json({ error: errUpd.message });
 
-      res.status(201).json({
-        mensaje: 'Evaluación registrada correctamente',
-        id_evaluacion: this.lastID,
-        nuevo_estado: estadoSolicitud
+            res.status(201).json({
+              mensaje: 'Evaluación registrada correctamente',
+              id_evaluacion: this.lastID,
+              nuevo_estado: estadoSolicitud
+            });
+          });
+        });
+
       });
     });
   });
