@@ -12,9 +12,6 @@ const db = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
-// ======================================================= //
-// CREACIÓN DE LAS 10 TABLAS Y DATOS DE PRUEBA            //
-// ======================================================= //
 db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS cliente (

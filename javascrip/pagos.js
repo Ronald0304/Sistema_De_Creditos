@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (usuarioGuardado) {
     try {
       const usuario = JSON.parse(usuarioGuardado);
-      const nombre = usuario.nombre || usuario.nombre_completo || 'Usuario';
+      const nombre = usuario.nombre || usuario.nombre_completo || 'Cajero';
       idUsuarioLogueado = usuario.id || usuario.id_usuario || 3;
 
       const iniciales = nombre.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (avatarEl) avatarEl.textContent = iniciales;
       if (nombreEl) nombreEl.textContent = nombre;
-      if (rolEl) rolEl.textContent = usuario.rol ? usuario.rol.charAt(0) + usuario.rol.slice(1).toLowerCase() : 'Cajero';
+      if (rolEl) rolEl.textContent = 'Cajero'; // Mantiene su rol correcto
     } catch (e) {
       console.error('Error al leer sesión:', e);
     }

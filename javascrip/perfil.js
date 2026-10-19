@@ -35,88 +35,81 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('sidebar-avatar').textContent = iniciales;
     document.getElementById('sidebar-nombre').textContent = nombreCompleto;
     
+    // Mapeo correcto de todos los roles del sistema
     let textoRolFormateado = 'Oficial de Crédito';
     if (rolUser === 'ANALISTA') textoRolFormateado = 'Analista de Crédito';
-    if (rolUser === 'JEFE') textoRolFormateado = 'Jefe de Créditos';
+    else if (rolUser === 'JEFE') textoRolFormateado = 'Jefe de Créditos';
+    else if (rolUser === 'CAJERO') textoRolFormateado = 'Cajero';
+    else if (rolUser === 'GERENTE') textoRolFormateado = 'Gerente General';
+    else if (rolUser === 'ADMIN') textoRolFormateado = 'Administrador';
+    
     document.getElementById('sidebar-rol').textContent = textoRolFormateado;
 
-    // 3. Construir navegación lateral según el ROL exacto
+    // 3. Construir navegación lateral según el ROL exacto (Evita que cambie de menú)
     if (rolUser === 'JEFE') {
         menuNav.innerHTML = `
             <a href="aprobaciones.html" class="enlace-nav">
-                <span class="icono-nav"></span>
                 <span class="texto-nav">Bandeja de aprobación</span>  
             </a>
             <a href="historial.html" class="enlace-nav">
-                <span class="icono-nav"></span>
                 <span class="texto-nav">Historial de decisiones</span>
             </a>
             <a href="perfil.html" class="enlace-nav">
-                <span class="icono-nav"></span>
                 <span class="texto-nav">Mi perfil</span>
             </a>
         `;
     } else if (rolUser === 'ANALISTA') {
         menuNav.innerHTML = `
             <a href="evaluaciones.html" class="enlace-nav">
-                <span class="icono-nav"></span>
                 <span class="texto-nav">Evaluaciones</span>  
             </a>
             <a href="perfil.html" class="enlace-nav">
-                <span class="icono-nav"></span>
                 <span class="texto-nav">Mi perfil</span>
             </a>
         `;
     } else if (rolUser === 'CAJERO') {
-        // Menú exclusivo para el Cajero
         menuNav.innerHTML = `
-            <a href="pagos.html" class="enlace-nav activo">
-                <span class="icono-nav">💳</span>
+            <a href="pagos.html" class="enlace-nav">
                 <span class="texto-nav">Caja / Pagos</span>  
+            </a>
+            <a href="perfil.html" class="enlace-nav">
+                <span class="texto-nav">Mi perfil</span>
             </a>
         `;
     } else if (rolUser === 'ADMIN') {
         menuNav.innerHTML = `
-            <a href="usuarios.html" class="enlace-nav activo">
-                <span class="icono-nav"></span>
+            <a href="usuarios.html" class="enlace-nav">
                 <span class="texto-nav">Gestión Usuarios</span>
             </a>
             <a href="perfil.html" class="enlace-nav">
-                <span class="icono-nav"></span>
                 <span class="texto-nav">Mi Perfil</span>
             </a>
         `;
     } else if (rolUser === 'GERENTE') {
         menuNav.innerHTML = `
-            <a href="reportes.html" class="enlace-nav activo">
+            <a href="reportes.html" class="enlace-nav">
                 <span class="texto-nav">Reportes de Gestión</span>  
             </a>
             <a href="perfil.html" class="enlace-nav">
                 <span class="texto-nav">Mi perfil</span>
             </a>
         `;
-    
-    }else {
+    } else {
         // Rol por defecto: OFICIAL
         menuNav.innerHTML = `
             <a href="clientes.html" class="enlace-nav">
-                <span class="icono-nav"></span>
                 <span class="texto-nav">Clientes</span>  
             </a>
             <a href="solicitudes.html" class="enlace-nav">
-                <span class="icono-nav"></span>
                 <span class="texto-nav">Solicitudes</span>
             </a>
             <a href="garantias.html" class="enlace-nav">
-                <span class="icono-nav"></span>
                 <span class="texto-nav">Garantías</span>
             </a>
             <a href="desembolsos.html" class="enlace-nav">
-                <span class="icono-nav"></span>
                 <span class="texto-nav">Desembolsos</span>
             </a>
             <a href="perfil.html" class="enlace-nav">
-                <span class="icono-nav"></span>
                 <span class="texto-nav">Mi perfil</span>
             </a>
         `;

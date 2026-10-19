@@ -130,7 +130,7 @@ router.post('/nueva', (req, res) => {
   const sql = `
     INSERT INTO solicitud_credito 
     (id_cliente, id_usuario_registra, fecha_solicitud, monto_solicitado, plazo_meses, destino, estado) 
-    VALUES (?, ?, DATE('now'), ?, ?, ?, 'EN_EVALUACION')
+    VALUES (?, ?, DATE('now'), ?, ?, ?, 'REGISTRADA')
   `;
 
   db.run(sql, [id_cliente, id_usuario_registra, monto_solicitado, plazo_meses, destino], function(err) {
@@ -385,7 +385,7 @@ router.post('/desembolsos', (req, res) => {
 });
 
 // ==========================================
-// 9. ENDPOINTS PARA EVALUACIONES (CORREGIDO)
+// 9. ENDPOINTS PARA EVALUACIONES (MODIFICADO Y CORREGIDO)
 // ==========================================
 router.get('/evaluaciones/pendientes', (req, res) => {
   const sql = `
@@ -398,7 +398,8 @@ router.get('/evaluaciones/pendientes', (req, res) => {
       c.ingresos_mensuales
     FROM solicitud_credito s
     JOIN cliente c ON s.id_cliente = c.id_cliente
-    WHERE s.estado = 'REGISTRADA' OR s.estado = 'EN_EVALUACION'
+    WHERE s.estado = 'REGISTRADA' 
+      AND s.id_solicitud NOT IN (SELECT id_solicitud FROM evaluacion_credito)
     ORDER BY s.id_solicitud DESC
   `;
 
@@ -440,8 +441,9 @@ router.post('/evaluaciones', (req, res) => {
       db.run(`ALTER TABLE evaluacion_credito ADD COLUMN resultado_crediticio TEXT`, () => {
         
         const capacidad_pago = ingresos - gastos;
-        // Si el resultado es FAVORABLE pasa a EN_EVALUACION o APROBADA para que el jefe decida
-        const estadoSolicitud = (resultado_evaluacion === 'FAVORABLE') ? 'EN_EVALUACION' : 'RECHAZADA';
+        
+        // CORRECCIÓN CLAVE: Forzar que el estado sea 'EN_EVALUACION' para que vaya al Jefe de Créditos
+        const estadoSolicitud = 'EN_EVALUACION';
 
         const sqlInsert = `
           INSERT INTO evaluacion_credito (id_solicitud, referencia_crediticia, resultado_crediticio, ingresos, gastos, capacidad_pago, nivel_riesgo, resultado, fecha_evaluacion)
@@ -451,7 +453,7 @@ router.post('/evaluaciones', (req, res) => {
         db.run(sqlInsert, [id_solicitud, referencia_crediticia, resultado_crediticio, ingresos, gastos, capacidad_pago, nivel_riesgo, resultado_evaluacion], function(errInsert) {
           if (errInsert) return res.status(500).json({ error: errInsert.message });
 
-          // Actualizar estado de la solicitud
+          // Actualizar estado de la solicitud a EN_EVALUACION
           db.run(`UPDATE solicitud_credito SET estado = ? WHERE id_solicitud = ?`, [estadoSolicitud, id_solicitud], (errUpd) => {
             if (errUpd) return res.status(500).json({ error: errUpd.message });
 
@@ -622,7 +624,6 @@ router.get('/reportes/gestion', (req, res) => {
   db.get(sqlResumen, [], (err, resumen) => {
     if (err) return res.status(500).json({ error: err.message });
 
-    // Consultar desglose por meses o estado para el reporte anual
     const sqlCuotas = `
       SELECT 
         strftime('%m', fecha_vencimiento) AS mes,

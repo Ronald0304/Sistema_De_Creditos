@@ -1,14 +1,22 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Cargar datos de usuario en sidebar
+    // Cargar datos reales del usuario logueado en el sidebar
     const usuarioGuardado = localStorage.getItem('usuarioLogueado');
     if (usuarioGuardado) {
         try {
             const usuario = JSON.parse(usuarioGuardado);
-            document.querySelector('.nombre-usuario').textContent = usuario.nombre || 'Gerente';
-            document.querySelector('.rol-usuario').textContent = 'Gerencia General';
-            document.querySelector('.avatar-usuario').textContent = 'GR';
+            const nombre = usuario.nombre || usuario.nombre_completo || 'Gerente General';
+            const iniciales = nombre.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+            const nombreEl = document.querySelector('.nombre-usuario');
+            const rolEl = document.querySelector('.rol-usuario');
+            const avatarEl = document.querySelector('.avatar-usuario');
+
+            if (nombreEl) nombreEl.textContent = nombre;
+            if (rolEl) rolEl.textContent = 'Gerencia General';
+            if (avatarEl) avatarEl.textContent = iniciales;
         } catch (e) { console.error(e); }
     }
+    // ... resto del código de reportes ...
 
     try {
         const respuesta = await fetch('/api/solicitudes/reportes/gestion?anio=2026');
