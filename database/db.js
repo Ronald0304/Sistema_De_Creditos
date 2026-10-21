@@ -189,6 +189,8 @@ db.serialize(() => {
         (104, 4, 1, DATE('now'), 45000.00, 24, 'Compra de Vehículo', 'APROBADA', NULL),
         (105, 5, 1, DATE('now'), 15000.00, 12, 'Mejora de vivienda', 'RECHAZADA', 'Capacidad de pago insuficiente')`);
 
+        
+
       console.log('Estructura de tablas y datos de prueba variados creados con éxito.');
     }
   });

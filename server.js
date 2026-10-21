@@ -9,12 +9,11 @@ const db = require('./database/db');
 const solicitudesRoutes = require('./routers/solicitudes');
 const pagosRoutes = require('./routers/pagos');
 const usuariosRoutes = require('./routers/usuarios');
-const clientespRoutes = require('./routers/clientesp'); // <--- 1. IMPORTAR RUTA DE CLIENTES (Panel Cliente y Login)
+const clientespRoutes = require('./routers/clientesp'); 
 
 const app = express();
 const PUERTO = 3000;
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
 
@@ -25,7 +24,7 @@ app.use(express.static(path.join(__dirname)));
 app.use('/api/solicitudes', solicitudesRoutes);
 app.use('/api/pagos', pagosRoutes);
 app.use('/api/usuarios', usuariosRoutes);
-app.use('/api/clientesp', clientespRoutes); // <--- 2. REGISTRAR ENDPOINT DE CLIENTES
+app.use('/api/clientesp', clientespRoutes); 
 
 // Servir vistas HTML principales
 app.get('/', (req, res) => {
