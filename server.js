@@ -8,7 +8,8 @@ const db = require('./database/db');
 // Importar Routers
 const solicitudesRoutes = require('./routers/solicitudes');
 const pagosRoutes = require('./routers/pagos');
-const usuariosRoutes = require('./routers/usuarios'); // <--- 1. IMPORTAR RUTA DE USUARIOS
+const usuariosRoutes = require('./routers/usuarios');
+const clientespRoutes = require('./routers/clientesp'); // <--- 1. IMPORTAR RUTA DE CLIENTES (Panel Cliente y Login)
 
 const app = express();
 const PUERTO = 3000;
@@ -22,9 +23,9 @@ app.use(express.static(path.join(__dirname)));
 
 // Rutas API
 app.use('/api/solicitudes', solicitudesRoutes);
-app.use('/api/clientes', solicitudesRoutes);
 app.use('/api/pagos', pagosRoutes);
-app.use('/api/usuarios', usuariosRoutes); // <--- 2. REGISTRAR ENDPOINT DE USUARIOS
+app.use('/api/usuarios', usuariosRoutes);
+app.use('/api/clientesp', clientespRoutes); // <--- 2. REGISTRAR ENDPOINT DE CLIENTES
 
 // Servir vistas HTML principales
 app.get('/', (req, res) => {
@@ -51,9 +52,13 @@ app.get('/reportes', (req, res) => {
   res.sendFile(path.join(__dirname, 'tamplates', 'repostes.html'));
 });
 
-// <--- 3. REGISTRAR RUTA HTML PARA GESTIÓN DE USUARIOS
 app.get('/usuarios', (req, res) => {
   res.sendFile(path.join(__dirname, 'tamplates', 'usuarios.html'));
+});
+
+// Ruta HTML para el Panel del Cliente
+app.get('/cliente_panel', (req, res) => {
+  res.sendFile(path.join(__dirname, 'tamplates', 'cliente_panel.html'));
 });
 
 // Iniciar Servidor

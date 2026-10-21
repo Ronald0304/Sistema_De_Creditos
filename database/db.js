@@ -22,7 +22,10 @@ db.serialize(() => {
       telefono TEXT,
       direccion TEXT,
       ingresos_mensuales REAL NOT NULL,
-      fecha_registro TEXT NOT NULL DEFAULT (DATE('now'))
+      fecha_registro TEXT NOT NULL DEFAULT (DATE('now')),
+      login TEXT UNIQUE,
+      clave TEXT,
+      primer_login INTEGER DEFAULT 1
     )
   `);
 
@@ -192,3 +195,4 @@ db.serialize(() => {
 });
 
 module.exports = db;
+

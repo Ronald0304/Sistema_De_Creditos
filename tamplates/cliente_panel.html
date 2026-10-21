@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Cliente - Sistema de Créditos</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/cliente_panel.css">
+</head>
+<body class="body-dashboard">
+
+    <!-- ========================================== -->
+    <!-- MENÚ LATERAL DESLIZANTE (SIDEBAR)          -->
+    <!-- ========================================== -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-avatar">SC</div>
+            <div class="logo-text">
+                <h3>Sistema de</h3>
+                <p>Créditos</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item activo" data-seccion="seccion-datos">
+                <span></span> Mis Datos
+            </a>
+            <a href="#" class="nav-item" data-seccion="seccion-solicitudes">
+                <span></span> Mis Solicitudes
+            </a>
+            <a href="#" class="nav-item" data-seccion="seccion-pagos">
+                <span></span> Mis Pagos y Cuotas
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="usuario-avatar-footer" id="cliente-iniciales">--</div>
+            <div class="usuario-info-footer">
+                <h4 id="cliente-nombre-menu">Cargando...</h4>
+                <p>Cliente</p>
+            </div>
+            <button id="btn-cerrar-sesion" class="btn-logout" title="Cerrar Sesión"></button>
+        </div>
+    </aside>
+
+    <!-- ========================================== -->
+    <!-- CONTENIDO PRINCIPAL                        -->
+    <!-- ========================================== -->
+    <main class="main-content">
+        
+        <!-- SECCIÓN 1: MIS DATOS PERSONALES -->
+        <section id="seccion-datos" class="seccion-panel activo">
+            <div class="cabecera-seccion">
+                <p class="miga-pan">Mi perfil / <span>Datos Personales</span></p>
+                <h2>Información Personal</h2>
+            </div>
+
+            <div class="tarjeta-contenedor">
+                <div class="grid-datos-personales">
+                    <div class="campo-dato">
+                        <label>Nombre Completo</label>
+                        <p id="perfil-nombres">---</p>
+                    </div>
+                    <div class="campo-dato">
+                        <label>Cédula de Identidad (CI)</label>
+                        <p id="perfil-ci">---</p>
+                    </div>
+                    <div class="campo-dato">
+                        <label>Teléfono de Contacto</label>
+                        <p id="perfil-telefono">---</p>
+                    </div>
+                    <div class="campo-dato">
+                        <label>Dirección Domiciliaria</label>
+                        <p id="perfil-direccion">---</p>
+                    </div>
+                    <div class="campo-dato">
+                        <label>Ingresos Mensuales Declarados</label>
+                        <p id="perfil-ingresos">Bs. 0.00</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-boton-clave">
+                    <button type="button" id="btn-abrir-modal-clave" class="boton-primario"> Cambiar mi Contraseña</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: MIS SOLICITUDES DE CRÉDITO -->
+        <section id="seccion-solicitudes" class="seccion-panel" style="display: none;">
+            <div class="cabecera-seccion">
+                <p class="miga-pan">Historial / <span>Mis Solicitudes</span></p>
+                <h2>Mis Solicitudes de Crédito</h2>
+            </div>
+
+            <div class="tarjeta-contenedor">
+                <div class="tabla-responsive">
+                    <table class="tabla-datos">
+                        <thead>
+                            <tr>
+                                <th>N° Solicitud</th>
+                                <th>Destino</th>
+                                <th>Monto Solicitado</th>
+                                <th>Plazo</th>
+                                <th>Fecha</th>
+                                <th>Estado Actual</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-solicitudes-cuerpo">
+                            <tr>
+                                <td colspan="6" class="tabla-mensaje-vacio">Cargando solicitudes...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: MIS PAGOS Y CUOTAS (CON MORA / RETRASO) -->
+        <section id="seccion-pagos" class="seccion-panel" style="display: none;">
+            <div class="cabecera-seccion">
+                <p class="miga-pan">Finanzas / <span>Pagos y Cuotas</span></p>
+                <h2>Mis Pagos, Cuotas y Estado de Mora</h2>
+            </div>
+
+            <div class="tarjeta-contenedor">
+                <div class="tabla-responsive">
+                    <table class="tabla-datos">
+                        <thead>
+                            <tr>
+                                <th>N° Crédito</th>
+                                <th>Cuota N°</th>
+                                <th>Fecha Vencimiento</th>
+                                <th>Monto Cuota</th>
+                                <th>Saldo Pendiente</th>
+                                <th>Estado / Mora</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-pagos-cuerpo">
+                            <tr>
+                                <td colspan="6" class="tabla-mensaje-vacio">Cargando cronograma de pagos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- MODAL / SUBPANTALLA PARA CAMBIAR CLAVE     -->
+    <!-- ========================================== -->
+    <div id="modal-cambiar-clave" class="modal-overlay">
+        <div class="modal-contenedor">
+            <div class="modal-cabecera">
+                <h3 class="modal-titulo">Seguridad: Cambiar Contraseña</h3>
+                <button type="button" id="modal-clave-cerrar" class="modal-btn-cerrar">✕</button>
+            </div>
+            <form id="form-cambiar-clave">
+                <div class="grupo-formulario">
+                    <label>Contraseña Actual (Tu CI)</label>
+                    <input type="password" id="clave-actual" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label>Nueva Contraseña</label>
+                    <input type="password" id="clave-nueva" required>
+                </div>
+                <div class="modal-pie">
+                    <button type="button" id="modal-clave-cancelar" class="btn-secundario">Cancelar</button>
+                    <button type="submit" class="boton-primario">Guardar Contraseña</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script principal de lógica del panel de cliente -->
+    <script src="../javascrip/cliente_panel.js"></script>
+</body>
+</html>

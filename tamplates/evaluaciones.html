@@ -77,9 +77,15 @@
             <p id="subtitulo-cliente-info" class="subtitulo-cliente">María Elena Quispe Mamani · Bs 30,000.00 a 12 meses</p>
           </div>
 
-          <!-- BLOQUE 1: HISTORIAL CREDITICIO -->
+          <!-- BLOQUE 1: HISTORIAL CREDITICIO CON BOTÓN DE CONSULTA API -->
           <div class="tarjeta-bloque">
-            <h3 class="etiqueta-bloque">HISTORIAL CREDITICIO</h3>
+            <div class="historial-cabecera">
+              <h3 class="etiqueta-bloque">HISTORIAL CREDITICIO</h3>
+              <button type="button" id="btn-consultar-buro" class="btn-consultar-buro">
+                Consultar Buró
+              </button>
+            </div>
+
             <div class="fila-campos-grid">
               <div class="grupo-input">
                 <label for="referencia_crediticia">Referencia *</label>
@@ -157,6 +163,29 @@
     </main>
 
   </div>
+
+  <!-- ======================================================= -->
+<!-- MODAL FLOTANTE DE REPORTE DE BURÓ DE CRÉDITO            -->
+<!-- ======================================================= -->
+<div id="modal-buro" class="modal-overlay">
+  <div class="modal-contenedor">
+    
+    <div class="modal-cabecera">
+      <h3 class="modal-titulo">Reporte de Buró de Información Crediticia</h3>
+      <button type="button" id="modal-buro-cerrar-X" class="modal-btn-cerrar">✕</button>
+    </div>
+
+    <!-- Contenido dinámico del reporte -->
+    <div id="contenido-reporte-buro" class="modal-contenido-reporte">
+      <!-- Se llena con JavaScript -->
+    </div>
+
+    <div class="modal-pie">
+      <button type="button" id="modal-buro-btn-aceptar" class="boton-primario">Entendido y Aplicar</button>
+    </div>
+
+  </div>
+</div>
 
   <script src="../javascrip/evaluaciones.js"></script>
 </body>

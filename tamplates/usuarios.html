@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CrediManager - Gestión de Usuarios</title>
+  <title>Sistema de Créditos - Gestión de Usuarios y Roles</title>
 
+  <!-- Hojas de estilo -->
   <link rel="stylesheet" href="../css/aprobaciones.css">
-  <link rel="stylesheet" href="../css/desembolsos.css">
-  <link rel="stylesheet" href="../css/pagos.css">
   <link rel="stylesheet" href="../css/usuarios.css">
 
+  <!-- Fuentes Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 
   <div class="contenedor-app">
 
-    <!-- BARRA LATERAL SIMPLIFICADA (2 OPCIONES) -->
+    <!-- BARRA LATERAL DE NAVEGACIÓN -->
     <aside class="barra-lateral">
       <div class="logotipo-contenedor">
         <div class="icono-logo">SC</div>
@@ -30,34 +30,27 @@
 
       <nav class="menu-navegacion">
         <a href="usuarios.html" class="enlace-nav activo">
-          <span class="icono-nav"></span>
           <span class="texto-nav">Gestión Usuarios</span>
         </a>
         <a href="perfil.html" class="enlace-nav">
-          <span class="icono-nav"></span>
           <span class="texto-nav">Mi Perfil</span>
         </a>
       </nav>
 
-      <!-- Tarjeta de usuario inferior -->
-      <div class="tarjeta-usuario" style="display: flex; align-items: center; justify-content: space-between;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <div class="avatar-usuario" id="sidebar-avatar">--</div>
-          <div class="detalles-usuario">
-            <p class="nombre-usuario" id="sidebar-nombre" style="font-size:12px; margin:0;">Cargando...</p>
-            <span class="rol-usuario" id="sidebar-rol" style="font-size:10px;">Administrador</span>
-          </div>
+      <div class="tarjeta-usuario">
+        <div class="avatar-usuario" id="sidebar-avatar">AS</div>
+        <div class="detalles-usuario">
+          <p class="nombre-usuario" id="sidebar-nombre">Administrador Sistema</p>
+          <span class="rol-usuario" id="sidebar-rol">Administrador</span>
         </div>
-        <button type="button" id="btn-cerrar-sesion" title="Cerrar Sesión" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:16px;">
-          
-        </button>
       </div>
     </aside>
 
     <!-- CONTENIDO PRINCIPAL -->
     <main class="contenido-principal">
+
       <header class="encabezado-seccion">
-        <nav class="miga-de-pan">
+        <nav class="miga-de-pan" aria-label="Navegación secundaria">
           <span>Administración</span>
           <span class="separador">/</span>
           <span class="pagina-actual">Gestión de Usuarios</span>
@@ -65,83 +58,152 @@
         <h1 class="titulo-pagina">Gestión de Usuarios y Roles</h1>
       </header>
 
-      <section class="seccion-formulario-desembolso">
+      <!-- SECCIÓN: REGISTRAR NUEVO USUARIO -->
+      <section class="seccion-bloque seccion-registro-usuario">
+        <h3 class="titulo-bloque">REGISTRAR NUEVO USUARIO</h3>
         
-        <!-- FORMULARIO PARA REGISTRAR NUEVO USUARIO -->
-        <div class="tarjeta-bloque" style="margin-bottom: 25px;">
-          <h3 class="etiqueta-bloque">REGISTRAR NUEVO USUARIO</h3>
-          
-          <form id="form-registrar-usuario">
-            <div class="fila-campos-desembolso tres-columnas" style="margin-bottom: 15px;">
-              <div class="grupo-input">
-                <label for="nombre_completo">Nombre Completo *</label>
-                <input type="text" id="nombre_completo" placeholder="Ej: Juan Pérez Rojas" required>
-              </div>
-
-              <div class="grupo-input">
-                <label for="login">Usuario (Login) *</label>
-                <input type="text" id="login" placeholder="Ej: jperez" required>
-              </div>
-
-              <div class="grupo-input">
-                <label for="clave_hash">Contraseña *</label>
-                <input type="password" id="clave_hash" placeholder="********" required>
-              </div>
+        <form id="form-crear-usuario">
+          <div class="grid-formulario-fila-1">
+            <div class="campo-formulario">
+              <label>Nombre Completo *</label>
+              <input type="text" id="crear-nombre" placeholder="Ej: Juan Pérez Rojas" required class="input-campo">
             </div>
-
-            <div class="fila-campos-desembolso tres-columnas">
-              <div class="grupo-input">
-                <label for="rol">Rol del Sistema *</label>
-                <select id="rol" required>
-                  <option value="CAJERO">Cajero</option>
-                  <option value="OFICIAL">Oficial de Crédito</option>
-                  <option value="ANALISTA">Analista de Crédito</option>
-                  <option value="JEFE">Jefe de Créditos</option>
-                  <option value="ADMIN">Administrador</option>
-                </select>
-              </div>
-
-              <div class="grupo-input">
-                <label for="limite_aprobacion">Límite de Aprobación (Bs)</label>
-                <input type="number" step="0.01" id="limite_aprobacion" value="0.00" placeholder="0.00">
-              </div>
-
-              <div class="grupo-input" style="align-self: flex-end;">
-                <button type="submit" class="boton-primario" style="width:100%; background:#10b981;">Guardar Usuario</button>
-              </div>
+            <div class="campo-formulario">
+              <label>Usuario (Login) *</label>
+              <input type="text" id="crear-login" placeholder="Ej: jperez" required class="input-campo">
             </div>
-          </form>
-        </div>
+            <div class="campo-formulario">
+              <label>Contraseña *</label>
+              <input type="password" id="crear-clave" placeholder="********" required class="input-campo">
+            </div>
+          </div>
 
-        <!-- TABLA DE LISTADO Y EDICIÓN DE USUARIOS -->
-        <div class="tarjeta-bloque">
-          <h3 class="etiqueta-bloque">USUARIOS Y ROLES REGISTRADOS</h3>
-          
-          <table class="tabla-datos">
+          <div class="grid-formulario-fila-2">
+            <div class="campo-formulario">
+              <label>Rol del Sistema *</label>
+              <select id="crear-rol" required class="input-campo">
+                <option value="ADMIN">Administrador</option>
+                <option value="JEFE">Jefe de Créditos</option>
+                <option value="OFICIAL">Oficial de Crédito</option>
+                <option value="ANALISTA">Analista de Crédito</option>
+                <option value="CAJERO">Cajero</option>
+                <option value="GERENTE">Gerente General</option>
+                <option value="CLIENTE">Cliente</option>
+              </select>
+            </div>
+            <div class="campo-formulario">
+              <label>Límite de Aprobación (Bs)</label>
+              <input type="number" step="0.01" id="crear-limite" value="0.00" required class="input-campo">
+            </div>
+            <div>
+              <button type="submit" class="boton-primario">Guardar Usuario</button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- SECCIÓN: USUARIOS Y ROLES REGISTRADOS -->
+      <section class="seccion-bloque">
+        <h3 class="titulo-bloque">USUARIOS Y ROLES REGISTRADOS</h3>
+        
+        <div class="contenedor-tabla">
+          <table class="tabla-solicitudes">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Nombre Completo</th>
-                <th>Usuario</th>
-                <th>Rol</th>
-                <th>Límite Aprobación</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre Completo</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Límite Aprobación</th>
+                <th scope="col">Estado</th>
+                <th scope="col" class="texto-centrado">Acciones</th>
               </tr>
             </thead>
-            <tbody id="tbody-usuarios">
-              <tr>
-                <td colspan="7" class="texto-vacio">Cargando usuarios...</td>
-              </tr>
+            <tbody id="cuerpo-tabla-usuarios">
+              <!-- Dinámico por JS -->
             </tbody>
           </table>
         </div>
-
       </section>
+
+      <!-- SECCIÓN: CLIENTES REGISTRADOS EN EL SISTEMA -->
+      <section class="seccion-bloque">
+        <div class="encabezado-bloque-flex">
+          <h3 class="titulo-bloque" style="margin: 0;">CLIENTES REGISTRADOS EN LA BASE DE DATOS</h3>
+          <span id="contador-clientes" class="badge-contador">Total: 0</span>
+        </div>
+
+        <div class="contenedor-tabla">
+          <table class="tabla-solicitudes">
+            <thead>
+              <tr>
+                <th scope="col">ID Cliente</th>
+                <th scope="col">C.I.</th>
+                <th scope="col">Nombres y Apellidos</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Ingresos Mensuales</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-clientes">
+              <!-- Dinámico por JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
     </main>
 
   </div>
 
+  <!-- MODAL FLOTANTE DE EDICIÓN DE USUARIO -->
+  <div id="modal-editar" class="modal-overlay" style="display: none;">
+    <div class="modal-contenedor">
+      <div class="modal-cabecera">
+        <h3 class="modal-titulo">Editar Usuario</h3>
+        <button type="button" id="cerrar-modal" class="boton-cerrar">&times;</button>
+      </div>
+      
+      <form id="form-editar-usuario">
+        <input type="hidden" id="edit-id">
+        
+        <div class="campo-formulario">
+          <label>Nombre Completo</label>
+          <input type="text" id="edit-nombre" required class="input-modal">
+        </div>
+
+        <div class="campo-formulario">
+          <label>Usuario (Login)</label>
+          <input type="text" id="edit-login" required class="input-modal">
+        </div>
+
+        <div class="campo-formulario">
+          <label>Rol del Sistema</label>
+          <select id="edit-rol" required class="input-modal">
+            <option value="ADMIN">ADMIN</option>
+            <option value="JEFE">JEFE</option>
+            <option value="OFICIAL">OFICIAL</option>
+            <option value="ANALISTA">ANALISTA</option>
+            <option value="CAJERO">CAJERO</option>
+            <option value="GERENTE">GERENTE</option>
+            <option value="CLIENTE">CLIENTE</option>
+          </select>
+        </div>
+
+        <div class="campo-formulario">
+          <label>Límite de Aprobación (Bs)</label>
+          <input type="number" step="0.01" id="edit-limite" required class="input-modal">
+        </div>
+
+        <div class="modal-botones">
+          <button type="button" id="btn-cancelar" class="boton-secundario">Cancelar</button>
+          <button type="submit" class="boton-primario">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script externo -->
   <script src="../javascrip/usuarios.js"></script>
 </body>
 </html>

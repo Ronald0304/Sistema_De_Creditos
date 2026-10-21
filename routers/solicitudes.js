@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../database/db');
 
 // ==========================================
-// 1. ENDPOINT DE LOGIN
+// 1. ENDPOINT DE LOGIN (USUARIOS INTERNOS)
 // ==========================================
 router.post('/login', (req, res) => {
   const { login, clave } = req.body;
@@ -26,7 +26,7 @@ router.post('/login', (req, res) => {
 });
 
 // ==========================================
-// 2. ENDPOINT DE SOLICITUDES Y MÉTRICAS
+// 2. ENDPOINT DE SOLICITUDES Y MÉTRICAS (BANDEJA JEFE DE CRÉDITOS)
 // ==========================================
 router.get('/', (req, res) => {
   const estadoFiltro = req.query.estado || 'TODOS';
@@ -48,6 +48,7 @@ router.get('/', (req, res) => {
       rechazadasHoy: metricasRow?.rechazadasHoy || 0
     };
 
+    // Filtramos para que el Jefe de Créditos NUNCA vea las 'REGISTRADA' (esas son solo del Analista)
     let sqlSolicitudes = `
       SELECT 
         s.id_solicitud AS id,
@@ -58,11 +59,12 @@ router.get('/', (req, res) => {
         s.estado
       FROM solicitud_credito s
       JOIN cliente c ON s.id_cliente = c.id_cliente
+      WHERE s.estado IN ('EN_EVALUACION', 'APROBADA', 'RECHAZADA', 'DESEMBOLSADO')
     `;
 
     let params = [];
     if (estadoFiltro !== 'TODOS') {
-      sqlSolicitudes += ` WHERE s.estado = ?`;
+      sqlSolicitudes += ` AND s.estado = ?`;
       params.push(estadoFiltro);
     }
 
@@ -76,7 +78,7 @@ router.get('/', (req, res) => {
 });
 
 // ==========================================
-// 3. ENDPOINT PARA REGISTRAR CLIENTE
+// 3. ENDPOINT PARA REGISTRAR CLIENTE (CON ACCESO WEB AUTOMÁTICO)
 // ==========================================
 router.post('/clientes', (req, res) => {
   const { ci, nombres, apellidos, telefono, direccion, ingresos_mensuales } = req.body;
@@ -85,18 +87,22 @@ router.post('/clientes', (req, res) => {
     return res.status(400).json({ error: 'Faltan campos obligatorios' });
   }
 
-  const sql = `INSERT INTO cliente (ci, nombres, apellidos, telefono, direccion, ingresos_mensuales) VALUES (?, ?, ?, ?, ?, ?)`;
+  // Se asigna el CI como login y clave por defecto, y primer_login en 1
+  const sql = `
+    INSERT INTO cliente (ci, nombres, apellidos, telefono, direccion, ingresos_mensuales, login, clave, primer_login) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)
+  `;
 
-  db.run(sql, [ci, nombres, apellidos, telefono, direccion, ingresos_mensuales], function(err) {
+  db.run(sql, [ci, nombres, apellidos, telefono, direccion, ingresos_mensuales, ci, ci], function(err) {
     if (err) {
-      if (err.message.includes('UNIQUE constraint failed: cliente.ci')) {
+      if (err.message.includes('UNIQUE constraint failed')) {
         return res.status(400).json({ error: 'El número de CI ya se encuentra registrado en el sistema.' });
       }
       return res.status(500).json({ error: err.message });
     }
 
     res.status(201).json({
-      mensaje: 'Cliente registrado correctamente',
+      mensaje: 'Cliente registrado correctamente con acceso web',
       id_cliente: this.lastID
     });
   });
@@ -385,7 +391,7 @@ router.post('/desembolsos', (req, res) => {
 });
 
 // ==========================================
-// 9. ENDPOINTS PARA EVALUACIONES (MODIFICADO Y CORREGIDO)
+// 9. ENDPOINTS PARA EVALUACIONES Y BURÓ
 // ==========================================
 router.get('/evaluaciones/pendientes', (req, res) => {
   const sql = `
@@ -398,8 +404,7 @@ router.get('/evaluaciones/pendientes', (req, res) => {
       c.ingresos_mensuales
     FROM solicitud_credito s
     JOIN cliente c ON s.id_cliente = c.id_cliente
-    WHERE s.estado = 'REGISTRADA' 
-      AND s.id_solicitud NOT IN (SELECT id_solicitud FROM evaluacion_credito)
+    WHERE s.estado = 'REGISTRADA'
     ORDER BY s.id_solicitud DESC
   `;
 
@@ -409,26 +414,67 @@ router.get('/evaluaciones/pendientes', (req, res) => {
   });
 });
 
-router.post('/evaluaciones', (req, res) => {
-  const { id_solicitud, referencia_crediticia, resultado_crediticio, ingresos, gastos, nivel_riesgo, resultado_evaluacion } = req.body;
+router.get('/consultar-buro/:id_solicitud', (req, res) => {
+  const { id_solicitud } = req.params;
 
-  if (!id_solicitud || !ingresos || !gastos || !nivel_riesgo) {
+  const sqlCheck = `SELECT ref_historial, resultado_historial FROM evaluacion_credito WHERE id_solicitud = ?`;
+
+  db.get(sqlCheck, [id_solicitud], (err, fila) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    if (fila && fila.ref_historial) {
+      return res.json({
+        ref_historial: fila.ref_historial,
+        resultado_historial: fila.resultado_historial
+      });
+    }
+
+    const numeroAleatorio = Math.floor(10000 + Math.random() * 90000);
+    const refGenerada = `R-${numeroAleatorio}`;
+    const perfilesPosibles = ["SIN MORA", "CON MORA LEVE", "CON ANTECEDENTES NEGATIVOS"];
+    const resultadoUnico = perfilesPosibles[Math.floor(Math.random() * perfilesPosibles.length)];
+
+    const sqlInsert = `
+      INSERT OR REPLACE INTO evaluacion_credito (id_solicitud, ref_historial, resultado_historial, ingresos, gastos, capacidad_pago, nivel_riesgo, resultado)
+      VALUES (?, ?, ?, 0, 0, 0, 'MEDIO', 'FAVORABLE')
+    `;
+
+    db.run(sqlInsert, [id_solicitud, refGenerada, resultadoUnico], (errIns) => {
+      if (errIns) {
+        db.get(sqlCheck, [id_solicitud], (err2, fila2) => {
+          if (err2 || !fila2) return res.status(500).json({ error: 'Error al generar buró' });
+          return res.json({ ref_historial: fila2.ref_historial, resultado_historial: fila2.resultado_historial });
+        });
+        return;
+      }
+
+      res.json({
+        ref_historial: refGenerada,
+        resultado_historial: resultadoUnico
+      });
+    });
+  });
+});
+
+router.post('/evaluaciones', (req, res) => {
+  const { id_solicitud, ref_historial, resultado_historial, ingresos, gastos, nivel_riesgo, resultado_evaluacion } = req.body;
+
+  if (!id_solicitud || ingresos === undefined || gastos === undefined || !nivel_riesgo) {
     return res.status(400).json({ error: 'Faltan campos obligatorios para la evaluación' });
   }
 
-  // 1. Crear tabla si no existe
   const crearTablaSQL = `
     CREATE TABLE IF NOT EXISTS evaluacion_credito (
       id_evaluacion INTEGER PRIMARY KEY AUTOINCREMENT,
-      id_solicitud INTEGER,
-      referencia_crediticia TEXT,
-      resultado_crediticio TEXT,
-      ingresos REAL,
-      gastos REAL,
-      capacidad_pago REAL,
-      nivel_riesgo TEXT,
-      resultado TEXT,
-      fecha_evaluacion DATE,
+      id_solicitud INTEGER NOT NULL UNIQUE,
+      fecha_evaluacion TEXT NOT NULL DEFAULT (DATE('now')),
+      ref_historial TEXT NOT NULL,
+      resultado_historial TEXT NOT NULL,
+      ingresos REAL NOT NULL,
+      gastos REAL NOT NULL,
+      capacidad_pago REAL NOT NULL,
+      nivel_riesgo TEXT CHECK(nivel_riesgo IN ('BAJO','MEDIO','ALTO')),
+      resultado TEXT CHECK(resultado IN ('FAVORABLE','DESFAVORABLE')),
       FOREIGN KEY (id_solicitud) REFERENCES solicitud_credito(id_solicitud)
     )
   `;
@@ -436,35 +482,26 @@ router.post('/evaluaciones', (req, res) => {
   db.run(crearTablaSQL, (err) => {
     if (err) return res.status(500).json({ error: err.message });
 
-    // 2. Asegurar que las columnas existan en bases de datos ya creadas
-    db.run(`ALTER TABLE evaluacion_credito ADD COLUMN referencia_crediticia TEXT`, () => {
-      db.run(`ALTER TABLE evaluacion_credito ADD COLUMN resultado_crediticio TEXT`, () => {
-        
-        const capacidad_pago = ingresos - gastos;
-        
-        // CORRECCIÓN CLAVE: Forzar que el estado sea 'EN_EVALUACION' para que vaya al Jefe de Créditos
-        const estadoSolicitud = 'EN_EVALUACION';
+    const capacidad_pago = ingresos - gastos;
+    const estadoSolicitud = 'EN_EVALUACION';
 
-        const sqlInsert = `
-          INSERT INTO evaluacion_credito (id_solicitud, referencia_crediticia, resultado_crediticio, ingresos, gastos, capacidad_pago, nivel_riesgo, resultado, fecha_evaluacion)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, DATE('now'))
-        `;
+    const sqlInsert = `
+      INSERT OR REPLACE INTO evaluacion_credito 
+      (id_solicitud, ref_historial, resultado_historial, ingresos, gastos, capacidad_pago, nivel_riesgo, resultado, fecha_evaluacion)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, DATE('now'))
+    `;
 
-        db.run(sqlInsert, [id_solicitud, referencia_crediticia, resultado_crediticio, ingresos, gastos, capacidad_pago, nivel_riesgo, resultado_evaluacion], function(errInsert) {
-          if (errInsert) return res.status(500).json({ error: errInsert.message });
+    db.run(sqlInsert, [id_solicitud, ref_historial, resultado_historial, ingresos, gastos, capacidad_pago, nivel_riesgo, resultado_evaluacion], function(errInsert) {
+      if (errInsert) return res.status(500).json({ error: errInsert.message });
 
-          // Actualizar estado de la solicitud a EN_EVALUACION
-          db.run(`UPDATE solicitud_credito SET estado = ? WHERE id_solicitud = ?`, [estadoSolicitud, id_solicitud], (errUpd) => {
-            if (errUpd) return res.status(500).json({ error: errUpd.message });
+      db.run(`UPDATE solicitud_credito SET estado = ? WHERE id_solicitud = ?`, [estadoSolicitud, id_solicitud], (errUpd) => {
+        if (errUpd) return res.status(500).json({ error: errUpd.message });
 
-            res.status(201).json({
-              mensaje: 'Evaluación registrada correctamente',
-              id_evaluacion: this.lastID,
-              nuevo_estado: estadoSolicitud
-            });
-          });
+        res.status(201).json({
+          mensaje: 'Evaluación registrada correctamente',
+          id_evaluacion: this.lastID,
+          nuevo_estado: estadoSolicitud
         });
-
       });
     });
   });
@@ -516,6 +553,8 @@ router.get('/detalle-evaluacion/:id', (req, res) => {
       c.telefono AS cliente_telefono,
       c.ingresos_mensuales AS cliente_ingresos,
       e.fecha_evaluacion,
+      e.ref_historial,
+      e.resultado_historial,
       e.ingresos AS eval_ingresos,
       e.gastos AS eval_gastos,
       e.capacidad_pago AS eval_capacidad,
@@ -539,7 +578,7 @@ router.get('/detalle-evaluacion/:id', (req, res) => {
 });
 
 // ==========================================
-// 12. CAMBIAR ESTADO (APROBAR / RECHAZAR CON CU09 Y CU10)
+// 12. CAMBIAR ESTADO (APROBAR / RECHAZAR)
 // ==========================================
 router.post('/cambiar-estado', (req, res) => {
   const { id_solicitud, nuevo_estado, motivo_rechazo } = req.body;

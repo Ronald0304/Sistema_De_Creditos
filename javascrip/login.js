@@ -21,14 +21,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const login = inputUsuario.value.trim();
             const clave = inputContrasena.value.trim();
 
+            if (!login || !clave) {
+                alert('Por favor ingrese su usuario y contraseña.');
+                return;
+            }
+
             try {
-                const respuesta = await fetch('/api/solicitudes/login', {
+                // 1. Intentar primero el login como usuario interno (Admin, Oficial, Jefe, etc.)
+                let respuesta = await fetch('/api/solicitudes/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ login, clave })
                 });
 
-                const data = await respuesta.json();
+                let data = await respuesta.json();
+
+                // 2. Si falla en usuario interno, intentar como cliente mediante clientesp.js
+                if (!respuesta.ok) {
+                    respuesta = await fetch('/api/clientesp/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ login, clave })
+                    });
+                    data = await respuesta.json();
+                }
 
                 if (!respuesta.ok) {
                     alert(data.error || 'Usuario o contraseña incorrectos');
@@ -38,12 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Guardar usuario logueado en LocalStorage
                 localStorage.setItem('usuarioLogueado', JSON.stringify(data.usuario));
 
-                // Redirección por Rol
+                // 3. Redirección inteligente por Rol
                 const rol = data.usuario.rol;
                 if (rol === 'JEFE') {
                     window.location.href = './aprobaciones.html';
                 } else if (rol === 'OFICIAL') {
-                    window.location.href = './clientes.html'; // <--- Apunta a tu archivo clientes.html
+                    window.location.href = './clientes.html';
                 } else if (rol === 'ANALISTA') {
                     window.location.href = './evaluaciones.html';
                 } else if (rol === 'CAJERO') {
@@ -52,8 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = './usuarios.html';
                 } else if (rol === 'GERENTE') {
                     window.location.href = './reportes.html';
+                } else if (rol === 'CLIENTE') {
+                    window.location.href = './cliente_panel.html';
                 } else {
-                    window.location.href = './aprobaciones.html'; // Redirigir a una página por defecto si el rol no coincide
+                    window.location.href = './cliente_panel.html';
                 }
 
             } catch (error) {
