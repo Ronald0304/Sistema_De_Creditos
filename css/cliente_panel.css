@@ -1,0 +1,184 @@
+/*  PORTAL DEL CLIENTE */
+
+/* --- Hero Cliente --- */
+.hero-cliente {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 30px 32px;
+  margin-bottom: 20px;
+  border-radius: 22px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, #0a1b33, #1d4ed8 60%, #0d9488);
+  box-shadow: var(--sombra-lg);
+}
+
+.hero-cliente::after {
+  content: '';
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  right: -100px;
+  top: -140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 70%);
+}
+
+.hero-cliente.mora {
+  background: linear-gradient(120deg, #3b0a0a, #b91c1c 60%, #d97706);
+}
+
+.hero-cliente.cancelado {
+  background: linear-gradient(120deg, #0a1b33, #1e3a8a 60%, #6d28d9);
+}
+
+.hero-cliente.al-dia {
+  background: linear-gradient(120deg, #052e2b, #047857 55%, #0d9488);
+}
+
+.hero-cliente-texto span {
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-cliente h1 {
+  color: #fff;
+  font-size: 34px;
+  font-weight: 800;
+  margin: 4px 0;
+}
+
+.hero-cliente p {
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 520px;
+}
+
+/* --- Hero Cliente Cifras --- */
+.hero-cliente-cifras {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-cliente-cifras div {
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  min-width: 150px;
+}
+
+.hero-cliente-cifras span {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.hero-cliente-cifras b {
+  font-family: var(--fuente-titulos);
+  font-size: 21px;
+}
+
+/* --- Listas y Créditos del Cliente --- */
+.lista-creditos, 
+.lista-solicitudes {
+  display: grid;
+  gap: 18px;
+}
+
+.credito-cliente {
+  overflow: hidden;
+}
+
+.credito-cliente .cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.credito-cliente .cabecera h3 {
+  font-size: 18px;
+}
+
+.credito-cliente .cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  padding: 18px 22px;
+}
+
+.credito-cliente .avance {
+  padding: 0 22px 18px;
+}
+
+.credito-cliente .avance .flex {
+  font-size: 12.5px;
+  color: var(--texto-suave);
+  margin-bottom: 6px;
+}
+
+/* --- Próxima Cuota --- */
+.proxima-cuota {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 22px 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--primario-suave);
+}
+
+.proxima-cuota.vencida {
+  background: var(--peligro-suave);
+}
+
+.proxima-cuota b {
+  font-family: var(--fuente-titulos);
+  font-size: 18px;
+}
+
+/* --- Detalles y Acciones del Crédito --- */
+.credito-cliente details summary {
+  padding: 14px 22px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--primario);
+  border-top: 1px solid var(--borde);
+}
+
+.credito-cliente .acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 22px;
+  background: var(--superficie-2);
+  border-top: 1px solid var(--borde);
+}
+
+/* --- Solicitud del Cliente --- */
+.solicitud-cliente {
+  padding: 20px 22px;
+}
+
+.solicitud-cliente .cabecera {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.solicitud-cliente h3 {
+  font-size: 16px;
+}

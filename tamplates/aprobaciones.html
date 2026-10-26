@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bandeja de aprobación | CrediManager</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/aprobaciones.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Menú lateral y barra superior: los construye javascript/comun.js según el rol -->
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    
+    <div class="app-principal">
+      <header class="barra-superior" id="barra-superior"></header>
+      
+      <main class="contenido">
+        <!-- Encabezado de la página -->
+        <div class="encabezado-pagina">
+          <div>
+            <div class="migas">
+              <span>Comité de crédito</span>
+              <span>/</span>
+              <span>Bandeja de aprobación</span>
+            </div>
+            <h1>Bandeja de aprobación</h1>
+            <p>Revise las solicitudes evaluadas por el Analista y resuelva su aprobación o rechazo.</p>
+          </div>
+          <div class="acciones-pagina">
+            <a href="/app/historial" class="boton boton-secundario">Historial de decisiones</a>
+          </div>
+        </div>
+
+        <!-- Indicadores KPI -->
+        <div class="grilla-kpi">
+          <div class="kpi morado animar">
+            <div class="kpi-etiqueta">Pendientes de resolución</div>
+            <div class="kpi-valor" id="kpi-pendientes">—</div>
+            <div class="kpi-nota" id="kpi-analisis">&nbsp;</div>
+          </div>
+          <div class="kpi verde animar" style="--i:1">
+            <div class="kpi-etiqueta">Aprobadas hoy</div>
+            <div class="kpi-valor" id="kpi-aprobadas">—</div>
+          </div>
+          <div class="kpi rojo animar" style="--i:2">
+            <div class="kpi-etiqueta">Rechazadas hoy</div>
+            <div class="kpi-valor" id="kpi-rechazadas">—</div>
+          </div>
+          <div class="kpi turquesa animar" style="--i:3">
+            <div class="kpi-etiqueta">Monto aprobado en el mes</div>
+            <div class="kpi-valor" id="kpi-monto">—</div>
+            <div class="kpi-nota" id="kpi-limite">&nbsp;</div>
+          </div>
+        </div>
+
+        <!-- Sección de solicitudes evaluadas -->
+        <section class="tarjeta animar" style="--i:2">
+          <div class="tarjeta-cabecera">
+            <h3>Solicitudes evaluadas</h3>
+            <p>Ordenadas por antigüedad de la evaluación</p>
+          </div>
+          <div class="tabla-contenedor">
+            <table class="tabla">
+              <thead>
+                <tr>
+                  <th>Solicitud</th>
+                  <th>Cliente</th>
+                  <th class="num">Monto / plazo</th>
+                  <th>Dictamen</th>
+                  <th>Riesgo</th>
+                  <th class="num">Cuota / capacidad</th>
+                  <th>Analista</th>
+                  <th class="num"></th>
+                </tr>
+              </thead>
+              <tbody id="tabla-bandeja"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Modal: revisión y resolución -->
+        <div class="modal" id="modal-resolucion">
+          <div class="modal-caja ancho" role="dialog" aria-modal="true">
+            <div class="modal-cabecera">
+              <h3 id="titulo-resolucion">Resolución de crédito</h3>
+              <button type="button" class="modal-cerrar" data-cerrar-modal aria-label="Cerrar">&times;</button>
+            </div>
+            
+            <div class="modal-cuerpo">
+              <div id="contenido-expediente">
+                <div class="cargador">Cargando...</div>
+              </div>
+              
+              <div class="panel-decision" id="panel-decision">
+                <h4 class="titulo-bloque">Decisión del Jefe de Crédito</h4>
+                <form id="formulario-aprobacion" novalidate>
+                  <div class="formulario-grilla">
+                    <div class="campo">
+                      <label>Monto aprobado (Bs) <span class="obligatorio">*</span></label>
+                      <input type="number" name="monto_aprobado" min="1" step="0.01" required>
+                      <small class="ayuda" id="ayuda-monto"></small>
+                    </div>
+                    <div class="campo">
+                      <label>Tasa de interés anual (%) <span class="obligatorio">*</span></label>
+                      <input type="number" name="tasa_interes" min="1" max="40" step="0.01" required>
+                    </div>
+                    <div class="campo">
+                      <label>Cuota mensual resultante</label>
+                      <input id="cuota-resultante" readonly>
+                    </div>
+                    <div class="campo completo">
+                      <label>Observación de la resolución</label>
+                      <input name="observacion" maxlength="500" placeholder="Opcional: condiciones, recomendaciones de seguimiento...">
+                    </div>
+                  </div>
+                  
+                  <div class="aviso alerta mt-2 oculto" id="aviso-limite"></div>
+                  <div class="aviso peligro mt-2 oculto" id="aviso-dictamen">
+                    <div><strong>RN03:</strong> El dictamen del analista es NO FAVORABLE. La solicitud solo puede ser rechazada.</div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            
+            <div class="modal-pie">
+              <button type="button" class="boton boton-secundario" data-cerrar-modal>Cancelar</button>
+              <button type="button" class="boton boton-peligro" id="boton-rechazar">Rechazar</button>
+              <button type="button" class="boton boton-exito" id="boton-aprobar">Aprobar crédito</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="contenedor-toasts"></div>
+
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/detalle_solicitud.js"></script>
+  <script src="/javascrip/aprobaciones.js"></script>
+</body>
+</html>

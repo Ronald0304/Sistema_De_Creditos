@@ -1,0 +1,344 @@
+/*  CAJERO - CAJA, COBRANZAS Y MORA */
+
+/* --- Buscador y Resultados --- */
+.buscador-caja {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 10px 20px;
+  border-radius: 16px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  box-shadow: var(--sombra);
+}
+
+.buscador-caja input {
+  flex: 1;
+  border: 0;
+  outline: none;
+  font-size: 16px;
+  padding: 10px 0;
+  background: transparent;
+}
+
+.resultados-busqueda {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.resultado {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  cursor: pointer;
+  transition: all var(--transicion);
+  animation: aparecer 0.35s ease both;
+  text-align: left;
+  width: 100%;
+}
+
+.resultado:hover, 
+.resultado.seleccionado {
+  border-color: var(--primario-claro);
+  box-shadow: 0 8px 24px rgba(29, 78, 216, 0.12);
+  transform: translateX(4px);
+}
+
+.resultado .avatar {
+  width: 42px;
+  height: 42px;
+}
+
+.resultado .info {
+  flex: 1;
+  min-width: 0;
+}
+
+.resultado .info strong {
+  display: block;
+}
+
+.resultado .info span {
+  font-size: 12.5px;
+  color: var(--texto-suave);
+}
+
+.resultado .montos {
+  text-align: right;
+  font-size: 12.5px;
+  color: var(--texto-suave);
+}
+
+.resultado .montos b {
+  display: block;
+  font-size: 15px;
+  color: var(--texto);
+}
+
+/* --- Cabecera de Crédito --- */
+.cabecera-credito {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  border-radius: var(--radio);
+  color: #fff;
+  background: linear-gradient(120deg, #0a1b33, #1d4ed8 70%, #0d9488);
+  box-shadow: var(--sombra);
+  animation: aparecer 0.4s ease both;
+}
+
+.cabecera-credito.mora {
+  background: linear-gradient(120deg, #3b0a0a, #991b1b 65%, #b45309);
+}
+
+.cabecera-credito.cancelado {
+  background: linear-gradient(120deg, #0a1b33, #334155);
+}
+
+.cabecera-credito .avatar {
+  width: 54px;
+  height: 54px;
+  font-size: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.cabecera-credito h3 {
+  color: #fff;
+  font-size: 19px;
+}
+
+.cabecera-credito span {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+}
+
+.cabecera-credito .cifras {
+  margin-left: auto;
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.cabecera-credito .cifras div span {
+  display: block;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cabecera-credito .cifras b {
+  font-family: var(--fuente-titulos);
+  font-size: 20px;
+}
+
+/* --- Grilla de Cobro y Tabla --- */
+.grilla-cobro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(310px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.tabla-cuotas {
+  max-height: 520px;
+  overflow-y: auto;
+}
+
+.tabla-cuotas .tabla {
+  font-size: 13px;
+}
+
+.tabla-cuotas .tabla th, 
+.tabla-cuotas .tabla td {
+  padding: 10px 9px;
+}
+
+.tabla tr.por-pagar {
+  background: #eef4ff;
+}
+
+.tabla tr.por-pagar td:first-child {
+  box-shadow: inset 4px 0 0 var(--primario);
+}
+
+.tabla tr.cuota-pagada td {
+  color: var(--texto-tenue);
+}
+
+/* --- Panel de Cobro --- */
+.panel-cobro {
+  position: sticky;
+  top: 84px;
+}
+
+.selector-modo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
+  border-radius: 12px;
+  background: #e9eef6;
+}
+
+.selector-modo button {
+  border: 0;
+  padding: 9px;
+  border-radius: 9px;
+  background: transparent;
+  font-weight: 600;
+  color: var(--texto-suave);
+  cursor: pointer;
+  transition: all var(--transicion);
+}
+
+.selector-modo button.activo {
+  background: var(--superficie);
+  color: var(--primario);
+  box-shadow: var(--sombra-sm);
+}
+
+.contador-cuotas {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 10px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.contador-cuotas button {
+  width: 44px;
+  border: 0;
+  background: var(--superficie-2);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.contador-cuotas button:hover {
+  background: var(--primario-suave);
+  color: var(--primario);
+}
+
+.contador-cuotas input {
+  width: 70px;
+  border: 0 !important;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* --- Desglose y Exoneración --- */
+.desglose {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--superficie-2);
+  border: 1px dashed var(--borde-fuerte);
+  display: grid;
+  gap: 8px;
+  font-size: 13.5px;
+}
+
+.desglose div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.desglose .recargo {
+  color: #b45309;
+}
+
+.desglose .tachado {
+  text-decoration: line-through;
+  color: var(--texto-tenue);
+}
+
+.desglose .total {
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--borde-fuerte);
+  font-size: 18px;
+  font-weight: 800;
+  font-family: var(--fuente-titulos);
+}
+
+.bloque-exoneracion {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.bloque-exoneracion textarea {
+  width: 100%;
+  min-height: 64px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--borde-fuerte);
+  outline: none;
+  resize: vertical;
+}
+
+/* --- Cambios, Botones y Arqueo --- */
+.cambio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--exito-suave);
+  color: var(--exito);
+}
+
+.cambio strong {
+  font-family: var(--fuente-titulos);
+  font-size: 20px;
+}
+
+.cambio.insuficiente {
+  background: var(--peligro-suave);
+  color: var(--peligro);
+}
+
+.boton-cobrar {
+  padding: 14px;
+  font-size: 15px;
+}
+
+.fila-forma {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--borde);
+}
+
+.total-arqueo {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--azul-900);
+  color: #fff;
+  font-family: var(--fuente-titulos);
+  font-size: 18px;
+}
+
+/* --- Media Queries --- */
+@media (max-width: 1100px) {
+  .grilla-cobro {
+    grid-template-columns: 1fr;
+  }
+  .panel-cobro {
+    position: static;
+  }
+}

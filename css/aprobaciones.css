@@ -1,0 +1,52 @@
+/* JEFE DE CRÉDITO - APROBACIONES E HISTORIAL DE DECISIONES */
+.panel-decision { 
+   margin-top: 8px; 
+   padding: 4px 18px 18px; 
+   border-radius: 14px; 
+   background: var(--superficie-2); 
+   border: 1px solid var(--borde); 
+}
+.exito-aprobacion { 
+   text-align: center; 
+   padding: 26px 24px; 
+}
+.exito-aprobacion h4 { 
+   font-size: 20px; 
+}
+.documentos-generados { 
+   display: grid; 
+   grid-template-columns: 1fr 1fr; 
+   gap: 12px;
+   margin-top: 18px; 
+}
+.documento { 
+   display: flex; 
+   align-items: center; 
+   gap: 12px; 
+   padding: 14px; 
+   border-radius: 12px; 
+   border: 1px solid var(--borde); 
+   text-align: left; 
+   color: var(--texto); 
+   transition: all var(--transicion); 
+}
+.documento:hover { 
+   border-color: var(--primario); 
+   background: var(--primario-suave); 
+   transform: translateY(-2px); 
+}
+.documento small {
+   display: block; 
+   color: var(--texto-suave); 
+}
+@media (max-width: 600px) 
+{ .documentos-generados 
+   { grid-template-columns: 1fr;
+   } 
+}
+.detalle-texto { 
+   max-width: 300px;
+   white-space: normal; 
+   font-size: 12.5px; 
+   color: var(--texto-suave); 
+}

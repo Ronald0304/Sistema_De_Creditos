@@ -1,0 +1,19 @@
+{
+    // Configuración de depuración para VS Code.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Iniciar servidor (Node)",
+            "program": "${workspaceFolder}/server.js"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Abrir Chrome en localhost:3000",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}

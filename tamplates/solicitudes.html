@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitudes de crédito</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/solicitudes.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Menú lateral y barra superior: los construye javascrip/comun.js según el rol -->
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    
+    <div class="app-principal">
+      <header class="barra-superior" id="barra-superior"></header>
+      
+      <main class="contenido">
+        <!-- Encabezado de la página -->
+        <div class="encabezado-pagina">
+          <div>
+            <div class="migas">
+              <span>Originación</span>
+              <span>/</span>
+              <span>Solicitudes</span>
+            </div>
+            <h1>Solicitudes de crédito</h1>
+            <p>Registre solicitudes, adjunte garantías y envíelas a evaluación del Analista de Crédito.</p>
+          </div>
+          <div class="acciones-pagina">
+            <button type="button" class="boton boton-primario" id="boton-nueva-solicitud">Nueva solicitud</button>
+          </div>
+        </div>
+
+        <!-- Indicadores KPI -->
+        <div class="grilla-kpi">
+          <div class="kpi animar">
+            <div class="kpi-etiqueta">Registradas (por enviar)</div>
+            <div class="kpi-valor" id="kpi-registradas">—</div>
+          </div>
+          <div class="kpi celeste animar" style="--i:1">
+            <div class="kpi-etiqueta">En evaluación / evaluadas</div>
+            <div class="kpi-valor" id="kpi-evaluacion">—</div>
+          </div>
+          <div class="kpi naranja animar" style="--i:2">
+            <div class="kpi-etiqueta">Aprobadas por desembolsar</div>
+            <div class="kpi-valor" id="kpi-aprobadas">—</div>
+          </div>
+          <div class="kpi verde animar" style="--i:3">
+            <div class="kpi-etiqueta">Desembolsadas</div>
+            <div class="kpi-valor" id="kpi-desembolsadas">—</div>
+          </div>
+        </div>
+
+        <!-- Sección de solicitudes -->
+        <section class="tarjeta animar" style="--i:2">
+          <div class="tarjeta-cabecera">
+            <div class="pestanas" style="margin:0" id="pestanas-estado">
+              <button type="button" class="pestana activa" data-estado="">Todas</button>
+              <button type="button" class="pestana" data-estado="REGISTRADA">Registradas</button>
+              <button type="button" class="pestana" data-estado="EN_EVALUACION,EVALUADA">En evaluación</button>
+              <button type="button" class="pestana" data-estado="APROBADA">Aprobadas</button>
+              <button type="button" class="pestana" data-estado="DESEMBOLSADA">Desembolsadas</button>
+              <button type="button" class="pestana" data-estado="RECHAZADA,ANULADA">Rechazadas / anuladas</button>
+            </div>
+            <div class="barra-filtros">
+              <div class="campo-busqueda">
+                <input type="search" id="filtro-buscar" placeholder="CI, cliente o código...">
+              </div>
+              <label class="casilla">
+                <input type="checkbox" id="filtro-mias"> Solo mis solicitudes
+              </label>
+            </div>
+          </div>
+          <div class="tabla-contenedor">
+            <table class="tabla">
+              <thead>
+                <tr>
+                  <th>Solicitud</th>
+                  <th>Cliente</th>
+                  <th>Producto</th>
+                  <th class="num">Monto / plazo</th>
+                  <th class="centro">Garantías</th>
+                  <th>Estado</th>
+                  <th class="num">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-solicitudes"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Modal: Nueva / Editar solicitud -->
+        <div class="modal" id="modal-solicitud">
+          <div class="modal-caja ancho" role="dialog" aria-modal="true">
+            <div class="modal-cabecera">
+              <h3 id="titulo-modal-solicitud">Nueva solicitud de crédito</h3>
+              <button type="button" class="modal-cerrar" data-cerrar-modal aria-label="Cerrar">&times;</button>
+            </div>
+            
+            <form id="formulario-solicitud" novalidate>
+              <div class="modal-cuerpo">
+                <input type="hidden" name="id_solicitud">
+                <input type="hidden" name="id_cliente">
+                
+                <!-- Paso 1: Cliente -->
+                <div id="bloque-buscar-cliente">
+                  <label class="etiqueta-paso"><span>1</span> Identifique al cliente</label>
+                  <div class="flex">
+                    <div class="campo-busqueda" style="flex:1">
+                      <input class="entrada-grande" id="buscar-ci" placeholder="Número de CI del cliente" maxlength="13">
+                    </div>
+                    <button type="button" class="boton boton-secundario" id="boton-buscar-cliente">Buscar</button>
+                  </div>
+                </div>
+                <div id="tarjeta-cliente" class="tarjeta-cliente-sel oculto"></div>
+
+                <!-- Paso 2: Condiciones -->
+                <label class="etiqueta-paso mt-3"><span>2</span> Condiciones del crédito</label>
+                <div class="formulario-grilla">
+                  <div class="campo">
+                    <label>Producto crediticio <span class="obligatorio">*</span></label>
+                    <select name="tipo_credito" id="campo-producto" required></select>
+                    <small class="ayuda" id="ayuda-producto"></small>
+                  </div>
+                  <div class="campo">
+                    <label>Monto solicitado (Bs) <span class="obligatorio">*</span></label>
+                    <input type="number" name="monto_solicitado" id="campo-monto" min="1" step="0.01" required>
+                  </div>
+                  <div class="campo">
+                    <label>Plazo (meses) <span class="obligatorio">*</span></label>
+                    <input type="number" name="plazo_meses" id="campo-plazo" min="1" step="1" required>
+                  </div>
+                  <div class="campo">
+                    <label>Destino del crédito <span class="obligatorio">*</span></label>
+                    <input name="destino" maxlength="120" required placeholder="Ej.: Capital de trabajo">
+                  </div>
+                  <div class="campo completo">
+                    <label>Descripción / justificación</label>
+                    <textarea name="descripcion" maxlength="500" placeholder="Detalle del uso de los fondos, fuente de repago, etc."></textarea>
+                  </div>
+                </div>
+
+                <!-- Resumen estimado -->
+                <div class="resumen-estimado" id="resumen-estimado">
+                  <div>
+                    <span>Tasa anual</span>
+                    <strong id="est-tasa">—</strong>
+                  </div>
+                  <div>
+                    <span>Cuota mensual estimada</span>
+                    <strong id="est-cuota">—</strong>
+                  </div>
+                  <div>
+                    <span>Total intereses</span>
+                    <strong id="est-interes">—</strong>
+                  </div>
+                  <div>
+                    <span>Relación cuota / ingreso</span>
+                    <strong id="est-rci">—</strong>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="modal-pie">
+                <button type="button" class="boton boton-secundario" data-cerrar-modal>Cancelar</button>
+                <button type="submit" class="boton boton-primario" id="boton-guardar-solicitud">Registrar solicitud</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Modal: Detalle de la solicitud -->
+        <div class="modal" id="modal-detalle">
+          <div class="modal-caja ancho" role="dialog" aria-modal="true">
+            <div class="modal-cabecera">
+              <h3 id="titulo-detalle">Detalle de la solicitud</h3>
+              <button type="button" class="modal-cerrar" data-cerrar-modal aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="modal-cuerpo" id="contenido-detalle"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="contenedor-toasts"></div>
+  
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/detalle_solicitud.js"></script>
+  <script src="/javascrip/solicitudes.js"></script>
+</body>
+</html>

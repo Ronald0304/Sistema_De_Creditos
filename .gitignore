@@ -1,0 +1,11 @@
+# Dependencias
+node_modules/
+
+# Base de datos local (se regenera automáticamente con datos de demostración)
+database/*.sqlite
+database/*.sqlite-journal
+database/*.sqlite-wal
+database/*.sqlite-shm
+
+# Variables de entorno
+.env

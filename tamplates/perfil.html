@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi perfil</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/perfil.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Menú lateral y barra superior: los construye javascrip/comun.js según el rol -->
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    
+    <div class="app-principal">
+      <header class="barra-superior" id="barra-superior"></header>
+      
+      <main class="contenido">
+        <!-- Encabezado de la página -->
+        <div class="encabezado-pagina">
+          <div>
+            <div class="migas">
+              <span>Cuenta</span>
+              <span>/</span>
+              <span>Mi perfil</span>
+            </div>
+            <h1>Mi perfil</h1>
+            <p>Información de su cuenta, indicadores de trabajo y actividad reciente.</p>
+          </div>
+          <div class="acciones-pagina">
+            <a href="/app/cambiar-clave" class="boton boton-secundario">
+              Cambiar contraseña
+            </a>
+          </div>
+        </div>
+
+        <!-- Tarjeta de presentación -->
+        <section class="tarjeta portada-perfil animar">
+          <div class="portada-fondo"></div>
+          <div class="portada-contenido">
+            <div class="avatar avatar-xl" id="perfil-avatar">--</div>
+            <div class="portada-datos">
+              <h2 id="perfil-nombre">Cargando...</h2>
+              <span class="insignia azul" id="perfil-rol">—</span>
+            </div>
+          </div>
+          <div class="tarjeta-cuerpo">
+            <div class="lista-datos" id="perfil-datos"></div>
+          </div>
+        </section>
+
+        <!-- Indicadores KPI / Estadísticas -->
+        <div class="grilla-kpi mt-3" id="perfil-estadisticas"></div>
+
+        <!-- Actividad reciente -->
+        <section class="tarjeta animar" style="--i: 2">
+          <div class="tarjeta-cabecera">
+            <h3>Actividad reciente</h3>
+            <p>Últimas operaciones registradas en la bitácora de auditoría</p>
+          </div>
+          <div class="tarjeta-cuerpo">
+            <ul class="lista-actividad" id="perfil-actividad">
+              <li class="cargador">Cargando...</li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="contenedor-toasts"></div>
+  
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/perfil.js"></script>
+</body>
+</html>

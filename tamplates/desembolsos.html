@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desembolsos</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/solicitudes.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Menú lateral y barra superior: los construye javascrip/comun.js según el rol -->
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    
+    <div class="app-principal">
+      <header class="barra-superior" id="barra-superior"></header>
+      
+      <main class="contenido">
+        <!-- Encabezado de la página -->
+        <div class="encabezado-pagina">
+          <div>
+            <div class="migas">
+              <span>Originación</span>
+              <span>/</span>
+              <span>Desembolsos</span>
+            </div>
+            <h1>Desembolso de créditos</h1>
+            <p>Ejecute el desembolso de los créditos aprobados por el Jefe de Crédito a través del Core Bancario.</p>
+          </div>
+          <div class="acciones-pagina">
+            <button type="button" class="boton boton-secundario" id="boton-refrescar">Actualizar</button>
+          </div>
+        </div>
+
+        <div class="aviso info mb-3 animar">
+          <div>Requisitos (RN05): el crédito debe estar <strong>aprobado</strong>, con <strong>contrato generado</strong> y al menos <strong>una garantía registrada</strong>. Al desembolsar, las fechas del cronograma se recalculan desde la fecha efectiva de desembolso.</div>
+        </div>
+
+        <h3 class="titulo-seccion">
+          Pendientes de desembolso 
+          <span class="insignia naranja" id="contador-pendientes">0</span>
+        </h3>
+        
+        <div class="tarjetas-desembolso mb-3" id="lista-pendientes">
+          <div class="cargador">Cargando...</div>
+        </div>
+
+        <!-- Últimos desembolsos ejecutados -->
+        <section class="tarjeta animar" style="--i:2">
+          <div class="tarjeta-cabecera">
+            <h3>Últimos desembolsos ejecutados</h3>
+          </div>
+          <div class="tabla-contenedor">
+            <table class="tabla">
+              <thead>
+                <tr>
+                  <th>Crédito</th>
+                  <th>Cliente</th>
+                  <th class="num">Monto</th>
+                  <th>Fecha</th>
+                  <th>Medio</th>
+                  <th>Operación Core</th>
+                  <th>Estado</th>
+                  <th class="num">Documentos</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-desembolsados"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Modal: Ejecutar desembolso -->
+        <div class="modal" id="modal-desembolso">
+          <div class="modal-caja" role="dialog" aria-modal="true">
+            <div class="modal-cabecera">
+              <h3>Ejecutar desembolso</h3>
+              <button type="button" class="modal-cerrar" data-cerrar-modal aria-label="Cerrar">&times;</button>
+            </div>
+            
+            <form id="formulario-desembolso" novalidate>
+              <div class="modal-cuerpo">
+                <div id="resumen-desembolso"></div>
+                
+                <label class="etiqueta-paso mt-3">Medio de desembolso</label>
+                <div class="opciones-medio">
+                  <div class="opcion-medio">
+                    <input type="radio" name="medio_desembolso" id="medio-cuenta" value="ABONO_CUENTA" checked>
+                    <label for="medio-cuenta">Abono en cuenta</label>
+                  </div>
+                  <div class="opcion-medio">
+                    <input type="radio" name="medio_desembolso" id="medio-cheque" value="CHEQUE">
+                    <label for="medio-cheque">Cheque</label>
+                  </div>
+                  <div class="opcion-medio">
+                    <input type="radio" name="medio_desembolso" id="medio-efectivo" value="EFECTIVO">
+                    <label for="medio-efectivo">Efectivo</label>
+                  </div>
+                </div>
+                
+                <div class="campo mt-2" id="campo-cuenta">
+                  <label id="etiqueta-cuenta">Número de cuenta de destino <span class="obligatorio">*</span></label>
+                  <input name="cuenta_destino" maxlength="30" placeholder="1000-1234567">
+                </div>
+              </div>
+              
+              <div class="modal-pie">
+                <button type="button" class="boton boton-secundario" data-cerrar-modal>Cancelar</button>
+                <button type="submit" class="boton boton-exito" id="boton-confirmar-desembolso">Confirmar desembolso</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="contenedor-toasts"></div>
+  
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/desembolsos.js"></script>
+</body>
+</html>

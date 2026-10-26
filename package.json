@@ -1,0 +1,27 @@
+{
+  "name": "sistema-crediticio",
+  "version": "2.0.0",
+  "description": "CrediManager - Sistema de Gestión de Créditos para una entidad bancaria (Node.js, Express, SQLite)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "reiniciar-bd": "node database/reiniciar.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ronald0304/Sistema-Crediticio.git"
+  },
+  "keywords": ["creditos", "banca", "express", "sqlite"],
+  "author": "Grupo 3 - INF 241 - UMSA",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "sqlite3": "^6.0.1"
+  }
+}

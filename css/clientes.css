@@ -1,0 +1,113 @@
+/*  GESTIÓN DE CLIENTES (Oficial de Crédito / Administrador) */
+
+/* --- Subtítulo del Formulario --- */
+.subtitulo-form {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primario);
+  margin: 20px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.subtitulo-form:first-of-type {
+  margin-top: 0;
+}
+
+.subtitulo-form::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--borde);
+}
+
+/* --- Celda de Cliente --- */
+.celda-cliente {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.celda-cliente .avatar {
+  width: 38px;
+  height: 38px;
+  font-size: 12px;
+}
+
+.celda-cliente strong {
+  display: block;
+}
+
+/* --- Ficha Cabecera --- */
+.ficha-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  border-radius: 14px;
+  background: linear-gradient(120deg, #0a1b33, #1d4ed8);
+  color: #fff;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.ficha-cabecera .avatar {
+  width: 58px;
+  height: 58px;
+  font-size: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.ficha-cabecera h4 {
+  color: #fff;
+  font-size: 19px;
+}
+
+.ficha-cabecera span {
+  color: #bfd2f5;
+  font-size: 13px;
+}
+
+.ficha-cabecera .derecha {
+  margin-left: auto;
+  text-align: right;
+}
+
+/* --- Calificación --- */
+.calificacion {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  font-family: var(--fuente-titulos);
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.calificacion.A { 
+  background: #059669; 
+} 
+
+.calificacion.B { 
+  background: #10b981; 
+} 
+
+.calificacion.C { 
+  background: #eab308; 
+}
+
+.calificacion.D { 
+  background: #f97316; 
+} 
+
+.calificacion.E { 
+  background: #ef4444; 
+} 
+
+.calificacion.F { 
+  background: #991b1b; 
+}

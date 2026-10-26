@@ -1,0 +1,231 @@
+/* PERFIL Y CENTRO DE SEGURIDAD (cambio de contraseña) */
+
+/* --- Pantalla de cambio de contraseña --- */
+.pantalla-seguridad {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 30px 16px;
+  background: radial-gradient(ellipse at top, #12305e, #0a1b33 55%, #050e1f);
+}
+
+.fondo-seguridad span {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.fondo-seguridad span:nth-child(1) {
+  width: 460px;
+  height: 460px;
+  background: #1d4ed8;
+  top: -120px;
+  left: -100px;
+}
+
+.fondo-seguridad span:nth-child(2) {
+  width: 380px;
+  height: 380px;
+  background: #0d9488;
+  bottom: -120px;
+  right: -60px;
+}
+
+.caja-seguridad {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  padding: 34px;
+  border-radius: 22px;
+  background: var(--superficie);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+.seguridad-marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.seguridad-marca strong {
+  display: block;
+  font-family: var(--fuente-titulos);
+  font-size: 17px;
+}
+
+.seguridad-marca span {
+  font-size: 12px;
+  color: var(--texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.caja-seguridad h1 {
+  font-size: 24px;
+  margin-top: 18px;
+}
+
+.caja-seguridad .aviso {
+  margin-bottom: 6px;
+}
+
+.medidor {
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 99px;
+  background: #e8edf4;
+  overflow: hidden;
+}
+
+.medidor div {
+  height: 100%;
+  width: 0;
+  border-radius: 99px;
+  transition: width 0.35s, background 0.35s;
+}
+
+.requisitos {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 14px;
+  margin: 14px 0 16px;
+  font-size: 12.5px;
+  color: var(--texto-suave);
+}
+
+.requisitos li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: color 0.2s;
+}
+
+.requisitos li::before {
+  content: '-';
+  font-weight: 700;
+  color: var(--texto-tenue);
+}
+
+.requisitos li.cumple {
+  color: var(--exito);
+}
+
+.requisitos li.cumple::before {
+  content: '+';
+  color: var(--exito);
+}
+
+.pie-seguridad {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--borde);
+  flex-wrap: wrap;
+}
+
+/* --- Perfil --- */
+.portada-perfil { 
+  overflow: hidden; 
+}
+
+.portada-fondo { 
+  height: 110px; 
+  /* background: linear-gradient(120deg, #0a1b33, #1d4ed8 55%, #14b8a6); */
+  position: relative;
+}
+
+.portada-fondo::after { 
+  /* content: ''; */
+  position: absolute; 
+  inset: 0; 
+  /* background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px); */
+  background-size: 18px 18px; 
+}
+
+.portada-contenido { 
+  display: flex; 
+  align-items: flex-end; 
+  gap: 18px; 
+  padding: 0 24px; 
+  margin-top: -44px; 
+  position: relative; 
+  flex-wrap: wrap; 
+}
+
+.avatar-xl { 
+  width: 92px; 
+  height: 92px; 
+  font-size: 30px; 
+  border: 5px solid var(--superficie); 
+  box-shadow: var(--sombra); 
+}
+
+.portada-datos { 
+  padding-bottom: 6px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 6px; 
+  align-items: flex-start; 
+}
+
+.portada-datos h2 { 
+  font-size: 22px; 
+}
+
+.lista-actividad { 
+  list-style: none; 
+  display: grid; 
+  gap: 4px; 
+}
+
+.lista-actividad li { 
+  display: flex; 
+  gap: 14px; 
+  align-items: flex-start; 
+  padding: 12px 6px; 
+  border-bottom: 1px dashed var(--borde); 
+}
+
+.lista-actividad li:last-child { 
+  border-bottom: 0; 
+}
+
+.lista-actividad .punto-actividad { 
+  width: 10px; 
+  height: 10px; 
+  margin-top: 6px; 
+  border-radius: 50%; 
+  flex-shrink: 0; 
+  background: var(--primario); 
+}
+
+.lista-actividad .punto-actividad.fallo { 
+  background: var(--peligro); 
+}
+
+.lista-actividad strong { 
+  display: block; 
+  font-size: 13.5px; 
+}
+
+.lista-actividad span { 
+  font-size: 12.5px; 
+  color: var(--texto-suave); 
+}
+
+/* --- Media Queries --- */
+@media (max-width: 520px) { 
+  .caja-seguridad { 
+    padding: 24px 20px; 
+  } 
+  .requisitos { 
+    grid-template-columns: 1fr; 
+  } 
+}

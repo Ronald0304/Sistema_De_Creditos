@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambiar contraseña</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/perfil.css">
+</head>
+<body class="pantalla-seguridad">
+  <!-- Fondo decorativo -->
+  <div class="fondo-seguridad" aria-hidden="true">
+    <span></span>
+    <span></span>
+  </div>
+
+  <main class="caja-seguridad animar">
+    <div class="seguridad-marca">
+      <div class="marca-logo">CM</div>
+      <div>
+        <strong>CrediManager</strong>
+        <span>Centro de seguridad</span>
+      </div>
+    </div>
+
+    <!-- Aviso de cambio obligatorio (primer ingreso) -->
+    <div class="aviso alerta oculto" id="aviso-obligatorio">
+      <div>
+        <strong>Primer ingreso: cambio de contraseña obligatorio.</strong><br>
+        Por su seguridad, reemplace la contraseña inicial asignada por la entidad antes de continuar.
+      </div>
+    </div>
+
+    <h1>Cambiar contraseña</h1>
+    <p class="texto-suave" id="texto-usuario">Cargando...</p>
+
+    <form id="formulario-clave" class="mt-2" novalidate>
+      <div class="campo">
+        <label for="clave-actual">Contraseña actual <span class="obligatorio">*</span></label>
+        <input type="password" id="clave-actual" name="clave_actual" autocomplete="current-password" required>
+        <small class="ayuda" id="ayuda-actual"></small>
+      </div>
+
+      <div class="campo mt-2">
+        <label for="clave-nueva">Nueva contraseña <span class="obligatorio">*</span></label>
+        <input type="password" id="clave-nueva" name="clave_nueva" autocomplete="new-password" maxlength="64" required>
+        <div class="medidor">
+          <div id="medidor-barra"></div>
+        </div>
+        <small class="ayuda" id="medidor-texto">Ingrese una contraseña segura</small>
+      </div>
+
+      <ul class="requisitos" id="requisitos">
+        <li data-regla="largo">Mínimo 8 caracteres</li>
+        <li data-regla="mayuscula">Al menos una letra mayúscula</li>
+        <li data-regla="minuscula">Al menos una letra minúscula</li>
+        <li data-regla="numero">Al menos un número</li>
+        <li data-regla="distinta">Diferente a su usuario / CI y a la actual</li>
+      </ul>
+
+      <div class="campo">
+        <label for="clave-confirmacion">Confirmar nueva contraseña <span class="obligatorio">*</span></label>
+        <input type="password" id="clave-confirmacion" name="confirmacion" autocomplete="new-password" maxlength="64" required>
+        <small class="ayuda" id="ayuda-confirmacion"></small>
+      </div>
+
+      <label class="casilla mt-2">
+        <input type="checkbox" id="mostrar-claves"> Mostrar contraseñas
+      </label>
+
+      <button type="submit" class="boton boton-primario boton-bloque mt-3" id="boton-guardar">Actualizar contraseña</button>
+    </form>
+
+    <div class="pie-seguridad">
+      <a href="/app" class="boton boton-fantasma oculto" id="enlace-volver">
+        Volver a mi panel
+      </a>
+      <button type="button" class="boton boton-fantasma texto-peligro" id="boton-salir">
+        Cerrar sesión
+      </button>
+    </div>
+  </main>
+
+  <div id="contenedor-toasts"></div>
+  
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/cambiar_clave.js"></script>
+</body>
+</html>

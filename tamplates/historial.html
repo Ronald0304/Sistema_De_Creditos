@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historial de decisiones</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/aprobaciones.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Menú lateral y barra superior: los construye javascrip/comun.js según el rol -->
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    
+    <div class="app-principal">
+      <header class="barra-superior" id="barra-superior"></header>
+      
+      <main class="contenido">
+        <!-- Encabezado de la página -->
+        <div class="encabezado-pagina">
+          <div>
+            <div class="migas">
+              <span>Comité de crédito</span>
+              <span>/</span>
+              <span>Historial</span>
+            </div>
+            <h1>Historial de decisiones</h1>
+            <p>Registro detallado de las resoluciones de crédito: aprobaciones, rechazos y documentos generados.</p>
+          </div>
+          <div class="acciones-pagina">
+            <button type="button" class="boton boton-secundario" id="boton-imprimir">Imprimir</button>
+          </div>
+        </div>
+
+        <!-- Indicadores KPI -->
+        <div class="grilla-kpi">
+          <div class="kpi verde animar">
+            <div class="kpi-etiqueta">Aprobadas</div>
+            <div class="kpi-valor" id="kpi-aprobadas">—</div>
+          </div>
+          <div class="kpi rojo animar" style="--i:1">
+            <div class="kpi-etiqueta">Rechazadas</div>
+            <div class="kpi-valor" id="kpi-rechazadas">—</div>
+          </div>
+          <div class="kpi animar" style="--i:2">
+            <div class="kpi-etiqueta">Tasa de aprobación</div>
+            <div class="kpi-valor" id="kpi-tasa">—</div>
+          </div>
+          <div class="kpi turquesa animar" style="--i:3">
+            <div class="kpi-etiqueta">Monto total aprobado</div>
+            <div class="kpi-valor" id="kpi-monto">—</div>
+          </div>
+        </div>
+
+        <!-- Sección de resoluciones -->
+        <section class="tarjeta animar" style="--i:2">
+          <div class="tarjeta-cabecera">
+            <h3>Resoluciones</h3>
+            <div class="barra-filtros">
+              <div class="campo-busqueda">
+                <input type="search" id="filtro-buscar" placeholder="CI, cliente o código...">
+              </div>
+              <select id="filtro-resultado">
+                <option value="">Todas</option>
+                <option value="APROBADA">Aprobadas</option>
+                <option value="RECHAZADA">Rechazadas</option>
+              </select>
+              <input type="date" id="filtro-desde" aria-label="Desde">
+              <input type="date" id="filtro-hasta" aria-label="Hasta">
+            </div>
+          </div>
+          <div class="tabla-contenedor">
+            <table class="tabla">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Solicitud</th>
+                  <th>Cliente</th>
+                  <th class="num">Monto</th>
+                  <th>Dictamen</th>
+                  <th>Resolución</th>
+                  <th>Motivo / observación</th>
+                  <th class="num">Documentos</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-historial"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Modal: Detalle de expediente -->
+        <div class="modal" id="modal-detalle">
+          <div class="modal-caja ancho" role="dialog" aria-modal="true">
+            <div class="modal-cabecera">
+              <h3 id="titulo-detalle">Expediente</h3>
+              <button type="button" class="modal-cerrar" data-cerrar-modal aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="modal-cuerpo" id="contenido-detalle"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="contenedor-toasts"></div>
+  
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/detalle_solicitud.js"></script>
+  <script src="/javascrip/historial.js"></script>
+</body>
+</html>

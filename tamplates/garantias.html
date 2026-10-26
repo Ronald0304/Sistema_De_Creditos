@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garantías</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/solicitudes.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Menú lateral y barra superior: los construye javascrip/comun.js según el rol -->
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    
+    <div class="app-principal">
+      <header class="barra-superior" id="barra-superior"></header>
+      
+      <main class="contenido">
+        <!-- Encabezado de la página -->
+        <div class="encabezado-pagina">
+          <div>
+            <div class="migas">
+              <span>Originación</span>
+              <span>/</span>
+              <span>Garantías</span>
+            </div>
+            <h1>Registro de garantías</h1>
+            <p>Asocie garantías hipotecarias, prendarias, personales o depósitos a cada solicitud (RN13).</p>
+          </div>
+        </div>
+
+        <!-- Selector de solicitud -->
+        <section class="tarjeta mb-3 animar">
+          <div class="tarjeta-cuerpo">
+            <div class="campo">
+              <label for="selector-solicitud">Solicitud de crédito</label>
+              <select id="selector-solicitud">
+                <option value="">Cargando solicitudes...</option>
+              </select>
+              <small class="ayuda">Se listan solicitudes registradas, en evaluación, evaluadas o aprobadas (pendientes de desembolso).</small>
+            </div>
+            <div id="resumen-solicitud" class="mt-2"></div>
+          </div>
+        </section>
+
+        <!-- Zona de garantías -->
+        <div class="grilla-2-1" id="zona-garantias" style="display:none">
+          <!-- Listado de garantías registradas -->
+          <section class="tarjeta animar" style="--i:1">
+            <div class="tarjeta-cabecera">
+              <h3>Garantías registradas</h3>
+              <span id="total-garantias" class="insignia azul">0</span>
+            </div>
+            <div class="tabla-contenedor">
+              <table class="tabla">
+                <thead>
+                  <tr>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                    <th class="num">Valor comercial</th>
+                    <th>Estado</th>
+                    <th class="num">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-garantias"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Formulario para nueva garantía / edición -->
+          <section class="tarjeta animar" style="--i:2">
+            <div class="tarjeta-cabecera">
+              <h3 id="titulo-form-garantia">Nueva garantía</h3>
+            </div>
+            
+            <form id="formulario-garantia" class="tarjeta-cuerpo" novalidate>
+              <input type="hidden" name="id_garantia">
+              
+              <div class="campo">
+                <label>Tipo de garantía <span class="obligatorio">*</span></label>
+                <select name="tipo" id="campo-tipo" required></select>
+              </div>
+              
+              <div class="campo mt-2">
+                <label>Descripción <span class="obligatorio">*</span></label>
+                <textarea name="descripcion" maxlength="300" required placeholder="Ej.: Vehículo Toyota Hilux 2020, placa 1234-ABC"></textarea>
+              </div>
+              
+              <div class="campo mt-2">
+                <label>Valor comercial (Bs) <span class="obligatorio">*</span></label>
+                <input type="number" name="valor_comercial" min="1" step="0.01" required>
+              </div>
+              
+              <div class="campo mt-2">
+                <label>Documento de respaldo</label>
+                <input name="documento_respaldo" maxlength="120" placeholder="Folio real, RUAT, certificado DPF...">
+              </div>
+              
+              <div class="flex mt-3">
+                <button type="submit" class="boton boton-primario" id="boton-guardar-garantia" style="flex:1">Registrar garantía</button>
+                <button type="button" class="boton boton-secundario oculto" id="boton-cancelar-edicion">Cancelar</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="contenedor-toasts"></div>
+  
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/garantias.js"></script>
+</body>
+</html>

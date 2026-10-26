@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CrediManager: Sistema de Gestión de Créditos para entidades bancarias. Evaluación de riesgo, aprobación, desembolso, cobranza y control de mora.">
+  <title> Sistema de Gestión de Créditos</title>
+  
+  <!-- Fuentes externas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body class="landing">
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navegacion" id="navegacion">
+    <div class="contenedor nav-interno">
+      <a href="#inicio" class="logo-landing">
+        <span class="logo-sc">CM</span>
+        <span class="logo-texto">Credi<strong>Manager</strong></span>
+      </a>
+      
+      <nav class="nav-enlaces" id="nav-enlaces" aria-label="Secciones">
+        <a href="#inicio">Inicio</a>
+        <a href="#productos">Productos</a>
+        <a href="#simulador">Simulador</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#seguridad">Seguridad</a>
+      </nav>
+
+      <a href="#acceso" class="boton boton-acceso-nav" id="boton-nav-acceso">
+        Banca en línea
+      </a>
+
+      <button type="button" class="nav-hamburguesa" id="nav-hamburguesa" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO + PANEL DE INICIO DE SESIÓN -->
+  <section class="hero" id="inicio">
+    <!-- Fondo animado: orbes, cuadrícula y gráfico financiero -->
+    <div class="hero-fondo" aria-hidden="true">
+      <div class="orbe orbe-1"></div>
+      <div class="orbe orbe-2"></div>
+      <div class="orbe orbe-3"></div>
+      <div class="cuadricula"></div>
+      <svg class="grafico-hero" viewBox="0 0 1200 400" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="degradado-linea" x1="0" x2="1">
+            <stop offset="0%" stop-color="#3b82f6" stop-opacity="0"/>
+            <stop offset="40%" stop-color="#3b82f6"/>
+            <stop offset="100%" stop-color="#2dd4bf"/>
+          </linearGradient>
+          <linearGradient id="degradado-area" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path class="area-grafico" d="M0,330 C120,310 180,250 280,265 C380,280 430,200 540,210 C650,220 700,140 820,150 C940,160 990,80 1100,70 L1200,55 L1200,400 L0,400 Z" fill="url(#degradado-area)"/>
+        <path class="linea-grafico" d="M0,330 C120,310 180,250 280,265 C380,280 430,200 540,210 C650,220 700,140 820,150 C940,160 990,80 1100,70 L1200,55" fill="none" stroke="url(#degradado-linea)" stroke-width="3"/>
+      </svg>
+    </div>
+
+    <div class="contenedor hero-contenido">
+      <!-- Columna de presentación -->
+      <div class="hero-texto">
+        <span class="hero-etiqueta revelar">
+          <span class="punto-vivo"></span> Core de Créditos · Versión 2026
+        </span>
+        
+        <h1 class="revelar" style="--retraso: 1">
+          Gestión de créditos <span class="texto-degradado">inteligente, segura</span> y en tiempo real.
+        </h1>
+        
+        <p class="hero-descripcion revelar" style="--retraso: 2">
+          Automatizamos el ciclo de vida completo del crédito: registro del cliente, evaluación de riesgo,
+          aprobación, contrato, desembolso, cobranza y control de mora, con trazabilidad total para cada operación.
+        </p>
+        
+        <div class="hero-acciones revelar" style="--retraso: 3">
+          <a href="#acceso" class="boton boton-hero-primario" id="boton-hero-ingresar">
+            Ingresar al sistema
+          </a>
+          <a href="#simulador" class="boton boton-hero-secundario">
+            Simular mi crédito
+          </a>
+        </div>
+        
+        <div class="hero-metricas revelar" style="--retraso: 4">
+          <div>
+            <strong data-contador="7">0</strong>
+            <span>Perfiles de usuario</span>
+          </div>
+          <div>
+            <strong data-contador="15">0</strong>
+            <span>Procesos automatizados</span>
+          </div>
+          <div>
+            <strong data-contador="100" data-sufijo="%">0</strong>
+            <span>Operaciones auditadas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna del panel de acceso -->
+      <div class="hero-acceso" id="acceso">
+        <div class="ficha-flotante ficha-1" aria-hidden="true">
+          <div>
+            <strong>Crédito aprobado</strong>
+            <small>Cronograma generado</small>
+          </div>
+        </div>
+        <div class="ficha-flotante ficha-2" aria-hidden="true">
+          <div>
+            <strong>Cartera al día</strong>
+            <small>Control de mora automático</small>
+          </div>
+        </div>
+
+        <div class="tarjeta-acceso" id="tarjeta-acceso">
+          <div class="acceso-cabecera">
+            <div class="acceso-escudo">CM</div>
+            <div>
+              <h2>Acceso seguro</h2>
+              <p>Personal de la entidad y clientes</p>
+            </div>
+          </div>
+
+          <!-- Aviso por estado de la sesión -->
+          <div class="acceso-aviso oculto" id="acceso-aviso" role="alert"></div>
+
+          <!-- Vista: sesión ya iniciada -->
+          <div class="sesion-activa oculto" id="sesion-activa">
+            <div class="avatar grande" id="sesion-avatar">--</div>
+            <p>Sesión activa como</p>
+            <strong id="sesion-nombre">—</strong>
+            <span class="insignia azul" id="sesion-rol">—</span>
+            <a href="/app" class="boton boton-primario boton-bloque mt-2" id="sesion-ir">Ir a mi panel</a>
+            <button type="button" class="boton boton-secundario boton-bloque mt-1" id="sesion-cambiar">
+              Cerrar sesión y cambiar de usuario
+            </button>
+          </div>
+
+          <!-- Formulario de inicio de sesión -->
+          <form id="formulario-login" novalidate autocomplete="on">
+            <div class="campo-acceso">
+              <label for="campo-usuario">Usuario</label>
+              <div class="entrada-acceso">
+                <input type="text" id="campo-usuario" name="login" placeholder="Usuario o número de CI" autocomplete="username" maxlength="60" required>
+              </div>
+            </div>
+
+            <div class="campo-acceso">
+              <label for="campo-clave">Contraseña</label>
+              <div class="entrada-acceso">
+                <input type="password" id="campo-clave" name="clave" placeholder="••••••••" autocomplete="current-password" maxlength="64" required>
+                <button type="button" class="ver-clave" id="ver-clave" aria-label="Mostrar contraseña" title="Mostrar contraseña">Ver</button>
+              </div>
+              <small class="aviso-mayus oculto" id="aviso-mayus">Atención: Bloq Mayús está activado</small>
+            </div>
+
+            <div class="fila-opciones">
+              <label class="casilla">
+                <input type="checkbox" id="recordar-usuario"> Recordar usuario
+              </label>
+              <span class="texto-chico">Sesión cifrada</span>
+            </div>
+
+            <p class="error-acceso oculto" id="error-acceso" role="alert"></p>
+
+            <button type="submit" class="boton boton-ingresar" id="boton-ingresar">
+              Iniciar sesión
+            </button>
+
+            <div class="nota-cliente">
+              <span><strong>¿Es cliente?</strong> Su usuario y contraseña inicial es su número de <strong>CI</strong>. En el primer ingreso deberá cambiar su contraseña.</span>
+            </div>
+          </form>
+
+          <!-- Accesos de demostración -->
+          <details class="accesos-demo" id="accesos-demo">
+            <summary>Accesos de demostración</summary>
+            <p class="texto-chico">Personal: contraseña <code>Credito2026*</code>. Clientes: <code>Cliente2026*</code> o su CI si aún no la cambiaron.</p>
+            <div class="lista-demo">
+              <button type="button" data-usuario="admin" data-clave="Credito2026*"><b>Administrador</b><span>admin</span></button>
+              <button type="button" data-usuario="atorrez" data-clave="Credito2026*"><b>Oficial de Crédito</b><span>atorrez</span></button>
+              <button type="button" data-usuario="lgomez" data-clave="Credito2026*"><b>Analista</b><span>lgomez</span></button>
+              <button type="button" data-usuario="cmendoza" data-clave="Credito2026*"><b>Jefe de Crédito</b><span>cmendoza</span></button>
+              <button type="button" data-usuario="mperez" data-clave="Credito2026*"><b>Cajero</b><span>mperez</span></button>
+              <button type="button" data-usuario="rmendez" data-clave="Credito2026*"><b>Gerente</b><span>rmendez</span></button>
+              <button type="button" data-usuario="7654321" data-clave="Cliente2026*"><b>Cliente (en mora)</b><span>7654321</span></button>
+              <button type="button" data-usuario="4567890" data-clave="4567890"><b>Cliente (1er ingreso)</b><span>4567890</span></button>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <a href="#productos" class="indicador-scroll" aria-label="Desplazarse hacia abajo"><span></span></a>
+  </section>
+
+  <!-- FRANJA ANIMADA DE CAPACIDADES -->
+  <div class="franja" aria-hidden="true">
+    <div class="franja-pista">
+      <span>Evaluación de riesgo</span><span>Historial crediticio</span><span>Cronogramas automáticos</span><span>Contratos imprimibles</span>
+      <span>Desembolsos vía Core</span><span>Vouchers de pago</span><span>Control de mora</span><span>Reportes gerenciales</span><span>Auditoría total</span>
+      <span>Evaluación de riesgo</span><span>Historial crediticio</span><span>Cronogramas automáticos</span><span>Contratos imprimibles</span>
+      <span>Desembolsos vía Core</span><span>Vouchers de pago</span><span>Control de mora</span><span>Reportes gerenciales</span><span>Auditoría total</span>
+    </div>
+  </div>
+
+  <!-- PRODUCTOS -->
+  <section class="seccion" id="productos">
+    <div class="contenedor">
+      <div class="seccion-titulo revelar">
+        <span class="sobretitulo">Productos crediticios</span>
+        <h2>Soluciones financieras para cada meta</h2>
+        <p>Tasas competitivas y plazos flexibles, evaluados con criterios técnicos y transparentes.</p>
+      </div>
+      <div class="grilla-productos" id="grilla-productos"><!-- Se genera con JavaScript --></div>
+    </div>
+  </section>
+
+  <!-- SIMULADOR DE CUOTAS -->
+  <section class="seccion seccion-oscura" id="simulador">
+    <div class="contenedor simulador">
+      <div class="simulador-texto revelar">
+        <span class="sobretitulo claro">Simulador</span>
+        <h2>Calcule su cuota en segundos</h2>
+        <p>Sistema de amortización francés (cuota fija). El resultado es referencial; la tasa final se define en la evaluación crediticia.</p>
+        
+        <div class="simulador-controles">
+          <div class="control">
+            <label for="sim-producto">Producto</label>
+            <select id="sim-producto"></select>
+          </div>
+          
+          <div class="control">
+            <div class="flex entre">
+              <label for="sim-monto">Monto</label>
+              <output id="sim-monto-valor">Bs 20.000</output>
+            </div>
+            <input type="range" id="sim-monto" min="1000" max="80000" step="500" value="20000">
+          </div>
+          
+          <div class="control">
+            <div class="flex entre">
+              <label for="sim-plazo">Plazo</label>
+              <output id="sim-plazo-valor">24 meses</output>
+            </div>
+            <input type="range" id="sim-plazo" min="3" max="48" step="1" value="24">
+          </div>
+        </div>
+      </div>
+
+      <div class="simulador-resultado revelar" style="--retraso: 2">
+        <span class="texto-chico">Cuota mensual estimada</span>
+        <strong class="cuota-grande" id="sim-cuota">Bs 0,00</strong>
+        
+        <div class="sim-desglose">
+          <div><span>Tasa anual</span><b id="sim-tasa">—</b></div>
+          <div><span>Total intereses</span><b id="sim-interes">—</b></div>
+          <div><span>Total a pagar</span><b id="sim-total">—</b></div>
+        </div>
+        
+        <div class="sim-barra">
+          <div id="sim-barra-capital"></div>
+          <div id="sim-barra-interes"></div>
+        </div>
+        
+        <div class="sim-leyenda">
+          <span><i class="capital"></i>Capital</span>
+          <span><i class="interes"></i>Intereses</span>
+        </div>
+        
+        <a href="#acceso" class="boton boton-hero-primario boton-bloque mt-2">Solicítelo con su oficial de crédito</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO DEL CRÉDITO -->
+  <section class="seccion" id="proceso">
+    <div class="contenedor">
+      <div class="seccion-titulo revelar">
+        <span class="sobretitulo">Ciclo de vida del crédito</span>
+        <h2>Un flujo controlado, de la solicitud a la cancelación</h2>
+        <p>Cada etapa la ejecuta el rol responsable y queda registrada en la bitácora de auditoría.</p>
+      </div>
+      
+      <ol class="linea-proceso">
+        <li class="revelar" style="--retraso: 0">
+          <span class="numero">01</span>
+          <h3>Registro</h3>
+          <p>El Oficial registra al cliente y su solicitud con garantías.</p>
+          <em>Oficial de Crédito</em>
+        </li>
+        <li class="revelar" style="--retraso: 1">
+          <span class="numero">02</span>
+          <h3>Evaluación</h3>
+          <p>El Analista enlaza el historial del Core Bancario y emite su dictamen.</p>
+          <em>Analista</em>
+        </li>
+        <li class="revelar" style="--retraso: 2">
+          <span class="numero">03</span>
+          <h3>Aprobación</h3>
+          <p>El Jefe aprueba o rechaza según su límite de atribución.</p>
+          <em>Jefe de Crédito</em>
+        </li>
+        <li class="revelar" style="--retraso: 3">
+          <span class="numero">04</span>
+          <h3>Contrato</h3>
+          <p>Se generan el contrato y el cronograma de pagos imprimibles.</p>
+          <em>Sistema</em>
+        </li>
+        <li class="revelar" style="--retraso: 4">
+          <span class="numero">05</span>
+          <h3>Desembolso</h3>
+          <p>El Oficial ejecuta el desembolso a través del Core Bancario.</p>
+          <em>Oficial de Crédito</em>
+        </li>
+        <li class="revelar" style="--retraso: 5">
+          <span class="numero">06</span>
+          <h3>Cobranza</h3>
+          <p>El Cajero cobra cuotas, aplica recargos por mora y emite vouchers.</p>
+          <em>Cajero</em>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SEGURIDAD -->
+  <section class="seccion seccion-suave" id="seguridad">
+    <div class="contenedor grilla-seguridad">
+      <div class="revelar">
+        <span class="sobretitulo">Seguridad bancaria</span>
+        <h2>Su información protegida en cada operación</h2>
+        <p class="texto-suave">Diseñado bajo principios de confidencialidad, integridad y trazabilidad exigidos por el sector financiero.</p>
+        
+        <ul class="lista-seguridad">
+          <li><div><b>Contraseñas cifradas</b>Algoritmo scrypt con sal única por usuario.</div></li>
+          <li><div><b>Control de acceso por roles</b>Cada perfil accede únicamente a sus funciones.</div></li>
+          <li><div><b>Bloqueo por intentos fallidos</b>Protección contra ataques de fuerza bruta.</div></li>
+          <li><div><b>Cambio obligatorio de clave</b>En el primer ingreso de cada cliente.</div></li>
+          <li><div><b>Auditoría completa</b>Usuario, fecha, operación, IP y resultado.</div></li>
+        </ul>
+      </div>
+
+      <div class="tarjetas-roles revelar" style="--retraso: 2">
+        <div class="rol"><b>Administrador</b><span>Usuarios, roles y auditoría</span></div>
+        <div class="rol"><b>Oficial de Crédito</b><span>Clientes, solicitudes y desembolsos</span></div>
+        <div class="rol"><b>Analista</b><span>Historial y dictamen técnico</span></div>
+        <div class="rol"><b>Jefe de Crédito</b><span>Aprobación y contratos</span></div>
+        <div class="rol"><b>Cajero</b><span>Cobranzas, mora y vouchers</span></div>
+        <div class="rol"><b>Gerente</b><span>Reportes ejecutivos</span></div>
+        <div class="rol destacado"><b>Cliente</b><span>Portal de consulta 24/7</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LLAMADO A LA ACCIÓN -->
+  <section class="cta">
+    <div class="contenedor cta-interno revelar">
+      <div>
+        <h2>¿Listo para operar?</h2>
+        <p>Ingrese con las credenciales asignadas por la entidad.</p>
+      </div>
+      <a href="#acceso" class="boton boton-hero-primario">Acceder a la plataforma</a>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="pie-landing">
+    <div class="contenedor pie-interno">
+      <div>
+        <a href="#inicio" class="logo-landing">
+          <span class="logo-sc">CM</span>
+          <span class="logo-texto">Credi<strong>Manager</strong></span>
+        </a>
+        <p>Sistema de Gestión de Créditos para una Entidad Bancaria.<br>Análisis y Diseño de Sistemas I · INF 241 · UMSA</p>
+      </div>
+      <div class="pie-datos">
+        <span>Av. 16 de Julio (El Prado) N° 1440, La Paz - Bolivia</span>
+        <span>(591-2) 2201234 · atencion@gmail.com.bo</span>
+        <span>© <span id="anio-actual">2026</span>S.A. Todos los derechos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="contenedor-toasts"></div>
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/index.js"></script>
+</body>
+</html>
