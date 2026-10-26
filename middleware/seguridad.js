@@ -20,10 +20,8 @@ function cabecerasSeguridad(req, res, next) {
   next();
 }
 
-/**
- * Exige JSON en peticiones de escritura dirigidas a la API.
- * El frontend (javascrip/comun.js) siempre envía `Content-Type: application/json`.
- */
+/** Exige JSON en peticiones de escritura dirigidas a la API.
+ * El frontend (javascrip/comun.js) siempre envía `Content-Type: application/json`. */
 function exigirJson(req, res, next) {
   const metodosEscritura = ['POST', 'PUT', 'PATCH', 'DELETE'];
   if (metodosEscritura.includes(req.method) && !req.is('application/json')) {
@@ -32,10 +30,8 @@ function exigirJson(req, res, next) {
   return next();
 }
 
-/**
- * Limitador en memoria: máximo `limite` peticiones por IP cada `ventanaMs`.
- * Se usa en el endpoint de login para frenar ataques de fuerza bruta.
- */
+/** Limitador en memoria: máximo `limite` peticiones por IP cada `ventanaMs`.
+ * Se usa en el endpoint de login para frenar ataques de fuerza bruta. */
 function limitadorPeticiones({ limite = 20, ventanaMs = 15 * 60 * 1000 } = {}) {
   const registros = new Map();
   setInterval(() => {

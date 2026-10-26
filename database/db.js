@@ -1,7 +1,6 @@
 /**
- * ============================================================================
  *  MÓDULO DE BASE DE DATOS (SQLite)
- * ============================================================================
+
  *  - Abre (o crea) el archivo `database/creditos.sqlite`.
  *  - Define el esquema relacional del sistema: EXACTAMENTE 10 TABLAS.
  *  - Expone funciones con Promesas (`ejecutar`, `obtener`, `todos`) para
@@ -19,9 +18,7 @@
  *    7. credito               -> Crédito aprobado + contrato + desembolso
  *    8. cuota                 -> Cronograma de pagos (plan de amortización)
  *    9. pago                  -> Pagos / vouchers emitidos por el Cajero
- *   10. auditoria             -> Bitácora de operaciones del sistema
- * ============================================================================
- */
+ *   10. auditoria             -> Bitácora de operaciones del sistema */
 const sqlite3 = require('sqlite3');
 const path = require('path');
 
@@ -376,3 +373,4 @@ module.exports = {
   transaccion,
   RUTA_BD
 };
+

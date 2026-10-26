@@ -1,4 +1,4 @@
-/** CREDIMANAGER - SISTEMA DE GESTIÓN DE CRÉDITOS
+/** SISTEMA DE GESTIÓN DE CRÉDITOS
  *  Servidor principal (Node.js + Express + SQLite)
 
  *  Estructura del proyecto:

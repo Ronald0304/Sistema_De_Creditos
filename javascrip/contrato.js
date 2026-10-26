@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       <h3>Segunda.- (Objeto y monto)</h3>
       <p>LA ENTIDAD otorga a favor de EL PRESTATARIO un <b>${App.esc(cr.producto)}</b> por la suma de <b>${App.moneda(cr.monto_aprobado)} (${App.esc(numeroALetras(cr.monto_aprobado))})</b>, destinado exclusivamente a: <i>${App.esc(cr.destino)}</i>, conforme a la solicitud ${App.esc(cr.codigo_solicitud)} aprobada por el Jefe de Crédito ${App.esc(cr.jefe || '')} en fecha ${App.fecha(cr.fecha_aprobacion)}.</p>
-
+ 
       <h3>Tercera.- (Condiciones financieras)</h3>
       <div class="cuadro-datos">
         <div><span>Tasa de interés nominal anual (fija):</span> <b>${App.numero(cr.tasa_interes, 2)} %</b></div>
@@ -98,7 +98,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="firma"><b>${App.esc(cr.jefe || 'Jefe de Crédito')}</b>Jefe de Crédito<br>p. ${App.esc(entidad.nombre)}</div>
       </div>
       <div class="pie-doc"><span>Documento generado por CrediManager · ${App.esc(App.fechaLarga())}</span><span>Oficial: ${App.esc(cr.oficial)}</span></div>`;
-  } catch (error) {
+    } catch (error) {
     documento.innerHTML = `<p class="cargando-doc" style="color:#dc2626">${App.esc(error.message)}</p>`;
+  } finally {
+    // Oculta "Generando documento..." y muestra la hoja del contrato (o el error)
+    document.getElementById('mensaje-carga').hidden = true;
+    documento.hidden = false;
   }
 });
+
