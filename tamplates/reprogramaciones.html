@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reprogramación de créditos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/aprobaciones.css">
+  <link rel="stylesheet" href="/css/reprogramaciones.css">
+</head>
+<!--
+  REPROGRAMACIÓN DE CRÉDITOS  (URL: /app/reprogramaciones)
+  Página compartida por dos roles (javascrip/reprogramaciones.js decide qué mostrar):
+   - OFICIAL DE CRÉDITO: revisa la solicitud y los adjuntos, simula el nuevo plan
+     (capitaliza intereses vencidos y moratorios) y deriva al Jefe con su dictamen.
+   - JEFE DE CRÉDITO: revisa la simulación y el dictamen y APRUEBA o RECHAZA.
+-->
+<body>
+  <div class="app">
+    <!-- Menú lateral y barra superior: los construye javascrip/comun.js según el rol -->
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+
+    <div class="app-principal">
+      <header class="barra-superior" id="barra-superior"></header>
+
+      <main class="contenido">
+        <!-- Encabezado de la página -->
+        <div class="encabezado-pagina">
+          <div>
+            <div class="migas">
+              <span id="miga-seccion">Créditos</span>
+              <span>/</span>
+              <span>Reprogramaciones</span>
+            </div>
+            <h1>Reprogramación de créditos</h1>
+            <p id="subtitulo-pagina">Solicitudes de clientes en mora temprana.</p>
+          </div>
+        </div>
+
+        <!-- Indicadores KPI -->
+        <div class="grilla-kpi">
+          <div class="kpi naranja animar">
+            <div class="kpi-etiqueta">Pendientes de evaluación</div>
+            <div class="kpi-valor" id="kpi-pendientes">—</div>
+            <div class="kpi-nota">Oficial de Crédito</div>
+          </div>
+          <div class="kpi morado animar" style="--i:1">
+            <div class="kpi-etiqueta">En revisión del Jefe</div>
+            <div class="kpi-valor" id="kpi-revision">—</div>
+            <div class="kpi-nota">Jefe de Crédito</div>
+          </div>
+          <div class="kpi verde animar" style="--i:2">
+            <div class="kpi-etiqueta">Aprobadas en el mes</div>
+            <div class="kpi-valor" id="kpi-aprobadas">—</div>
+          </div>
+          <div class="kpi rojo animar" style="--i:3">
+            <div class="kpi-etiqueta">Rechazadas en el mes</div>
+            <div class="kpi-valor" id="kpi-rechazadas">—</div>
+          </div>
+        </div>
+
+        <!-- Bandeja -->
+        <section class="tarjeta animar" style="--i:2">
+          <div class="tarjeta-cabecera">
+            <div class="pestanas" id="pestanas-vista">
+              <button type="button" class="pestana activa" data-vista="pendientes" id="pestana-pendientes">Por atender</button>
+              <button type="button" class="pestana" data-vista="historial">Historial</button>
+            </div>
+            <p id="nota-bandeja">Ordenadas por antigüedad de la solicitud</p>
+          </div>
+          <div class="tabla-contenedor">
+            <table class="tabla">
+              <thead>
+                <tr>
+                  <th>Solicitud</th>
+                  <th>Cliente</th>
+                  <th>Crédito</th>
+                  <th class="num">Mora al solicitar</th>
+                  <th>Propuesta del cliente</th>
+                  <th>Estado</th>
+                  <th class="num"></th>
+                </tr>
+              </thead>
+              <tbody id="tabla-reprogramaciones"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Modal: expediente, simulador y decisión -->
+        <div class="modal" id="modal-reprogramacion">
+          <div class="modal-caja ancho" role="dialog" aria-modal="true">
+            <div class="modal-cabecera">
+              <h3 id="titulo-reprogramacion">Reprogramación</h3>
+              <button type="button" class="modal-cerrar" data-cerrar-modal aria-label="Cerrar">&times;</button>
+            </div>
+
+            <div class="modal-cuerpo">
+              <!-- Expediente: cliente, crédito, solicitud, situación de mora, adjuntos, dictamen -->
+              <div id="expediente-reprogramacion"><div class="cargador">Cargando...</div></div>
+
+              <!-- OFICIAL: simulador del nuevo plan + dictamen -->
+              <div class="panel-decision oculto" id="panel-simulador">
+                <h4 class="titulo-bloque">Simulador de reprogramación</h4>
+                <p class="texto-chico texto-suave mb-2">El nuevo capital suma el saldo pendiente + los intereses corrientes vencidos + los intereses moratorios (recargos por mora) a la fecha.</p>
+                <form id="formulario-simulacion" novalidate>
+                  <div class="formulario-grilla">
+                    <div class="campo">
+                      <label for="sim-plazo">Nuevo plazo (meses) <span class="obligatorio">*</span></label>
+                      <input type="number" id="sim-plazo" name="plazo" min="1" step="1" required>
+                      <small class="ayuda" id="ayuda-plazo"></small>
+                    </div>
+                    <div class="campo">
+                      <label for="sim-tasa">Tasa de interés anual (%) <span class="obligatorio">*</span></label>
+                      <input type="number" id="sim-tasa" name="tasa" min="0" max="40" step="0.01" required>
+                      <small class="ayuda">Por defecto, la tasa vigente del crédito.</small>
+                    </div>
+                    <div class="campo">
+                      <label for="sim-recomendacion">Recomendación <span class="obligatorio">*</span></label>
+                      <select id="sim-recomendacion" name="recomendacion" required>
+                        <option value="">Seleccione...</option>
+                        <option value="FAVORABLE">Favorable</option>
+                        <option value="NO_FAVORABLE">No favorable</option>
+                      </select>
+                    </div>
+                    <div class="campo completo">
+                      <label for="sim-dictamen">Dictamen del Oficial <span class="obligatorio">*</span></label>
+                      <textarea id="sim-dictamen" name="dictamen" minlength="20" maxlength="1000" required
+                        placeholder="Análisis de la causa de la mora, de los documentos presentados y de la capacidad de pago con el nuevo plan."></textarea>
+                    </div>
+                  </div>
+                </form>
+                <div id="resultado-simulacion" class="mt-2"></div>
+              </div>
+
+              <!-- JEFE: simulación del Oficial (recalculada a hoy) + decisión -->
+              <div class="panel-decision oculto" id="panel-jefe">
+                <h4 class="titulo-bloque">Simulación propuesta por el Oficial (importes a la fecha)</h4>
+                <div id="resultado-jefe"></div>
+                <div class="campo mt-2">
+                  <label for="observacion-jefe">Observación de la resolución</label>
+                  <input id="observacion-jefe" maxlength="500" placeholder="Opcional: condiciones o recomendaciones de seguimiento...">
+                </div>
+                <div class="aviso peligro mt-2 oculto" id="aviso-recomendacion">
+                  <div><strong>Dictamen NO FAVORABLE:</strong> la reprogramación solo puede ser rechazada.</div>
+                </div>
+                <div class="aviso alerta mt-2 oculto" id="aviso-limite-jefe"></div>
+              </div>
+            </div>
+
+            <div class="modal-pie">
+              <button type="button" class="boton boton-secundario" data-cerrar-modal>Cerrar</button>
+              <button type="button" class="boton boton-primario oculto" id="boton-derivar">Derivar al Jefe de Crédito</button>
+              <button type="button" class="boton boton-peligro oculto" id="boton-rechazar">Rechazar</button>
+              <button type="button" class="boton boton-exito oculto" id="boton-aprobar">Aprobar reprogramación</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="contenedor-toasts"></div>
+
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/reprogramaciones.js"></script>
+</body>
+</html>

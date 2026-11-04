@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bandeja de evaluación</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/evaluaciones.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Menú lateral y barra superior: los construye javascrip/comun.js según el rol -->
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    
+    <div class="app-principal">
+      <header class="barra-superior" id="barra-superior"></header>
+      
+      <main class="contenido">
+        <!-- Encabezado de la página -->
+        <div class="encabezado-pagina">
+          <div>
+            <div class="migas">
+              <span>Riesgo crediticio</span>
+              <span>/</span>
+              <span>Bandeja</span>
+            </div>
+            <h1>Bandeja de evaluación</h1>
+            <p>Analice la capacidad de pago y el historial crediticio de cada solicitud y emita su dictamen técnico.</p>
+          </div>
+          <div class="acciones-pagina">
+            <button type="button" class="boton boton-secundario" id="boton-refrescar">Actualizar</button>
+          </div>
+        </div>
+
+        <!-- Indicadores KPI -->
+        <div class="grilla-kpi">
+          <div class="kpi celeste animar">
+            <div class="kpi-etiqueta">Pendientes de evaluación</div>
+            <div class="kpi-valor" id="kpi-pendientes">—</div>
+          </div>
+          <div class="kpi animar" style="--i:1">
+            <div class="kpi-etiqueta">Evaluadas hoy</div>
+            <div class="kpi-valor" id="kpi-hoy">—</div>
+          </div>
+          <div class="kpi verde animar" style="--i:2">
+            <div class="kpi-etiqueta">Dictámenes favorables</div>
+            <div class="kpi-valor" id="kpi-favorables">—</div>
+          </div>
+          <div class="kpi rojo animar" style="--i:3">
+            <div class="kpi-etiqueta">Dictámenes no favorables</div>
+            <div class="kpi-valor" id="kpi-no-favorables">—</div>
+          </div>
+        </div>
+
+        <!-- Pestañas de navegación -->
+        <div class="pestanas">
+          <button type="button" class="pestana activa" data-pestana="bandeja">Por evaluar</button>
+          <button type="button" class="pestana" data-pestana="realizadas">Mis evaluaciones</button>
+        </div>
+
+        <!-- Panel: Por evaluar -->
+        <div class="panel-pestana activo" data-panel="bandeja">
+          <section class="tarjeta">
+            <div class="tabla-contenedor">
+              <table class="tabla">
+                <thead>
+                  <tr>
+                    <th>Solicitud</th>
+                    <th>Cliente</th>
+                    <th>Producto</th>
+                    <th class="num">Monto / plazo</th>
+                    <th class="centro">Garantías</th>
+                    <th>Historial</th>
+                    <th>Espera</th>
+                    <th class="num"></th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-bandeja"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- Panel: Mis evaluaciones -->
+        <div class="panel-pestana" data-panel="realizadas">
+          <section class="tarjeta">
+            <div class="tabla-contenedor">
+              <table class="tabla">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Solicitud</th>
+                    <th>Cliente</th>
+                    <th class="num">Monto</th>
+                    <th class="num">Capacidad</th>
+                    <th>Riesgo</th>
+                    <th>Dictamen</th>
+                    <th>Estado actual</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-realizadas"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="contenedor-toasts"></div>
+  
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/evaluaciones.js"></script>
+</body>
+</html>

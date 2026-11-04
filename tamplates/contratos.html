@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrato de crédito</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/impresion.css">
+</head>
+<!--
+  CONTRATO DE CRÉDITO  (URL: /app/contrato?id=ID_CREDITO)
+  ----------------------------------------------------------------------------
+  CÓMO EDITAR ESTE DOCUMENTO:
+   - Los TEXTOS (cláusulas, títulos, párrafos) se editan AQUÍ mismo.
+   - Los DATOS variables van en <span data-campo="nombre"></span>; el archivo
+     javascrip/contrato.js los rellena. Puede mover, quitar o reutilizar
+     cualquier data-campo. Lista de campos disponibles: ver contrato.js.
+   - Para ELIMINAR una cláusula, borre su <section> completa.
+   - Los COLORES y tamaños se cambian en css/impresion.css (variables :root).
+   - Nombre, NIT y dirección de la entidad: utils/parametros.js (ENTIDAD).
+-->
+<body class="documento-impreso">
+  <!-- Barra de acciones (no se imprime) -->
+  <div class="barra-documento">
+    <span class="titulo">Contrato de crédito</span>
+    <div class="botones">
+      <button type="button" class="btn-doc secundario" data-volver>Volver</button>
+      <button type="button" class="btn-doc primario" data-imprimir>Imprimir / Guardar PDF</button>
+    </div>
+  </div>
+
+  <p class="cargando-doc" id="mensaje-carga">Generando documento...</p>
+
+  <article class="hoja" id="documento" hidden>
+
+    <!-- ======================= MEMBRETE ======================= -->
+    <header class="membrete">
+      <div class="logo">
+        <span>CM</span>
+        <div>
+          <h2 data-campo="entidad_nombre"></h2>
+          <p>
+            NIT <span data-campo="entidad_nit"></span> · <span data-campo="entidad_direccion"></span><br>
+            Telf. <span data-campo="entidad_telefono"></span>
+          </p>
+        </div>
+      </div>
+      <div class="doc">
+        <h1>Contrato de préstamo de dinero</h1>
+        <strong>N° <span data-campo="numero_contrato"></span></strong>
+        <p>Crédito <span data-campo="numero_credito"></span></p>
+      </div>
+    </header>
+
+    <p>Conste por el presente documento privado de préstamo de dinero, que con el solo reconocimiento de firmas podrá ser elevado a instrumento público, suscrito al tenor de las siguientes cláusulas:</p>
+
+    <!-- ======================= CLÁUSULA PRIMERA ======================= -->
+    <section>
+      <h3>Primera.- (Partes)</h3>
+      <p>Intervienen en la celebración del presente contrato: <b data-campo="entidad_nombre"></b>, entidad de intermediación financiera, en adelante <b>LA ENTIDAD</b>; y por otra parte:</p>
+      <div class="cuadro-datos">
+        <div><span>Prestatario:</span> <b data-campo="cliente_nombre"></b></div>
+        <div><span>C.I.:</span> <b data-campo="cliente_ci"></b></div>
+        <div><span>Domicilio:</span> <b data-campo="cliente_direccion"></b></div>
+        <div><span>Teléfono:</span> <b data-campo="cliente_telefono"></b></div>
+        <div><span>Ocupación:</span> <b data-campo="cliente_ocupacion"></b></div>
+        <div><span>Correo:</span> <b data-campo="cliente_correo"></b></div>
+      </div>
+      <p>mayor de edad y hábil por derecho, en adelante <b>EL PRESTATARIO</b>.</p>
+    </section>
+
+    <!-- ======================= CLÁUSULA SEGUNDA ======================= -->
+    <section>
+      <h3>Segunda.- (Objeto y monto)</h3>
+      <p>LA ENTIDAD otorga a favor de EL PRESTATARIO un <b data-campo="producto"></b> por la suma de
+        <b><span data-campo="monto"></span> (<span data-campo="monto_literal"></span>)</b>,
+        destinado exclusivamente a: <i data-campo="destino"></i>, conforme a la solicitud <span data-campo="codigo_solicitud"></span>
+        aprobada por el Jefe de Crédito <span data-campo="jefe"></span> en fecha <span data-campo="fecha_aprobacion"></span>.</p>
+    </section>
+
+    <!-- ======================= CLÁUSULA TERCERA ======================= -->
+    <section>
+      <h3>Tercera.- (Condiciones financieras)</h3>
+      <div class="cuadro-datos">
+        <div><span>Tasa de interés nominal anual (fija):</span> <b data-campo="tasa"></b></div>
+        <div><span>Plazo:</span> <b><span data-campo="plazo"></span> meses</b></div>
+        <div><span>Sistema de amortización:</span> <b>Francés (cuota fija)</b></div>
+        <div><span>Cuota mensual:</span> <b data-campo="cuota_mensual"></b></div>
+        <div><span>Total intereses:</span> <b data-campo="total_interes"></b></div>
+        <div><span>Total a pagar:</span> <b data-campo="total_pagar"></b></div>
+        <div><span>Primer vencimiento:</span> <b data-campo="primer_vencimiento"></b></div>
+        <div><span>Último vencimiento:</span> <b data-campo="ultimo_vencimiento"></b></div>
+      </div>
+    </section>
+
+    <!-- ======================= CLÁUSULA CUARTA ======================= -->
+    <section>
+      <h3>Cuarta.- (Forma de pago)</h3>
+      <p>EL PRESTATARIO se obliga a pagar el préstamo en <span data-campo="plazo"></span> cuotas mensuales y consecutivas, de acuerdo al cronograma de pagos que forma parte indivisible del presente contrato. Los pagos se efectuarán en las ventanillas de caja de LA ENTIDAD, que emitirá el comprobante (voucher) correspondiente.</p>
+    </section>
+
+    <!-- ======================= CLÁUSULA QUINTA ======================= -->
+    <section>
+      <h3>Quinta.- (Mora y recargos)</h3>
+      <p>El incumplimiento en el pago de cualquier cuota en la fecha establecida constituirá automáticamente en mora a EL PRESTATARIO, sin necesidad de requerimiento judicial o extrajudicial alguno, generándose un recargo por mora del <b>0,10 % diario</b> sobre el monto de la cuota vencida (con un tope del 25 % de la cuota), además de su reporte a la central de riesgo crediticio.</p>
+    </section>
+
+    <!-- ======================= CLÁUSULA SEXTA ======================= -->
+    <section>
+      <h3>Sexta.- (Garantías)</h3>
+      <p>En respaldo del cumplimiento de las obligaciones asumidas, EL PRESTATARIO constituye las siguientes garantías:</p>
+      <table class="tabla-doc" data-si="tiene_garantias">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Documento</th>
+            <th>Valor (Bs)</th>
+          </tr>
+        </thead>
+        <tbody data-lista="garantias">
+          <template>
+            <tr>
+              <td class="izq" data-campo="tipo"></td>
+              <td class="izq texto-izq" data-campo="descripcion"></td>
+              <td class="izq" data-campo="documento"></td>
+              <td data-campo="valor"></td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+      <p data-no="tiene_garantias"><i>Garantías pendientes de registro antes del desembolso.</i></p>
+    </section>
+
+    <!-- ======================= CLÁUSULA SÉPTIMA ======================= -->
+    <section>
+      <h3>Séptima.- (Pago anticipado)</h3>
+      <p>EL PRESTATARIO podrá realizar la cancelación total anticipada del crédito en cualquier momento, pagando el capital pendiente, los intereses devengados del periodo en curso y los recargos que correspondan, sin penalidad alguna. Los intereses futuros no devengados serán condonados.</p>
+    </section>
+
+    <!-- ======================= CLÁUSULA OCTAVA ======================= -->
+    <section>
+      <h3>Octava.- (Desembolso)</h3>
+      <p data-si="desembolsado">El desembolso fue efectuado el <span data-campo="fecha_desembolso"></span> mediante <b data-campo="medio_desembolso"></b> <span data-campo="cuenta_destino"></span>, operación Core Bancario <span data-campo="codigo_transaccion"></span>.</p>
+      <p data-no="desembolsado">El desembolso se efectuará una vez suscrito el presente contrato y constituidas las garantías.</p>
+    </section>
+
+    <!-- ======================= CLÁUSULA NOVENA ======================= -->
+    <section>
+      <h3>Novena.- (Conformidad)</h3>
+      <p>Ambas partes declaran su plena conformidad con todas y cada una de las cláusulas del presente contrato, firmando en la ciudad de <span data-campo="entidad_ciudad"></span>, en fecha <span data-campo="fecha_contrato"></span>.</p>
+    </section>
+
+    <!-- ======================= FIRMAS ======================= -->
+    <div class="firmas">
+      <div class="firma">
+        <b data-campo="cliente_nombre"></b><br>
+        C.I. <span data-campo="cliente_ci"></span><br>
+        EL PRESTATARIO
+      </div>
+      <div class="firma">
+        <b data-campo="jefe"></b><br>
+        Jefe de Crédito<br>
+        p. <span data-campo="entidad_nombre"></span>
+      </div>
+    </div>
+
+    <div class="pie-doc">
+      <span>Documento generado por CrediManager · <span data-campo="fecha_generacion"></span></span>
+      <span>Oficial: <span data-campo="oficial"></span></span>
+    </div>
+  </article>
+
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/contrato.js"></script>
+</body>
+</html>

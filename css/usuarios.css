@@ -1,0 +1,143 @@
+/* ADMINISTRACIÓN DE USUARIOS Y AUDITORÍA*/
+.celda-usuario { 
+   display: flex; 
+   align-items: center; 
+   gap: 12px; 
+}
+.celda-usuario .avatar { 
+   width: 36px; 
+   height: 36px; 
+   font-size: 12px; 
+}
+.celda-usuario strong { 
+   display: block; 
+}
+.celda-usuario small { 
+   color: var(--texto-suave); 
+   font-size: 12px; 
+}
+.etiqueta-rol { 
+   display: inline-flex; 
+   align-items: center; 
+   gap: 6px; 
+   padding: 4px 10px; 
+   border-radius: 8px; 
+   font-size: 12px;
+   font-weight: 600; 
+   background: var(--superficie-2); 
+   border: 1px solid var(--borde); 
+}
+.etiqueta-rol.ADMIN { 
+   color: #7c3aed; 
+   border-color: #ddd0fb; 
+   background: #f6f2ff; 
+}
+.etiqueta-rol.OFICIAL { 
+   color: #1d4ed8; 
+   border-color: #cfdcfb; 
+   background: #f1f5ff; 
+}
+.etiqueta-rol.ANALISTA { 
+   color: #0369a1; 
+   border-color: #c8e6f6; 
+   background: #f0f9ff; 
+}
+.etiqueta-rol.JEFE { 
+   color: #047857; 
+   border-color: #c6eedd;
+   background: #effcf6; 
+}
+.etiqueta-rol.CAJERO { 
+   color: #b45309; 
+   border-color: #fbe0b8; 
+   background: #fffaf0; 
+}
+.etiqueta-rol.GERENTE { 
+   color: #be123c; 
+   border-color: #f9cdd8; 
+   background: #fff1f4; 
+}
+.etiqueta-rol.CLIENTE { 
+   color: #475569; 
+}
+.interruptor { 
+   position: relative; 
+   width: 40px;
+   height: 22px; 
+   display: inline-block; 
+}
+.interruptor input { 
+   opacity: 0; 
+   width: 0; 
+   height: 0;
+}
+.interruptor span { 
+   position: absolute; 
+   inset: 0; 
+   border-radius: 99px; 
+   background: #cbd5e1; 
+   cursor: pointer; 
+   transition: background 0.2s; 
+}
+.interruptor span::before { 
+   content: ''; 
+   position: absolute; 
+   left: 3px; 
+   top: 3px; 
+   width: 16px; 
+   height: 16px; 
+   border-radius: 50%; 
+   background: #fff; 
+   box-shadow: 0 1px 3px rgba(0,0,0,0.2); 
+   transition: transform 0.2s; 
+}
+.interruptor input:checked + span { 
+   background: var(--exito); 
+}
+.interruptor input:checked + span::before { 
+   transform: translateX(18px); 
+}
+.interruptor input:disabled + span { 
+   opacity: 0.5; 
+   cursor: not-allowed; 
+}
+
+/* Auditoría */
+.barras-horizontales { 
+   display: grid; 
+   gap: 12px; 
+}
+.barra-h { 
+   display: grid; 
+   grid-template-columns: 150px 1fr 50px;
+   gap: 12px; 
+   align-items: center; 
+   font-size: 13px; 
+}
+.barra-h .pista { 
+   height: 10px; 
+   border-radius: 99px; 
+   background: #edf1f7; 
+   overflow: hidden; 
+}
+.barra-h .relleno { 
+   height: 100%; 
+   border-radius: 99px; 
+   background: linear-gradient(90deg, var(--primario-claro), var(--acento)); 
+   width: 0; 
+   transition: width 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); 
+}
+.barra-h b { 
+   text-align: right; 
+}
+.detalle-auditoria { 
+   max-width: 380px; 
+   white-space: normal;
+   color: var(--texto-suave); 
+   font-size: 12.5px; 
+}
+@media (max-width: 600px) 
+{ .barra-h { 
+   grid-template-columns: 100px 1fr 40px; 
+} 
+}

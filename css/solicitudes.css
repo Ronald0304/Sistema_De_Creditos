@@ -1,0 +1,282 @@
+/*  1. VARIABLES DE DISEÑO (Variables CSS Globales) */
+:root {
+  --primario: #2563eb;
+  --primario-claro: #3b82f6;
+  --primario-suave: #eff6ff;
+  --acento: #0d9488;
+  
+  --superficie: #ffffff;
+  --superficie-2: #f8fafc;
+  --fondo: #f1f5f9;
+  
+  --texto: #0f172a;
+  --texto-suave: #64748b;
+  
+  --borde: #e2e8f0;
+  --borde-fuerte: #cbd5e1;
+  
+  --azul-900: #0f172a;
+  --radio: 14px;
+  --sombra: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --transicion: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --fuente-titulos: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Base global */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--texto);
+  background-color: var(--fondo);
+  margin: 0;
+  padding: 20px;
+}
+
+/* Animation helpers */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. ELEMENTOS GENERALES Y ENCABEZADOS */
+.titulo-seccion { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  font-size: 17px; 
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 14px; 
+}
+
+.etiqueta-paso { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  font-weight: 700; 
+  font-size: 14px; 
+  color: var(--texto);
+  margin-bottom: 12px; 
+}
+
+.etiqueta-paso span { 
+  width: 26px; 
+  height: 26px; 
+  border-radius: 50%; 
+  display: grid; 
+  place-items: center; 
+  font-size: 12px; 
+  color: #fff; 
+  background: linear-gradient(135deg, var(--primario), var(--acento));
+}
+
+/* Inputs de texto amplios */
+.entrada-grande { 
+  width: 100%; 
+  padding: 12px 14px 12px 40px; 
+  border-radius: 10px; 
+  border: 1px solid var(--borde-fuerte); 
+  font-size: 15px; 
+  outline: none; 
+  background-color: var(--superficie);
+  color: var(--texto);
+  transition: all var(--transicion);
+}
+
+.entrada-grande:focus { 
+  border-color: var(--primario-claro); 
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.14);
+}
+
+/* 3. TARJETA DE CLIENTE SELECCIONADO */
+.tarjeta-cliente-sel { 
+  display: flex; 
+  align-items: center; 
+  gap: 14px; 
+  margin-top: 14px; 
+  padding: 14px 16px; 
+  border-radius: 12px; 
+  border: 1px solid #bfd3fb; 
+  background: linear-gradient(120deg, #f1f6ff, #f0fdfa); 
+  animation: aparecer 0.35s ease both; 
+  flex-wrap: wrap;
+}
+
+.tarjeta-cliente-sel .avatar { 
+  width: 44px; 
+  height: 44px; 
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.tarjeta-cliente-sel strong { 
+  display: block; 
+  font-size: 15px;
+  color: var(--texto);
+}
+
+.tarjeta-cliente-sel .derecha { 
+  margin-left: auto; 
+  text-align: right; 
+  font-size: 12.5px; 
+  color: var(--texto-suave); 
+}
+
+/* 4. RESÚMENES Y SIMULADORES */
+/* Resumen Estimado (Panel Oscuro / Métricas) */
+.resumen-estimado { 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 12px; 
+  margin-top: 20px; 
+  padding: 16px; 
+  border-radius: 14px; 
+  background: var(--azul-900); 
+  color: #cbd5e1; 
+}
+
+.resumen-estimado span { 
+  display: block; 
+  font-size: 11.5px; 
+  text-transform: uppercase; 
+  letter-spacing: 0.5px; 
+  color: #7f93b3; 
+}
+
+.resumen-estimado strong { 
+  font-family: var(--fuente-titulos); 
+  font-size: 18px; 
+  color: #fff; 
+}
+
+/* Resumen de Solicitud (Panel Claro / Estado) */
+.resumen-solicitud { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+  gap: 14px; 
+  padding: 16px; 
+  border-radius: 14px; 
+  background: var(--superficie-2); 
+  border: 1px solid var(--borde); 
+}
+
+/* Componente de Cobertura de Garantías */
+.cobertura { 
+  display: flex; 
+  align-items: center; 
+  gap: 14px; 
+}
+
+.cobertura .progreso { 
+  flex: 1; 
+}
+
+/* 5. TARJETAS DE DESEMBOLSO Y OPCIONES */
+.tarjetas-desembolso { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+  gap: 18px; 
+}
+
+.tarjeta-desembolso { 
+  padding: 20px; 
+  border-radius: var(--radio); 
+  background: var(--superficie); 
+  border: 1px solid var(--borde); 
+  box-shadow: var(--sombra); 
+  transition: transform var(--transicion), box-shadow var(--transicion); 
+  display: flex; 
+  flex-direction: column; 
+  gap: 14px; 
+}
+
+.tarjeta-desembolso:hover { 
+  transform: translateY(-3px); 
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1); 
+}
+
+.tarjeta-desembolso .monto { 
+  font-family: var(--fuente-titulos); 
+  font-size: 26px; 
+  font-weight: 800; 
+  color: var(--primario); 
+}
+
+.tarjeta-desembolso .fila { 
+  display: flex; 
+  justify-content: space-between; 
+  font-size: 13px; 
+  color: var(--texto-suave); 
+}
+
+.tarjeta-desembolso .fila b { 
+  color: var(--texto); 
+}
+
+/* Selección del Medio de Desembolso (Radio/Cards) */
+.opciones-medio { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px; 
+}
+
+.opcion-medio { 
+  position: relative; 
+}
+
+.opcion-medio input { 
+  position: absolute; 
+  opacity: 0; 
+  width: 0;
+  height: 0;
+}
+
+.opcion-medio label { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 6px; 
+  padding: 14px 8px; 
+  border-radius: 12px; 
+  border: 2px solid var(--borde); 
+  cursor: pointer; 
+  font-size: 13px; 
+  font-weight: 600; 
+  text-align: center; 
+  transition: all var(--transicion); 
+  color: var(--texto-suave);
+}
+
+.opcion-medio input:checked + label { 
+  border-color: var(--primario); 
+  background: var(--primario-suave); 
+  color: var(--primario); 
+}
+
+/* 6. DISEÑO RESPONSIVO (Media Queries) */
+@media (max-width: 720px) { 
+  .resumen-estimado { 
+    grid-template-columns: 1fr 1fr; 
+  } 
+  
+  .opciones-medio { 
+    grid-template-columns: 1fr; 
+  } 
+  
+  .tarjeta-cliente-sel .derecha {
+    margin-left: 0;
+    text-align: left;
+    width: 100%;
+  }
+}

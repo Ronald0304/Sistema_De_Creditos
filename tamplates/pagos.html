@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caja y cobranzas</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/pagos.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Menú lateral y barra superior: los construye javascrip/comun.js según el rol -->
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    
+    <div class="app-principal">
+      <header class="barra-superior" id="barra-superior"></header>
+      
+      <main class="contenido">
+        <!-- Encabezado de la página -->
+        <div class="encabezado-pagina">
+          <div>
+            <div class="migas">
+              <span>Operaciones de caja</span>
+              <span>/</span>
+              <span>Caja y cobranzas</span>
+            </div>
+            <h1>Caja y cobranzas</h1>
+            <p>Cobro de cuotas, cancelaciones totales, control de mora y emisión de vouchers de pago.</p>
+          </div>
+        </div>
+
+        <!-- Indicadores KPI -->
+        <div class="grilla-kpi">
+          <div class="kpi verde animar">
+            <div class="kpi-etiqueta">Recaudado hoy (mi caja)</div>
+            <div class="kpi-valor" id="kpi-recaudado">—</div>
+          </div>
+          <div class="kpi animar" style="--i:1">
+            <div class="kpi-etiqueta">Operaciones hoy</div>
+            <div class="kpi-valor" id="kpi-operaciones">—</div>
+          </div>
+          <div class="kpi naranja animar" style="--i:2">
+            <div class="kpi-etiqueta">Recargos por mora cobrados</div>
+            <div class="kpi-valor" id="kpi-recargos">—</div>
+          </div>
+          <div class="kpi rojo animar" style="--i:3">
+            <div class="kpi-etiqueta">Créditos en mora</div>
+            <div class="kpi-valor" id="kpi-mora">—</div>
+          </div>
+        </div>
+
+        <!-- Pestañas de navegación -->
+        <div class="pestanas">
+          <button type="button" class="pestana activa" data-pestana="cobranza">Cobranza</button>
+          <button type="button" class="pestana" data-pestana="mora">Cartera en mora</button>
+          <button type="button" class="pestana" data-pestana="arqueo">Arqueo del día</button>
+        </div>
+
+        <!-- ================= COBRANZA ================= -->
+        <div class="panel-pestana activo" data-panel="cobranza">
+          <section class="buscador-caja animar">
+            <input type="search" id="campo-busqueda" placeholder="Buscar por CI, número de crédito o nombre del cliente..." autocomplete="off">
+            <button type="button" class="boton boton-primario" id="boton-buscar">Buscar</button>
+          </section>
+          
+          <div id="resultados-busqueda" class="resultados-busqueda"></div>
+
+          <div id="estado-cuenta" class="oculto">
+            <div class="cabecera-credito" id="cabecera-credito"></div>
+            
+            <div class="grilla-cobro">
+              <!-- Plan de pagos -->
+              <section class="tarjeta">
+                <div class="tarjeta-cabecera">
+                  <h3>Plan de pagos</h3>
+                  <a class="boton boton-secundario boton-sm" id="enlace-cronograma" target="_blank" rel="noopener">Cronograma</a>
+                </div>
+                <div class="tabla-contenedor tabla-cuotas">
+                  <table class="tabla">
+                    <thead>
+                      <tr>
+                        <th class="centro">N°</th>
+                        <th>Vencimiento</th>
+                        <th class="num">Capital</th>
+                        <th class="num">Interés</th>
+                        <th class="num">Cuota</th>
+                        <th class="centro">Atraso</th>
+                        <th class="num">Recargo</th>
+                        <th>Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tabla-cuotas"></tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Panel para registrar cobro -->
+              <section class="tarjeta panel-cobro" id="panel-cobro">
+                <div class="tarjeta-cabecera">
+                  <h3>Registrar cobro</h3>
+                </div>
+                <div class="tarjeta-cuerpo">
+                  <div class="selector-modo">
+                    <button type="button" class="activo" data-modo="cuotas">Pago de cuotas</button>
+                    <button type="button" data-modo="cancelacion">Cancelación total</button>
+                  </div>
+                  
+                  <div class="campo mt-2" id="bloque-cantidad">
+                    <label>Cuotas a pagar (desde la más antigua)</label>
+                    <div class="contador-cuotas">
+                      <button type="button" id="cuotas-menos">−</button>
+                      <input type="number" id="cantidad-cuotas" min="1" value="1">
+                      <button type="button" id="cuotas-mas">+</button>
+                    </div>
+                  </div>
+                  
+                  <div class="aviso info mt-2 oculto" id="aviso-cancelacion">
+                    <div>Cancelación anticipada: se cobra capital pendiente, intereses de cuotas vencidas y del periodo en curso, y recargos. Los intereses futuros se condonan.</div>
+                  </div>
+
+                  <div class="desglose" id="desglose"></div>
+
+                  <div class="bloque-exoneracion" id="bloque-exoneracion">
+                    <label class="casilla">
+                      <input type="checkbox" id="exonerar-recargo"> Exonerar recargo por mora
+                    </label>
+                    <textarea id="motivo-exoneracion" class="oculto" maxlength="300" placeholder="Motivo de la exoneración (obligatorio, queda auditado)"></textarea>
+                  </div>
+
+                  <div class="formulario-grilla mt-2" style="grid-template-columns:1fr 1fr">
+                    <div class="campo">
+                      <label>Forma de pago</label>
+                      <select id="forma-pago">
+                        <option value="EFECTIVO">Efectivo</option>
+                        <option value="TRANSFERENCIA">Transferencia</option>
+                        <option value="DEBITO_CUENTA">Débito en cuenta</option>
+                        <option value="CHEQUE">Cheque</option>
+                      </select>
+                    </div>
+                    <div class="campo" id="bloque-recibido">
+                      <label>Monto recibido (Bs)</label>
+                      <input type="number" id="monto-recibido" min="0" step="0.01">
+                    </div>
+                  </div>
+                  
+                  <div class="cambio" id="caja-cambio">
+                    <span>Cambio a devolver</span>
+                    <strong id="monto-cambio">Bs 0,00</strong>
+                  </div>
+                  
+                  <button type="button" class="boton boton-exito boton-bloque mt-2 boton-cobrar" id="boton-cobrar">Cobrar</button>
+                </div>
+              </section>
+            </div>
+
+            <!-- Pagos registrados del crédito -->
+            <section class="tarjeta mt-3">
+              <div class="tarjeta-cabecera">
+                <h3>Pagos registrados del crédito</h3>
+              </div>
+              <div class="tabla-contenedor">
+                <table class="tabla">
+                  <thead>
+                    <tr>
+                      <th>Recibo</th>
+                      <th>Fecha</th>
+                      <th>Tipo</th>
+                      <th>Cuotas</th>
+                      <th class="num">Recargo</th>
+                      <th class="num">Total</th>
+                      <th>Cajero</th>
+                      <th class="num"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabla-pagos-credito"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- ================= MORA ================= -->
+        <div class="panel-pestana" data-panel="mora">
+          <section class="tarjeta">
+            <div class="tarjeta-cabecera">
+              <h3>Créditos en mora</h3>
+              <p id="politica-mora">Recargo automático por día de atraso</p>
+            </div>
+            <div class="tabla-contenedor">
+              <table class="tabla">
+                <thead>
+                  <tr>
+                    <th>Crédito</th>
+                    <th>Cliente</th>
+                    <th>Contacto</th>
+                    <th class="centro">Cuotas vencidas</th>
+                    <th class="centro">Días de mora</th>
+                    <th class="num">Monto vencido</th>
+                    <th class="num">Recargo acumulado</th>
+                    <th class="num"></th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-mora"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- ================= ARQUEO ================= -->
+        <div class="panel-pestana" data-panel="arqueo">
+          <div class="grilla-2-1">
+            <section class="tarjeta">
+              <div class="tarjeta-cabecera">
+                <h3>Operaciones del día</h3>
+                <button type="button" class="boton boton-secundario boton-sm" id="boton-imprimir-arqueo">Imprimir arqueo</button>
+              </div>
+              <div class="tabla-contenedor">
+                <table class="tabla">
+                  <thead>
+                    <tr>
+                      <th>Hora</th>
+                      <th>Recibo</th>
+                      <th>Cliente / crédito</th>
+                      <th>Tipo</th>
+                      <th>Forma</th>
+                      <th class="num">Total</th>
+                      <th class="num"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabla-arqueo"></tbody>
+                </table>
+              </div>
+            </section>
+            
+            <section class="tarjeta">
+              <div class="tarjeta-cabecera">
+                <h3>Resumen por forma de pago</h3>
+              </div>
+              <div class="tarjeta-cuerpo" id="resumen-arqueo"></div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="contenedor-toasts"></div>
+  
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/pagos.js"></script>
+</body>
+</html>

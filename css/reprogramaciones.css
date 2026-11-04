@@ -1,0 +1,53 @@
+/* REPROGRAMACIÓN DE CRÉDITOS (Oficial y Jefe de Crédito)
+   Complementa base.css y reutiliza el panel de decisión de aprobaciones.css */
+
+/* --- Resultado del simulador: cifras clave resaltadas --- */
+.resumen-expediente .destacado strong {
+  color: var(--primario);
+  font-size: 16px;
+}
+
+/* --- Nuevo cronograma (desplegable con desplazamiento interno) --- */
+.detalle-plan {
+  margin-top: 12px;
+}
+
+.detalle-plan summary {
+  padding: 10px 0;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--primario);
+}
+
+.tabla-plan {
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+}
+
+/* --- Documentos de respaldo del cliente --- */
+.lista-adjuntos {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.lista-adjuntos li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  background: var(--superficie-2);
+  font-size: 13px;
+  word-break: break-all;
+}
+
+/* El panel del simulador/decisión va debajo del expediente */
+#panel-simulador,
+#panel-jefe {
+  margin-top: 18px;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cronograma de pagos | CrediManager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/impresion.css">
+</head>
+<body class="documento-impreso">
+  <!-- Barra de acciones (no se imprime) -->
+  <div class="barra-documento">
+    <span class="titulo">Cronograma de pagos</span>
+    <div class="botones">
+      <button type="button" class="btn-doc secundario" data-volver>Volver</button>
+      <button type="button" class="btn-doc primario" data-imprimir>Imprimir / Guardar PDF</button>
+    </div>
+  </div>
+  <!-- Documento (lo genera javascrip/cronograma.js con los datos del servidor) -->
+  <article class="hoja" id="documento"><p class="cargando-doc" style="color:#64748b">Generando documento...</p></article>
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/cronograma.js"></script>
+</body>
+</html>

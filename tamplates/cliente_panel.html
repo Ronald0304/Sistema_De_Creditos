@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi portal</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/cliente_panel.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Menú lateral y barra superior: los construye javascrip/comun.js según el rol -->
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    
+    <div class="app-principal">
+      <header class="barra-superior" id="barra-superior"></header>
+      
+      <main class="contenido">
+        <!-- Estado general de la cuenta -->
+        <section class="hero-cliente animar" id="hero-cliente">
+          <div class="hero-cliente-texto">
+            <span class="texto-chico">Estado de mi cuenta</span>
+            <h1 id="estado-general">Cargando...</h1>
+            <p id="mensaje-estado">&nbsp;</p>
+          </div>
+          <div class="hero-cliente-cifras">
+            <div>
+              <span>Saldo por pagar</span>
+              <b id="cifra-saldo">—</b>
+            </div>
+            <div>
+              <span>Monto vencido</span>
+              <b id="cifra-vencido">—</b>
+            </div>
+            <div>
+              <span>Total pagado</span>
+              <b id="cifra-pagado">—</b>
+            </div>
+          </div>
+        </section>
+
+        <div class="aviso info mb-3 animar" style="--i:1">
+          <div>
+            Este portal es de <strong>consulta</strong>. Los pagos de cuotas se realizan en ventanilla de caja de la entidad. Para nuevas solicitudes, contacte a su Oficial de Crédito: <strong id="nombre-oficial">—</strong>.
+          </div>
+        </div>
+
+        <!-- Pestañas de navegación -->
+        <div class="pestanas">
+          <button type="button" class="pestana activa" data-pestana="creditos">Mis créditos</button>
+          <button type="button" class="pestana" data-pestana="solicitudes">Mis solicitudes</button>
+          <button type="button" class="pestana" data-pestana="pagos">Mis pagos</button>
+          <button type="button" class="pestana" data-pestana="perfil">Mi perfil</button>
+        </div>
+
+        <!-- Paneles de las pestañas -->
+        <div class="panel-pestana activo" data-panel="creditos">
+          <div id="lista-creditos" class="lista-creditos">
+            <div class="cargador">Cargando...</div>
+          </div>
+        </div>
+        
+        <div class="panel-pestana" data-panel="solicitudes">
+          <div id="lista-solicitudes" class="lista-solicitudes"></div>
+        </div>
+        
+        <div class="panel-pestana" data-panel="pagos">
+          <section class="tarjeta">
+            <div class="tabla-contenedor">
+              <table class="tabla">
+                <thead>
+                  <tr>
+                    <th>Recibo</th>
+                    <th>Fecha</th>
+                    <th>Crédito</th>
+                    <th>Tipo</th>
+                    <th>Cuotas</th>
+                    <th class="num">Monto</th>
+                    <th class="num">Voucher</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-pagos"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+        
+        <div class="panel-pestana" data-panel="perfil">
+          <section class="tarjeta">
+            <div class="tarjeta-cabecera">
+              <h3>Mis datos</h3>
+              <a href="/app/cambiar-clave" class="boton boton-secundario boton-sm">Cambiar contraseña</a>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="lista-datos" id="datos-perfil"></div>
+              <p class="texto-chico texto-suave mt-2">¿Sus datos cambiaron? Solicite la actualización a su Oficial de Crédito.</p>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal: solicitud de reprogramación (lo controla javascrip/reprogramacion_cliente.js) -->
+  <div class="modal" id="modal-reprogramacion">
+    <div class="modal-caja" role="dialog" aria-modal="true" aria-labelledby="titulo-reprogramacion">
+      <div class="modal-cabecera">
+        <h3 id="titulo-reprogramacion">Solicitar reprogramación</h3>
+        <button type="button" class="modal-cerrar" data-cerrar-modal aria-label="Cerrar">&times;</button>
+      </div>
+
+      <form id="formulario-reprogramacion" novalidate>
+        <div class="modal-cuerpo">
+          <!-- Situación del crédito (la completa el JS) -->
+          <div class="resumen-expediente mb-2" id="resumen-reprogramacion"></div>
+
+          <div class="formulario-grilla">
+            <div class="campo completo">
+              <label for="motivo-reprogramacion">Motivo / justificativo de la mora <span class="obligatorio">*</span></label>
+              <textarea id="motivo-reprogramacion" name="motivo" minlength="20" maxlength="1000" required
+                placeholder="Explique qué le impidió pagar a tiempo (salud, baja de ventas, pérdida de empleo...)."></textarea>
+              <small class="ayuda" id="contador-motivo">Mínimo 20 caracteres.</small>
+            </div>
+
+            <div class="campo">
+              <label for="tipo-propuesta">Mi propuesta <span class="obligatorio">*</span></label>
+              <select id="tipo-propuesta" name="tipo_propuesta" required>
+                <option value="PLAZO">Nuevo plazo (en meses)</option>
+                <option value="CUOTA">Cuota máxima que puedo pagar</option>
+              </select>
+            </div>
+
+            <div class="campo">
+              <label for="valor-propuesta" id="etiqueta-propuesta">Plazo propuesto (meses) <span class="obligatorio">*</span></label>
+              <input type="number" id="valor-propuesta" name="valor_propuesta" min="1" step="1" required>
+              <small class="ayuda" id="ayuda-propuesta"></small>
+            </div>
+
+            <div class="campo completo">
+              <label for="adjuntos-reprogramacion">Documentos de respaldo (PDF o imágenes)</label>
+              <input type="file" id="adjuntos-reprogramacion" multiple accept="application/pdf,image/jpeg,image/png">
+              <small class="ayuda">Hasta 3 archivos PDF, JPG o PNG de máximo 2 MB cada uno (certificado médico, carta de despido, facturas...).</small>
+              <ul class="lista-adjuntos" id="lista-adjuntos-cliente"></ul>
+            </div>
+          </div>
+
+          <div class="aviso info mt-2">
+            <div>Su Oficial de Crédito revisará la solicitud y la simulación del nuevo plan; el Jefe de Crédito dará la resolución final. Podrá ver el resultado en este portal.</div>
+          </div>
+        </div>
+
+        <div class="modal-pie">
+          <button type="button" class="boton boton-secundario" data-cerrar-modal>Cancelar</button>
+          <button type="submit" class="boton boton-primario" id="boton-enviar-reprogramacion">Enviar solicitud</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="contenedor-toasts"></div>
+  
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/reprogramacion_cliente.js"></script>
+  <script src="/javascrip/cliente_panel.js"></script>
+</body>
+</html>

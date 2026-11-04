@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación crediticia</title>
+  
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/evaluaciones.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Menú lateral y barra superior: los construye javascrip/comun.js según el rol -->
+    <aside class="barra-lateral" id="barra-lateral"></aside>
+    
+    <div class="app-principal">
+      <header class="barra-superior" id="barra-superior"></header>
+      
+      <main class="contenido">
+        <!-- Encabezado de la página -->
+        <div class="encabezado-pagina">
+          <div>
+            <div class="migas">
+              <span>Riesgo crediticio</span>
+              <span>/</span>
+              <a href="/app/evaluaciones">Bandeja</a>
+              <span>/</span>
+              <span id="miga-codigo">Expediente</span>
+            </div>
+            <h1 id="titulo-expediente">Evaluación crediticia</h1>
+            <p id="subtitulo-expediente">Cargando expediente...</p>
+          </div>
+          <div class="acciones-pagina">
+            <a href="/app/evaluaciones" class="boton boton-secundario">Volver a la bandeja</a>
+          </div>
+        </div>
+
+        <div id="contenedor-evaluacion" class="oculto">
+          <div class="grilla-2-1">
+            <!-- Columna izquierda: expediente -->
+            <div>
+              <section class="tarjeta mb-3 animar">
+                <div class="tarjeta-cabecera">
+                  <h3>Solicitud y cliente</h3>
+                  <span id="estado-solicitud"></span>
+                </div>
+                <div class="tarjeta-cuerpo" id="bloque-solicitud"></div>
+              </section>
+
+              <section class="tarjeta mb-3 animar" style="--i:1">
+                <div class="tarjeta-cabecera">
+                  <h3>Garantías ofrecidas</h3>
+                  <span id="cobertura-garantias"></span>
+                </div>
+                <div class="tabla-contenedor">
+                  <table class="tabla">
+                    <thead>
+                      <tr>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                        <th class="num">Valor</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tabla-garantias"></tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section class="tarjeta mb-3 animar" style="--i:2">
+                <div class="tarjeta-cabecera">
+                  <h3>Créditos anteriores en la entidad</h3>
+                </div>
+                <div class="tabla-contenedor">
+                  <table class="tabla">
+                    <thead>
+                      <tr>
+                        <th>Crédito</th>
+                        <th class="num">Monto</th>
+                        <th>Estado</th>
+                        <th class="num">Saldo</th>
+                        <th class="centro">Máx. atraso</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tabla-anteriores"></tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Capacidad de pago y dictamen -->
+              <section class="tarjeta animar" style="--i:3">
+                <div class="tarjeta-cabecera">
+                  <h3>Capacidad de pago y dictamen técnico</h3>
+                </div>
+                
+                <form id="formulario-dictamen" class="tarjeta-cuerpo" novalidate>
+                  <div class="formulario-grilla">
+                    <div class="campo">
+                      <label>Ingresos mensuales verificados (Bs) <span class="obligatorio">*</span></label>
+                      <input type="number" name="ingresos" min="0" step="0.01" required>
+                    </div>
+                    <div class="campo">
+                      <label>Gastos mensuales (Bs) <span class="obligatorio">*</span></label>
+                      <input type="number" name="gastos" min="0" step="0.01" required>
+                    </div>
+                    <div class="campo">
+                      <label>Cuotas de otras deudas (Bs/mes)</label>
+                      <input type="number" name="deudas_mensuales" min="0" step="0.01" value="0">
+                      <small class="ayuda">Se precarga desde el historial del Core Bancario.</small>
+                    </div>
+                  </div>
+                  
+                  <div class="indicadores-capacidad" id="indicadores-capacidad"></div>
+                  <div class="aviso info sugerencia" id="sugerencia-sistema"></div>
+
+                  <div class="separador"></div>
+                  
+                  <div class="formulario-grilla">
+                    <div class="campo">
+                      <label>Nivel de riesgo <span class="obligatorio">*</span></label>
+                      <select name="nivel_riesgo" required>
+                        <option value="">Seleccione...</option>
+                        <option value="BAJO">Bajo</option>
+                        <option value="MEDIO">Medio</option>
+                        <option value="ALTO">Alto</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <label class="etiqueta-paso mt-2" style="margin-bottom:10px">
+                    Dictamen <span class="obligatorio" style="background:none;color:var(--peligro);width:auto;height:auto">*</span>
+                  </label>
+                  
+                  <div class="opciones-dictamen">
+                    <div class="opcion-dictamen favorable">
+                      <input type="radio" name="dictamen" id="dictamen-favorable" value="FAVORABLE">
+                      <label for="dictamen-favorable">
+                        <div>Favorable<small>Recomendar aprobación</small></div>
+                      </label>
+                    </div>
+                    <div class="opcion-dictamen no-favorable">
+                      <input type="radio" name="dictamen" id="dictamen-no" value="NO_FAVORABLE">
+                      <label for="dictamen-no">
+                        <div>No favorable<small>Recomendar rechazo</small></div>
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div class="campo mt-2">
+                    <label>Fundamento técnico / observaciones <span class="obligatorio">*</span></label>
+                    <textarea name="observaciones" maxlength="1000" required placeholder="Justifique el dictamen: capacidad de pago, historial, garantías, estabilidad laboral..."></textarea>
+                  </div>
+                  
+                  <button type="submit" class="boton boton-primario boton-bloque mt-3" id="boton-dictamen">Emitir dictamen y remitir al Jefe de Crédito</button>
+                </form>
+              </section>
+            </div>
+
+            <!-- Columna derecha: Core Bancario -->
+            <div>
+              <section class="panel-core animar" style="--i:1" id="panel-core">
+                <h3>Core Bancario · Historial crediticio</h3>
+                <p class="texto-chico">Consulta a la central de riesgo y al comportamiento interno del cliente.</p>
+                <div id="contenido-core"></div>
+              </section>
+            </div>
+          </div>
+        </div>
+        
+        <div id="cargando-expediente" class="cargador">Cargando expediente...</div>
+      </main>
+    </div>
+  </div>
+
+  <div id="contenedor-toasts"></div>
+  
+  <!-- Scripts -->
+  <script src="/javascrip/comun.js"></script>
+  <script src="/javascrip/detalle_evaluacion.js"></script>
+</body>
+</html>
