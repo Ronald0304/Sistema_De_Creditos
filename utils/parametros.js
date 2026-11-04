@@ -22,7 +22,7 @@ const ENTIDAD = {
 const PRODUCTOS = {
   CONSUMO:      { nombre: 'Crédito de Consumo',  tasa: 16.0, montoMin: 1000,  montoMax: 80000,   plazoMin: 3,  plazoMax: 48 },
   MICROCREDITO: { nombre: 'Microcrédito',        tasa: 18.0, montoMin: 500,   montoMax: 50000,   plazoMin: 3,  plazoMax: 36 },
-  VEHICULAR:    { nombre: 'Crédito Vehicular',   tasa: 12.5, montoMin: 10000, montoMax: 250000,  plazoMin: 12, plazoMax: 72 },
+  VEHICULAR:    { nombre: 'Crédito Vehicular',   tasa: 13.0, montoMin: 10000, montoMax: 250000,  plazoMin: 12, plazoMax: 72 },
   VIVIENDA:     { nombre: 'Crédito de Vivienda', tasa: 9.0,  montoMin: 30000, montoMax: 1500000, plazoMin: 24, plazoMax: 240 },
   PYME:         { nombre: 'Crédito PyME',        tasa: 13.5, montoMin: 5000,  montoMax: 500000,  plazoMin: 6,  plazoMax: 84 }
 };
